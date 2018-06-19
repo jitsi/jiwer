@@ -46,6 +46,7 @@ ground_truth = ["hello world", "i like monthy python", "what do you mean, africa
 hypothesis = ["hello", "i like", "python", "what you mean swallow"]
 
 # is equivelent to
+
 ground_truth = "hello world i like monhty python what do you mean african or european swallow"
 hypothesis = "hello i like python what you mean swallow"
 ```
