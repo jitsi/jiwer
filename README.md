@@ -70,7 +70,7 @@ wer(ground_truth, hypothesis, standardize=True)
 ground_truth = "he is my neminis"
 hypothesis = "he is my"
 
-wer(ground_truth, hypothesis, standardize=False)
+wer(ground_truth, hypothesis)
 ```
 
 Also, there is an option give a list of words to remove from the 
