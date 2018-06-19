@@ -34,8 +34,10 @@ from itertools import chain
 
 
 def wer(truth: Union[str, List[str], List[List[str]]],
-        hypothesis: Union[str, List[str], List[List[str]]]) \
-        -> Tuple[float, int, int]:
+        hypothesis: Union[str, List[str], List[List[str]]],
+        standardize=False,
+        words_to_filter=None
+        ) -> float:
     """
     Calculate the WER between a ground-truth string and a hypothesis string
 
@@ -74,7 +76,7 @@ def wer(truth: Union[str, List[str], List[List[str]]],
     n = len(truth)
     error_rate = distance / n
 
-    return error_rate, distance, n
+    return error_rate
 
 ################################################################################
 # Implementation of helper methods, private to this package
@@ -83,42 +85,51 @@ def wer(truth: Union[str, List[str], List[List[str]]],
 _common_words_to_remove = ["yeah", "so", "oh", "ooh", "yhe"]
 
 
-def _preprocess(text:  Union[str, List[str], List[List[str]]]):
+def _preprocess(text: Union[str, List[str], List[List[str]]],
+                standardize:bool = False,
+                words_to_remove=None):
     """
-
+    Preprocess the input, be it a string, list of strings, or list of list of
+    strings, such that the output is a list of strings.
     :param text:
     :return:
     """
     if isinstance(text, str):
-        return _preprocess_text(text)
+        return _preprocess_text(text,
+                                standardize=standardize,
+                                words_to_remove=words_to_remove)
     elif len(text) == 0:
         raise ValueError("received empty list")
     elif len(text) == 1:
         return _preprocess(text[0])
     elif all(isinstance(e, str) for e in text):
-        return _preprocess_text("".join(text))
+        return _preprocess_text("".join(text), standardize=standardize,
+                                words_to_remove=words_to_remove)
     elif all(isinstance(e, list) for e in text):
         for e in text:
             if not all(isinstance(f, str) for f in e):
                 raise ValueError("The second list needs to only contain "
                                  "strings")
-        return _preprocess_text("".join(["".join(e) for e in text]))
+        return _preprocess_text("".join(["".join(e) for e in text]),
+                                        standardize = standardize,
+                                        words_to_remove=words_to_remove)
     else:
         raise ValueError("given list should only contain lists or list of "
                          "strings")
 
 
 def _preprocess_text(phrase: str,
-                     standardize: bool = True,
-                     words_to_remove: List[str] = _common_words_to_remove)\
+                     standardize: bool = False,
+                     words_to_remove: List[str] = None)\
         -> List[str]:
     """
     Applies the following preprocessing steps on a string of text (a sentence):
 
-    * abbreviates words such as he is into he's, you are into you're, ect
+    * optionally expands common abbreviated words such as he's into he is, you're into
+    you are, ect
     * makes everything lowercase
     * tokenize words
-    * remove common words such as "yeah", "so"
+    * optionally remove common words such as "yeah", "so"
     * change all numbers written as one, two, ... to 1, 2, ...
     * remove strings between [] and <>, such as [laughter] and <unk>
 
@@ -154,9 +165,10 @@ def _preprocess_text(phrase: str,
     phrase = phrase.split(" ")
 
     # remove common stop words (from observation):
-    for word_to_remove in words_to_remove:
-        if word_to_remove in phrase:
-            phrase.remove(word_to_remove)
+    if words_to_remove is not None:
+        for word_to_remove in words_to_remove:
+            if word_to_remove in phrase:
+                phrase.remove(word_to_remove)
 
     return phrase
 
