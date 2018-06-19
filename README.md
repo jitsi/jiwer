@@ -7,7 +7,7 @@ using the
 algorithm. Because this algorithm computes the character-level minimum-edit distance, every word in a sentence is assigned a
 unique integer, and the edit-distance is computed over a string of integers. 
 
-# Installiation
+# Installation
 
 You should be able to install this package using pip: 
 
