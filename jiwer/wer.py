@@ -43,6 +43,8 @@ def wer(truth: Union[str, List[str], List[List[str]]],
 
     :param truth the ground-truth sentence as a string or list of words
     :param hypothesis the hypothesis sentence as a string or list of words
+    :param standardize whether to apply some standard rules to the given string
+    :param words_to_filter a list of words to remove from the sentences
     :return: the WER, the distance (also known as the amount of
     substitutions, insertions and deletions) and the length of the ground truth
     """
