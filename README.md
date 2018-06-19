@@ -53,9 +53,9 @@ hypothesis = "hello i like python what you mean swallow"
 # Additional preprocessing
 
 Some additional preprocessing can be done on the input. By default, whitespace is removed, everything is set to lower-case,
-`.` and ',' are removed, everything between `[]` and `<>` (common for Kaldi models) is removed and each word is tokenized by 
-splitting by one or more spaces. Additionally, common abbreviations, such as "won't", "let's" "n't" will be expanded if 
-`standize=True` is passed along the `wer` method.
+`.` and `,` are removed, everything between `[]` and `<>` (common for Kaldi models) is removed and each word is tokenized by 
+splitting by one or more spaces. Additionally, common abbreviations, such as `won't`, `let's`,`n't` will be expanded if 
+`standardize=True` is passed along the `wer` method.
 
 ```python
 from jiwer import wer
