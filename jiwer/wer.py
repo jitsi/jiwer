@@ -48,8 +48,8 @@ def wer(truth: Union[str, List[str], List[List[str]]],
     :return: the WER, the distance (also known as the amount of
     substitutions, insertions and deletions) and the length of the ground truth
     """
-    truth = _preprocess(truth)
-    hypothesis = _preprocess(hypothesis)
+    truth = _preprocess(truth, standardize=standardize, words_to_remove=words_to_filter)
+    hypothesis = _preprocess(hypothesis, standardize=standardize, words_to_remove=words_to_filter)
 
     if len(truth) == 0:
         raise ValueError("truth needs to be a non-empty list of string")
@@ -270,6 +270,15 @@ def main():
 
     print(r, "\n", h, sep="")
     print(wer(r, h))
+
+    test_standardize()
+
+
+def test_standardize():
+    e1 = wer("he's my neminis", "he is my <unk> [laughter]", standardize=True)
+    e2 = wer("he is my neminis", "he is my")
+
+    assert e1 == e2
 
 
 if __name__ == '__main__':
