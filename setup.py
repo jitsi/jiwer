@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='jiwer',
-    version='1.3.1',
+    version='1.3.2',
     description='Approximate the WER of an ASR transcript',
     url='https://github.com/jitsi/asr-wer/',
     author='Nik Vaessen',
