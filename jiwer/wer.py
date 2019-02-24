@@ -105,7 +105,7 @@ def _preprocess(text: Union[str, List[str], List[List[str]]],
     elif len(text) == 1:
         return _preprocess(text[0])
     elif all(isinstance(e, str) for e in text):
-        return _preprocess_text("".join(text), standardize=standardize,
+        return _preprocess_text(" ".join(text), standardize=standardize,
                                 words_to_remove=words_to_remove)
     elif all(isinstance(e, list) for e in text):
         for e in text:
