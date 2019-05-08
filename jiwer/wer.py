@@ -54,22 +54,11 @@ def wer(truth: Union[str, List[str], List[List[str]]],
     if len(truth) == 0:
         raise ValueError("truth needs to be a non-empty list of string")
 
-    # Create the list of vocabulary used
-    vocab = list()
-
-    for w in chain(truth, hypothesis):
-        if w not in vocab:
-            vocab.append(w)
+    vocab = {w: i for i, w in enumerate(set(chain(truth, hypothesis)))}
 
     # recreate the truth and hypothesis string as a list of tokens
-    t = []
-    h = []
-
-    for w in truth:
-        t.append(vocab.index(w))
-
-    for w in hypothesis:
-        h.append(vocab.index(w))
+    t = [vocab[w] for w in truth]
+    h = [vocab[w] for w in hypothesis]
 
     # now that the words are tokenized, we can do alignment
     distance = _edit_distance(t, h)
