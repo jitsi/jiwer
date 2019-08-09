@@ -135,7 +135,7 @@ def _preprocess_text(phrase: str,
     * change all numbers written as one, two, ... to 1, 2, ...
     * remove strings between [] and <>, such as [laughter] and <unk>
 
-    :param s: the string, which is a sentence
+    :param phrase: the string, which is a sentence
     :param standardize: standardize the string by removing common abbreviations
     :param words_to_remove: remove words in this list from the phrase
     :return: the processed string
@@ -151,8 +151,8 @@ def _preprocess_text(phrase: str,
     if standardize:
         phrase = _standardise(phrase)
 
-    # remove words between [] and <>
-    phrase = re.sub('[<\[](\w)*[>\]]', "", phrase)
+    # remove everything between [] and <>
+    phrase = re.sub('[<\[](.)*[>\]]', "", phrase)
 
     # remove redundant white space
     phrase = phrase.strip()
@@ -170,7 +170,8 @@ def _preprocess_text(phrase: str,
     if words_to_remove is not None:
         for word_to_remove in words_to_remove:
             if word_to_remove in phrase:
-                phrase.remove(word_to_remove)
+                for _ in range(phrase.count(word_to_remove))
+                    phrase.remove(word_to_remove)
 
     return phrase
 
