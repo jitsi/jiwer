@@ -170,7 +170,7 @@ def _preprocess_text(phrase: str,
     if words_to_remove is not None:
         for word_to_remove in words_to_remove:
             if word_to_remove in phrase:
-                for _ in range(phrase.count(word_to_remove))
+                for _ in range(phrase.count(word_to_remove)):
                     phrase.remove(word_to_remove)
 
     return phrase
