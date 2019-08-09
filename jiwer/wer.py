@@ -152,7 +152,7 @@ def _preprocess_text(phrase: str,
         phrase = _standardise(phrase)
 
     # remove everything between [] and <>
-    phrase = re.sub('[<\[](.)*[>\]]', "", phrase)
+    phrase = re.sub('[<\[][^>\]]*[>\]]', "", phrase)
 
     # remove redundant white space
     phrase = phrase.strip()
