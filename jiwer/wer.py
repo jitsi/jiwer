@@ -33,11 +33,12 @@ from itertools import chain
 # Implementation of the WER method, exposed publicly
 
 
-def wer(truth: Union[str, List[str], List[List[str]]],
-        hypothesis: Union[str, List[str], List[List[str]]],
-        standardize=False,
-        words_to_filter=None
-        ) -> float:
+def wer(
+    truth: Union[str, List[str], List[List[str]]],
+    hypothesis: Union[str, List[str], List[List[str]]],
+    standardize=False,
+    words_to_filter=None,
+) -> float:
     """
     Calculate the WER between a ground-truth string and a hypothesis string
 
@@ -49,7 +50,9 @@ def wer(truth: Union[str, List[str], List[List[str]]],
     substitutions, insertions and deletions) and the length of the ground truth
     """
     truth = _preprocess(truth, standardize=standardize, words_to_remove=words_to_filter)
-    hypothesis = _preprocess(hypothesis, standardize=standardize, words_to_remove=words_to_filter)
+    hypothesis = _preprocess(
+        hypothesis, standardize=standardize, words_to_remove=words_to_filter
+    )
 
     if len(truth) == 0:
         raise ValueError("truth needs to be a non-empty list of string")
@@ -80,6 +83,7 @@ def wer(truth: Union[str, List[str], List[List[str]]],
 
     return error_rate
 
+
 ################################################################################
 # Implementation of helper methods, private to this package
 
@@ -87,9 +91,11 @@ def wer(truth: Union[str, List[str], List[List[str]]],
 _common_words_to_remove = ["yeah", "so", "oh", "ooh", "yhe"]
 
 
-def _preprocess(text: Union[str, List[str], List[List[str]]],
-                standardize:bool = False,
-                words_to_remove=None):
+def _preprocess(
+    text: Union[str, List[str], List[List[str]]],
+    standardize: bool = False,
+    words_to_remove=None,
+):
     """
     Preprocess the input, be it a string, list of strings, or list of list of
     strings, such that the output is a list of strings.
@@ -97,33 +103,33 @@ def _preprocess(text: Union[str, List[str], List[List[str]]],
     :return:
     """
     if isinstance(text, str):
-        return _preprocess_text(text,
-                                standardize=standardize,
-                                words_to_remove=words_to_remove)
+        return _preprocess_text(
+            text, standardize=standardize, words_to_remove=words_to_remove
+        )
     elif len(text) == 0:
         raise ValueError("received empty list")
     elif len(text) == 1:
         return _preprocess(text[0])
     elif all(isinstance(e, str) for e in text):
-        return _preprocess_text(" ".join(text), standardize=standardize,
-                                words_to_remove=words_to_remove)
+        return _preprocess_text(
+            " ".join(text), standardize=standardize, words_to_remove=words_to_remove
+        )
     elif all(isinstance(e, list) for e in text):
         for e in text:
             if not all(isinstance(f, str) for f in e):
-                raise ValueError("The second list needs to only contain "
-                                 "strings")
-        return _preprocess_text("".join(["".join(e) for e in text]),
-                                        standardize = standardize,
-                                        words_to_remove=words_to_remove)
+                raise ValueError("The second list needs to only contain " "strings")
+        return _preprocess_text(
+            "".join(["".join(e) for e in text]),
+            standardize=standardize,
+            words_to_remove=words_to_remove,
+        )
     else:
-        raise ValueError("given list should only contain lists or list of "
-                         "strings")
+        raise ValueError("given list should only contain lists or list of " "strings")
 
 
-def _preprocess_text(phrase: str,
-                     standardize: bool = False,
-                     words_to_remove: List[str] = None)\
-        -> List[str]:
+def _preprocess_text(
+    phrase: str, standardize: bool = False, words_to_remove: List[str] = None
+) -> List[str]:
     """
     Applies the following preprocessing steps on a string of text (a sentence):
 
@@ -141,8 +147,11 @@ def _preprocess_text(phrase: str,
     :return: the processed string
     """
     if type(phrase) is not str:
-        raise ValueError("can only preprocess a string type, got {} of type {}"
-                         .format(phrase, type(phrase)))
+        raise ValueError(
+            "can only preprocess a string type, got {} of type {}".format(
+                phrase, type(phrase)
+            )
+        )
 
     # lowercase
     phrase = phrase.lower()
@@ -152,7 +161,7 @@ def _preprocess_text(phrase: str,
         phrase = _standardise(phrase)
 
     # remove words between [] and <>
-    phrase = re.sub('[<\[](\w)*[>\]]', "", phrase)
+    phrase = re.sub(r"[<\[](\w)*[>\]]", "", phrase)
 
     # remove redundant white space
     phrase = phrase.strip()
@@ -161,7 +170,7 @@ def _preprocess_text(phrase: str,
     phrase = phrase.replace("\r", "")
     phrase = phrase.replace(",", "")
     phrase = phrase.replace(".", "")
-    phrase = re.sub("\s\s+", " ", phrase)  # remove more than one space between words
+    phrase = re.sub(r"\s\s+", " ", phrase)  # remove more than one space between words
 
     # tokenize
     phrase = phrase.split(" ")
@@ -190,7 +199,7 @@ def _standardise(phrase: str):
     # specific
     phrase = re.sub(r"won't", "will not", phrase)
     phrase = re.sub(r"can\'t", "can not", phrase)
-    phrase = re.sub(r"let\'s", "let us",  phrase)
+    phrase = re.sub(r"let\'s", "let us", phrase)
 
     # general
     phrase = re.sub(r"n\'t", " not", phrase)
@@ -205,7 +214,7 @@ def _standardise(phrase: str):
     return phrase
 
 
-def _edit_distance(a: List[int], b:List[int]) -> int:
+def _edit_distance(a: List[int], b: List[int]) -> int:
     """
     Calculate the edit distance between two lists of integers according to the
     Wagner-Fisher algorithm. Reference:
@@ -246,19 +255,16 @@ def _edit_distance(a: List[int], b:List[int]) -> int:
     #
     for i in range(1, m.shape[0]):
         for j in range(1, m.shape[1]):
-            if a[j-1] == b[i-1]:
-                m[i, j] = m[i-1, j-1]
+            if a[j - 1] == b[i - 1]:
+                m[i, j] = m[i - 1, j - 1]
             else:
-                m[i, j] = min(
-                    m[i-1, j-1] + 1,
-                    m[i, j - 1] + 1,
-                    m[i - 1, j] + 1
-                )
+                m[i, j] = min(m[i - 1, j - 1] + 1, m[i, j - 1] + 1, m[i - 1, j] + 1)
 
     # and the minimum-edit distance is simply the value of the down-right most
     # cell
 
     return m[len(b), len(a)]
+
 
 ################################################################################
 # Main method used for debugging purposes
@@ -281,5 +287,5 @@ def test_standardize():
     assert e1 == e2
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
