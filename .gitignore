@@ -7,3 +7,5 @@
 # Python egg metadata, regenerated from source files by setuptools.
 /*.egg-info
 
+# playground directory for running local debug code
+playground
