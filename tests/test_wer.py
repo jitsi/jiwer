@@ -46,6 +46,18 @@ class TestWERInputMethods(unittest.TestCase):
 
         self._apply_test_on(cases)
 
+        ground_truth = ["i like monthy python", "what do you mean african or european swallow"]
+        hypothesis = ["i like", "python", "what you mean", "or swallow"]
+        x = jiwer.wer(ground_truth, hypothesis)
+
+        # is equivalent to
+
+        ground_truth = "i like monthy python what do you mean african or european swallow"
+        hypothesis = "i like python what you mean or swallow"
+        y = jiwer.wer(ground_truth, hypothesis)
+
+        self.assertEqual(x, y)
+
     def test_fail_on_empty_ground_truth(self):
         def callback():
             jiwer.wer("", "test")
