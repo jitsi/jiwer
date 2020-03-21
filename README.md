@@ -2,10 +2,7 @@
 
 This repository contains a simple python package to approximate the WER of a transcript. It computes the minimum-edit distance 
 between the ground-truth sentence and the hypothesis sentence of a speech-to-text API. The minimum-edit distance is calculated
-using the 
-[Wagner-Fisher](https://en.wikipedia.org/wiki/Wagner%E2%80%93Fischer_algorithm) 
-algorithm. Because this algorithm computes the character-level minimum-edit distance, every word in a sentence is assigned a
-unique integer, and the edit-distance is computed over a string of integers. 
+using the python C module [python-Levenshtein](https://github.com/ztane/python-Levenshtein).
 
 # Installation
 

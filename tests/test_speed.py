@@ -30,7 +30,7 @@ def test_with_n_sentences(num_sentences):
 
 
 def main():
-    for n in [1, 10, 50, 100]:
+    for n in [1, 10, 50, 100, 1000]:
         test_with_n_sentences(n)
 
 

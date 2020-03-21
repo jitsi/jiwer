@@ -1,2 +1,2 @@
-numpy
-black
+numpy==1.18.2
+python-Levenshtein==0.12.0
