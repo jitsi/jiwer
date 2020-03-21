@@ -1,7 +1,7 @@
 #
 # JiWER - Jitsi Word Error Rate
 #
-# Copyright @ 2018 Atlassian Pty Ltd
+# Copyright @ 2018 - present 8x8, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,50 +26,91 @@ import re
 
 import numpy as np
 
-from typing import Union, List, Tuple
+from typing import Union, List
 from itertools import chain
+
+import jiwer.transforms as tr
+
+__all__ = ["wer"]
 
 ################################################################################
 # Implementation of the WER method, exposed publicly
 
+_default_transform = tr.Compose(
+    [
+        tr.RemoveMultipleSpaces(),
+        tr.Strip(),
+        tr.SentencesToListOfWords(),
+        tr.RemoveEmptyStrings(),
+    ]
+)
 
-def wer(truth: Union[str, List[str], List[List[str]]],
-        hypothesis: Union[str, List[str], List[List[str]]],
-        standardize=False,
-        words_to_filter=None
-        ) -> float:
+_standardize_transform = tr.Compose(
+    [
+        tr.ToLowerCase(),
+        tr.ExpandCommonEnglishContractions(),
+        tr.RemoveKaldiNonWords(),
+        tr.RemoveWhiteSpace(replace_by_space=True),
+    ]
+)
+
+SPECIAL_EMPTY_HYPOTHESIS_TOKEN = "SPECIALEMPTYHYPOTHESISTOKENTHISWORDCANNEVERHAPPENINREALLIFEOK"
+
+
+def wer(
+    truth: Union[str, List[str]],
+    hypothesis: Union[str, List[str]],
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
+    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
+    **kwargs
+) -> float:
     """
-    Calculate the WER between a ground-truth string and a hypothesis string
+    Calculate the WER between between a set of ground-truth sentences and a set of
+    hypothesis sentences.
 
-    :param truth the ground-truth sentence as a string or list of words
-    :param hypothesis the hypothesis sentence as a string or list of words
-    :param standardize whether to apply some standard rules to the given string
-    :param words_to_filter a list of words to remove from the sentences
-    :return: the WER, the distance (also known as the amount of
-    substitutions, insertions and deletions) and the length of the ground truth
+    The set of sentences can be given as a string or a list of strings. A string
+    input is assumed to be a single sentence. A list of strings is assumed to be
+    multiple sentences. Each word in a sentence is separated by one or more spaces.
+    A sentence is not expected to end with a specific token (such as a `.`). If
+    the ASR does delimit sentences it is expected that these tokens are filtered out.
+
+    The optional `transforms` arguments can be used to apply pre-processing to
+    respectively the ground truth and hypotheses input. Note that the transform
+    should ALWAYS include `SentencesToListOfWords`, as that is the expected input.
+
+    :param truth: the ground-truth sentence(s) as a string or list of strings
+    :param hypothesis: the hypothesis sentence(s) as a string or list of strings
+    :param truth_transform: the transformation to apply on the truths input
+    :param hypothesis_transform: the transformation to apply on the hypothesis input
+    :return: the WER as a floating number between 0 and 1
     """
-    truth = _preprocess(truth, standardize=standardize, words_to_remove=words_to_filter)
-    hypothesis = _preprocess(hypothesis, standardize=standardize, words_to_remove=words_to_filter)
+    # deal with old API
+    if "standardize" in kwargs:
+        truth = _standardize_transform(truth)
+        hypothesis = _standardize_transform(hypothesis)
+    if "words_to_filter" in kwargs:
+        t = tr.RemoveSpecificWords(kwargs["words_to_filter"])
+        truth = t(truth)
+        hypothesis = t(hypothesis)
 
+    # Apply transforms. By default, it collapses input to a list of words
+    truth = truth_transform(truth)
+    hypothesis = hypothesis_transform(hypothesis)
+
+    # raise an error if the ground truth is empty
     if len(truth) == 0:
-        raise ValueError("truth needs to be a non-empty list of string")
+        raise ValueError("the ground truth cannot be an empty")
+
+    # make sure the WER can be computed if the hypothesis is an empty string
+    if len(hypothesis) == 0:
+        hypothesis = [SPECIAL_EMPTY_HYPOTHESIS_TOKEN]
 
     # Create the list of vocabulary used
-    vocab = list()
+    vocab = {w: i for i, w in enumerate(set(chain(truth, hypothesis)))}
 
-    for w in chain(truth, hypothesis):
-        if w not in vocab:
-            vocab.append(w)
-
-    # recreate the truth and hypothesis string as a list of tokens
-    t = []
-    h = []
-
-    for w in truth:
-        t.append(vocab.index(w))
-
-    for w in hypothesis:
-        h.append(vocab.index(w))
+    # recreate the truth and hypothesis string as a list of integer tokens
+    t = [vocab[w] for w in truth]
+    h = [vocab[w] for w in hypothesis]
 
     # now that the words are tokenized, we can do alignment
     distance = _edit_distance(t, h)
@@ -80,132 +121,12 @@ def wer(truth: Union[str, List[str], List[List[str]]],
 
     return error_rate
 
+
 ################################################################################
-# Implementation of helper methods, private to this package
+# Implementation of helper methods
 
 
-_common_words_to_remove = ["yeah", "so", "oh", "ooh", "yhe"]
-
-
-def _preprocess(text: Union[str, List[str], List[List[str]]],
-                standardize:bool = False,
-                words_to_remove=None):
-    """
-    Preprocess the input, be it a string, list of strings, or list of list of
-    strings, such that the output is a list of strings.
-    :param text:
-    :return:
-    """
-    if isinstance(text, str):
-        return _preprocess_text(text,
-                                standardize=standardize,
-                                words_to_remove=words_to_remove)
-    elif len(text) == 0:
-        raise ValueError("received empty list")
-    elif len(text) == 1:
-        return _preprocess(text[0])
-    elif all(isinstance(e, str) for e in text):
-        return _preprocess_text(" ".join(text), standardize=standardize,
-                                words_to_remove=words_to_remove)
-    elif all(isinstance(e, list) for e in text):
-        for e in text:
-            if not all(isinstance(f, str) for f in e):
-                raise ValueError("The second list needs to only contain "
-                                 "strings")
-        return _preprocess_text("".join(["".join(e) for e in text]),
-                                        standardize = standardize,
-                                        words_to_remove=words_to_remove)
-    else:
-        raise ValueError("given list should only contain lists or list of "
-                         "strings")
-
-
-def _preprocess_text(phrase: str,
-                     standardize: bool = False,
-                     words_to_remove: List[str] = None)\
-        -> List[str]:
-    """
-    Applies the following preprocessing steps on a string of text (a sentence):
-
-    * optionally expands common abbreviated words such as he's into he is, you're into
-    you are, ect
-    * makes everything lowercase
-    * tokenize words
-    * optionally remove common words such as "yeah", "so"
-    * change all numbers written as one, two, ... to 1, 2, ...
-    * remove strings between [] and <>, such as [laughter] and <unk>
-
-    :param s: the string, which is a sentence
-    :param standardize: standardize the string by removing common abbreviations
-    :param words_to_remove: remove words in this list from the phrase
-    :return: the processed string
-    """
-    if type(phrase) is not str:
-        raise ValueError("can only preprocess a string type, got {} of type {}"
-                         .format(phrase, type(phrase)))
-
-    # lowercase
-    phrase = phrase.lower()
-
-    # deal with abbreviated words
-    if standardize:
-        phrase = _standardise(phrase)
-
-    # remove words between [] and <>
-    phrase = re.sub('[<\[](\w)*[>\]]', "", phrase)
-
-    # remove redundant white space
-    phrase = phrase.strip()
-    phrase = phrase.replace("\n", "")
-    phrase = phrase.replace("\t", "")
-    phrase = phrase.replace("\r", "")
-    phrase = phrase.replace(",", "")
-    phrase = phrase.replace(".", "")
-    phrase = re.sub("\s\s+", " ", phrase)  # remove more than one space between words
-
-    # tokenize
-    phrase = phrase.split(" ")
-
-    # remove common stop words (from observation):
-    if words_to_remove is not None:
-        for word_to_remove in words_to_remove:
-            if word_to_remove in phrase:
-                phrase.remove(word_to_remove)
-
-    return phrase
-
-
-def _standardise(phrase: str):
-    """
-    Standardise a phrase by removing common abbreviations from a sentence
-    as well as making everything lowercase
-
-    :param phrase: the sentence
-    :return: the sentence with common stuff removed
-    """
-    # lowercase
-    if not phrase.islower():
-        phrase = phrase.lower()
-
-    # specific
-    phrase = re.sub(r"won't", "will not", phrase)
-    phrase = re.sub(r"can\'t", "can not", phrase)
-    phrase = re.sub(r"let\'s", "let us",  phrase)
-
-    # general
-    phrase = re.sub(r"n\'t", " not", phrase)
-    phrase = re.sub(r"\'re", " are", phrase)
-    phrase = re.sub(r"\'s", " is", phrase)
-    phrase = re.sub(r"\'d", " would", phrase)
-    phrase = re.sub(r"\'ll", " will", phrase)
-    phrase = re.sub(r"\'t", " not", phrase)
-    phrase = re.sub(r"\'ve", " have", phrase)
-    phrase = re.sub(r"\'m", " am", phrase)
-
-    return phrase
-
-
-def _edit_distance(a: List[int], b:List[int]) -> int:
+def _edit_distance(a: List[int], b: List[int]) -> int:
     """
     Calculate the edit distance between two lists of integers according to the
     Wagner-Fisher algorithm. Reference:
@@ -246,40 +167,12 @@ def _edit_distance(a: List[int], b:List[int]) -> int:
     #
     for i in range(1, m.shape[0]):
         for j in range(1, m.shape[1]):
-            if a[j-1] == b[i-1]:
-                m[i, j] = m[i-1, j-1]
+            if a[j - 1] == b[i - 1]:
+                m[i, j] = m[i - 1, j - 1]
             else:
-                m[i, j] = min(
-                    m[i-1, j-1] + 1,
-                    m[i, j - 1] + 1,
-                    m[i - 1, j] + 1
-                )
+                m[i, j] = min(m[i - 1, j - 1] + 1, m[i, j - 1] + 1, m[i - 1, j] + 1)
 
     # and the minimum-edit distance is simply the value of the down-right most
     # cell
 
     return m[len(b), len(a)]
-
-################################################################################
-# Main method used for debugging purposes
-
-
-def main():
-    r = "hello this is a nice day"
-    h = "hello this a day"
-
-    print(r, "\n", h, sep="")
-    print(wer(r, h))
-
-    test_standardize()
-
-
-def test_standardize():
-    e1 = wer("he's my neminis", "he is my <unk> [laughter]", standardize=True)
-    e2 = wer("he is my neminis", "he is my")
-
-    assert e1 == e2
-
-
-if __name__ == '__main__':
-    main()
