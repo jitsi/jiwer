@@ -96,11 +96,18 @@ def wer(
     if len(truth) == 0:
         raise ValueError("the ground truth cannot be an empty")
 
+    # tokenize each word into an integer
+    vocabulary = set(truth + hypothesis)
+    word2char = dict(zip(vocabulary, range(len(vocabulary))))
+
+    truth_chars = [chr(word2char[w]) for w in truth]
+    hypothesis_chars = [chr(word2char[w]) for w in hypothesis]
+
     # now that the words are tokenized, we can do alignment
-    distance = _edit_distance(truth, hypothesis)
+    distance = _edit_distance(truth_chars, hypothesis_chars)
 
     # and the WER is simply distance divided by the length of the truth
-    n = len(truth)
+    n = len(truth_chars)
     error_rate = distance / n
 
     return error_rate
@@ -118,4 +125,4 @@ def _edit_distance(a: List[str], b: List[str]) -> int:
     :param b: another list of words, representing one or more sentences
     :return: the number of substitutions, insertions or deletions to apply to get from a to b
     """
-    return Levenshtein.distance(" ".join(a), " ".join(b))
+    return Levenshtein.distance("".join(a), "".join(b))
