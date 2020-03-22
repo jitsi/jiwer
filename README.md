@@ -6,7 +6,7 @@ using the python C module [python-Levenshtein](https://github.com/ztane/python-L
 
 # Installation
 
-You should be able to install this package using pip: 
+You should be able to install this package using pip if your python version is >= 3: 
 
 ```bash
 $ pip install jiwer
