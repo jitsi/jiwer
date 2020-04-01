@@ -227,7 +227,7 @@ print(jiwer.ExpandCommonEnglishContractions()(sentences))
 #### SubstituteWords
 
 `jiwer.SubstituteWords(dictionary: Mapping[str, str])` can be used to replace a word into another word. Note that
-the whole word is matched. If a word you're attempting to substitute is a substring of another it will not be affected. 
+the whole word is matched. If the word you're attempting to substitute is a substring of another it will not be affected. 
 For example, if you're substituting `foo` into `bar`, the word `foobar` will NOT be substituted into `barbar`.
 
 Example:
