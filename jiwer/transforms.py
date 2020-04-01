@@ -30,6 +30,7 @@ from typing import Union, List, Mapping
 
 __all__ = [
     "AbstractTransform",
+    "ApplyRegexSubstitution",
     "Compose",
     "ExpandCommonEnglishContractions",
     "SentencesToListOfWords",
@@ -40,6 +41,7 @@ __all__ = [
     "RemoveSpecificWords",
     "RemoveWhiteSpace",
     "Strip",
+    "SubstituteWords",
     "ToLowerCase",
     "ToUpperCase",
 ]
@@ -182,12 +184,23 @@ class ExpandCommonEnglishContractions(AbstractTransform):
         return s
 
 
-class ReplaceWords(AbstractTransform):
+class SubstituteWords(AbstractTransform):
     def __init__(self, dictionary: Mapping[str, str]):
         self.dictionary = dictionary
 
     def process_string(self, s: str):
         for key, value in self.dictionary.items():
+            s = re.sub(r"\b{}\b".format(re.escape(key)), value, s)
+
+        return s
+
+
+class ApplyRegexSubstitution(AbstractTransform):
+    def __init__(self, regex_strings: Mapping[str, str]):
+        self.regex_strings = regex_strings
+
+    def process_string(self, s: str):
+        for key, value in self.regex_strings.items():
             s = re.sub(key, value, s)
 
         return s

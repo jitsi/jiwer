@@ -224,17 +224,33 @@ print(jiwer.ExpandCommonEnglishContractions()(sentences))
 # prints: ["she will make sure you can not make it", "let us party!"]
 ```
 
-#### ReplaceWords
+#### SubstituteWords
 
-`jiwer.ReplaceWords(dictionary: Mapping[str, str])` can be used to replace a word into another word.
+`jiwer.SubstituteWords(dictionary: Mapping[str, str])` can be used to replace a word into another word. Note that
+the whole word is matched. If a word you're attempting to substitute is a substring of another it will not be affected. 
+For example, if you're substituting `foo` into `bar`, the word `foobar` will NOT be substituted into `barbar`.
 
 Example:
 ```python
-sentences = ["you're pretty"]
+sentences = ["you're pretty", "your book", "foobar"]
 
-print(jiwer.ReplaceWords({"pretty": "awesome", "you": "i", "'re": " am"})(sentences))
+print(jiwer.SubstituteWords({"pretty": "awesome", "you": "i", "'re": " am", 'foo': 'bar'})(sentences))
 
-# prints: ["i am awesome"]
+# prints: ["i am awesome", "your book", "foobar"]
+```
+
+#### ApplyRegexSubstitution
+
+`jiwer.ApplyRegexSubstitution(dictionary: Mapping[str, str])` can be used to replace a substring matching a regex
+ expression into another substring.
+
+Example:
+```python
+sentences = ["is the world doomed or loved?", "the sun is loved"]
+
+print(jiwer.ApplyRegexSubstitution({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"}))
+
+# prints: ["is the world sacr or lov?", "the sun is lov"]
 ```
 
 #### ToLowerCase
