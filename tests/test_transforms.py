@@ -88,6 +88,38 @@ class TestRemoveMultipleSpaces(unittest.TestCase):
     pass
 
 
+class TestSubstituteWords(unittest.TestCase):
+    def test_normal(self):
+        cases = [
+            (["you're pretty"], ["i am awesome"]),
+            (["your book"], ["your book"]),
+            (["foobar"], ["foobar"]),
+        ]
+
+        _apply_test_on(
+            self,
+            SubstituteWords(
+                {"pretty": "awesome", "you": "i", "'re": " am", "foo": "bar"}
+            ),
+            cases,
+        )
+
+
+class TestSubstituteRegexes(unittest.TestCase):
+    def test_normal(self):
+        cases = [
+            (["is the world doomed or loved?"], ["is the world sacr or lov?"]),
+            (["the sun is loved"], ["the sun is lov"]),
+            (["edibles are allegedly cultivated"], ["edibles are allegedly cultivat"])
+        ]
+
+        _apply_test_on(
+            self,
+            SubstituteRegexes({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"}),
+            cases,
+        )
+
+
 class TestStrip(unittest.TestCase):
     def test_normal(self):
         cases = [

@@ -40,6 +40,8 @@ __all__ = [
     "RemoveSpecificWords",
     "RemoveWhiteSpace",
     "Strip",
+    "SubstituteRegexes",
+    "SubstituteWords",
     "ToLowerCase",
     "ToUpperCase",
 ]
@@ -182,12 +184,23 @@ class ExpandCommonEnglishContractions(AbstractTransform):
         return s
 
 
-class ReplaceWords(AbstractTransform):
-    def __init__(self, dictionary: Mapping[str, str]):
-        self.dictionary = dictionary
+class SubstituteWords(AbstractTransform):
+    def __init__(self, substitutions: Mapping[str, str]):
+        self.substitutions = substitutions
 
     def process_string(self, s: str):
-        for key, value in self.dictionary.items():
+        for key, value in self.substitutions.items():
+            s = re.sub(r"\b{}\b".format(re.escape(key)), value, s)
+
+        return s
+
+
+class SubstituteRegexes(AbstractTransform):
+    def __init__(self, substitutions: Mapping[str, str]):
+        self.substitutions = substitutions
+
+    def process_string(self, s: str):
+        for key, value in self.substitutions.items():
             s = re.sub(key, value, s)
 
         return s
