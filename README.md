@@ -101,7 +101,7 @@ jiwer.Compose([
 
 #### SentencesToListOfWords
 
-`jiwer.SentencesToListOfWords(word_delimiter=" ")` can be used to transform a one or more sentences into a
+`jiwer.SentencesToListOfWords(word_delimiter=" ")` can be used to transform one or more sentences into a
 list of words. The sentences can be given as a string (one sentence) or a list of strings (one or more sentences).
 
 Example:
@@ -172,7 +172,7 @@ print(jiwer.RemoveMultipleSpaces()(sentences))
 
 #### Strip
 
-`jiwer.Strip()` can be used to filter to remove all tailing spaces.
+`jiwer.Strip()` can be used to remove all leading and trailing spaces.
 
 Example:
 ```python
@@ -186,7 +186,7 @@ print(jiwer.Strip()(sentences))
 
 #### RemoveEmptyStrings
 
-`jiwer.RemoveEmptyStrings()` can be used to filter to empty strings.
+`jiwer.RemoveEmptyStrings()` can be used to remove empty strings.
 
 Example:
 ```python
@@ -200,7 +200,8 @@ print(jiwer.RemoveEmptyStrings()(sentences))
 
 `jiwer.ExpandCommonEnglishContractions()` can be used to replace common contractions such as `let's` to `let us`.
 
-Currently, this method will perform the following replacements. Note that `␣` is used to indicate a space (` `) to get around markdown rendering constrains.
+Currently, this method will perform the following replacements. Note that `␣` is used to indicate a space (` `) to get
+around markdown rendering constrains.
 
 | Contraction   | transformed into |
 | ------------- |:----------------:|
@@ -227,7 +228,8 @@ print(jiwer.ExpandCommonEnglishContractions()(sentences))
 #### SubstituteWords
 
 `jiwer.SubstituteWords(dictionary: Mapping[str, str])` can be used to replace a word into another word. Note that
-the whole word is matched. If the word you're attempting to substitute is a substring of another it will not be affected. 
+the whole word is matched. If the word you're attempting to substitute is a substring of another word it will 
+not be affected. 
 For example, if you're substituting `foo` into `bar`, the word `foobar` will NOT be substituted into `barbar`.
 
 Example:
@@ -239,18 +241,20 @@ print(jiwer.SubstituteWords({"pretty": "awesome", "you": "i", "'re": " am", 'foo
 # prints: ["i am awesome", "your book", "foobar"]
 ```
 
-#### ApplyRegexSubstitution
+#### SubstituteRegexes
 
-`jiwer.ApplyRegexSubstitution(dictionary: Mapping[str, str])` can be used to replace a substring matching a regex
+`jiwer.SubstituteRegexes(dictionary: Mapping[str, str])` can be used to replace a substring matching a regex
  expression into another substring.
 
 Example:
 ```python
-sentences = ["is the world doomed or loved?", "the sun is loved"]
+sentences = ["is the world doomed or loved?", "edibles are allegedly cultivated"]
 
-print(jiwer.ApplyRegexSubstitution({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"}))
+print(jiwer.SubstituteRegexes({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"}))
 
-# prints: ["is the world sacr or lov?", "the sun is lov"]
+# note: the regex string "\b(\w+)ed\b", matches every word ending in 'ed', 
+# and "\1" stands for the first group ('\w+). It therefore removes 'ed' in every match
+# prints: ["is the world sacr or lov?", "edibles are allegedly cultivat"]
 ```
 
 #### ToLowerCase

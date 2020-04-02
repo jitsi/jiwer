@@ -105,16 +105,17 @@ class TestSubstituteWords(unittest.TestCase):
         )
 
 
-class TestApplyRegexSubstitution(unittest.TestCase):
+class TestSubstituteRegexes(unittest.TestCase):
     def test_normal(self):
         cases = [
             (["is the world doomed or loved?"], ["is the world sacr or lov?"]),
             (["the sun is loved"], ["the sun is lov"]),
+            (["edibles are allegedly cultivated"], ["edibles are allegedly cultivat"])
         ]
 
         _apply_test_on(
             self,
-            ApplyRegexSubstitution({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"}),
+            SubstituteRegexes({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"}),
             cases,
         )
 
