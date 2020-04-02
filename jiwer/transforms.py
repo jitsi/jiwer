@@ -30,7 +30,6 @@ from typing import Union, List, Mapping
 
 __all__ = [
     "AbstractTransform",
-    "SubstituteRegexes",
     "Compose",
     "ExpandCommonEnglishContractions",
     "SentencesToListOfWords",
@@ -41,6 +40,7 @@ __all__ = [
     "RemoveSpecificWords",
     "RemoveWhiteSpace",
     "Strip",
+    "SubstituteRegexes",
     "SubstituteWords",
     "ToLowerCase",
     "ToUpperCase",

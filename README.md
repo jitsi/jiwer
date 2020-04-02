@@ -250,10 +250,10 @@ Example:
 ```python
 sentences = ["is the world doomed or loved?", "edibles are allegedly cultivated"]
 
+# note: the regex string "\b(\w+)ed\b", matches every word ending in 'ed', 
+# and "\1" stands for the first group ('\w+). It therefore removes 'ed' in every match.
 print(jiwer.SubstituteRegexes({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"}))
 
-# note: the regex string "\b(\w+)ed\b", matches every word ending in 'ed', 
-# and "\1" stands for the first group ('\w+). It therefore removes 'ed' in every match
 # prints: ["is the world sacr or lov?", "edibles are allegedly cultivat"]
 ```
 
