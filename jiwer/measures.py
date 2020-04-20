@@ -17,18 +17,28 @@
 #
 
 """
-This file implements methods for calculating the WER between a ground-truth
-sentence and a hypothesis sentence, commonly a measure of performance for a
-automatic speech recognition system
+This file implements methods for calculating a number of similarity error
+measures between a ground-truth sentence and a hypothesis sentence, which are
+commonly used to measure the performance for an automatic speech recognition
+(ASR) system.
+
+The following measures are implemented:
+
+- Word Error Rate (WER), which is where this library got its name from. This
+  has has long been (and arguably still is) the de facto standard for computing
+  ASR performance.
+- Match Error Rate (MER)
+- Word Information Lost (WIL)
+- Word Information Preserved (WIP)
 """
 
 import Levenshtein
 
-from typing import Union, List, Mapping
+from typing import List, Mapping, Tuple, Union
 
 import jiwer.transforms as tr
 
-__all__ = ["wer"]
+__all__ = ["wer", "mer", "wil", "wip", "compute_measures"]
 
 ################################################################################
 # Implementation of the WER method, exposed publicly
@@ -184,8 +194,8 @@ def compute_measures(
     return {
         'wer': wer,
         'mer': mer,
-        'wip': wip,
         'wil': wil,
+        'wip': wip,
     }
 
 
@@ -197,7 +207,7 @@ def _preprocess(
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform],
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform]
-) -> List[str]:
+) -> Tuple[str, str]:
     """
     Pre-process the truth and hypothesis into a form that Levenshtein can handle.
 
@@ -231,7 +241,7 @@ def _preprocess(
 def _get_operation_counts(
     source_string: str,
     destination_string: str
-) -> List[str]:
+) -> Tuple[int, int, int, int]:
     """
     Check how many edit operations (delete, insert, replace) are required to
     transform the source string into the destination string. The number of hits

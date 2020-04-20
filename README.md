@@ -1,6 +1,6 @@
 # Simularity error measures for automatic speech recognition
 
-This repository contains a simple python package to approximate the Word Error Rate (WER), Match Error Rate (MER), Word Information Preserved (WIP) and Word Information Lost (WIP) of a transcript.
+This repository contains a simple python package to approximate the Word Error Rate (WER), Match Error Rate (MER), Word Information Lost (WIL) and Word Information Preserved (WIP) of a transcript.
 It computes the minimum-edit distance between the ground-truth sentence and the hypothesis sentence of a speech-to-text API.
 The minimum-edit distance is calculated using the python C module [python-Levenshtein](https://github.com/ztane/python-Levenshtein).
 
