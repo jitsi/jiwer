@@ -1,13 +1,15 @@
 import unittest
 import jiwer
 
+
 def _m(wer, mer, wil):
     return {
-        'wer': wer,
-        'mer': mer,
-        'wip': 1 - wil,
-        'wil': wil,
+        "wer": wer,
+        "mer": mer,
+        "wip": 1 - wil,
+        "wil": wil,
     }
+
 
 class TestWERInputMethods(unittest.TestCase):
     def test_input_gt_string_h_string(self):
@@ -48,19 +50,32 @@ class TestWERInputMethods(unittest.TestCase):
 
     def test_different_sentence_length(self):
         cases = [
-            (["hello", "this", "sentence", "is fractured"], ["this sentence"], _m(0.6, 0.6, 0.6)),
-            ("i am a short ground truth", "i am a considerably longer and very much incorrect hypothesis", _m(7/6, 0.7, 0.85)),
+            (
+                ["hello", "this", "sentence", "is fractured"],
+                ["this sentence"],
+                _m(0.6, 0.6, 0.6),
+            ),
+            (
+                "i am a short ground truth",
+                "i am a considerably longer and very much incorrect hypothesis",
+                _m(7 / 6, 0.7, 0.85),
+            ),
         ]
 
         self._apply_test_on(cases)
 
-        ground_truth = ["i like monthy python", "what do you mean african or european swallow"]
+        ground_truth = [
+            "i like monthy python",
+            "what do you mean african or european swallow",
+        ]
         hypothesis = ["i like", "python", "what you mean", "or swallow"]
         x = jiwer.wer(ground_truth, hypothesis)
 
         # is equivalent to
 
-        ground_truth = "i like monthy python what do you mean african or european swallow"
+        ground_truth = (
+            "i like monthy python what do you mean african or european swallow"
+        )
         hypothesis = "i like python what you mean or swallow"
         y = jiwer.wer(ground_truth, hypothesis)
 
