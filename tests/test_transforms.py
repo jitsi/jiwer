@@ -110,13 +110,11 @@ class TestSubstituteRegexes(unittest.TestCase):
         cases = [
             (["is the world doomed or loved?"], ["is the world sacr or lov?"]),
             (["the sun is loved"], ["the sun is lov"]),
-            (["edibles are allegedly cultivated"], ["edibles are allegedly cultivat"])
+            (["edibles are allegedly cultivated"], ["edibles are allegedly cultivat"]),
         ]
 
         _apply_test_on(
-            self,
-            SubstituteRegexes({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"}),
-            cases,
+            self, SubstituteRegexes({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"}), cases,
         )
 
 

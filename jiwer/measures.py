@@ -77,8 +77,11 @@ def wer(
 
     :return: WER as a floating point number
     """
-    measures = compute_measures(truth, hypothesis, truth_transform, hypothesis_transform, **kwargs)
-    return measures['wer']
+    measures = compute_measures(
+        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
+    )
+    return measures["wer"]
+
 
 def mer(
     truth: Union[str, List[str]],
@@ -95,8 +98,11 @@ def mer(
 
     :return: MER as a floating point number
     """
-    measures = compute_measures(truth, hypothesis, truth_transform, hypothesis_transform, **kwargs)
-    return measures['mer']
+    measures = compute_measures(
+        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
+    )
+    return measures["mer"]
+
 
 def wip(
     truth: Union[str, List[str]],
@@ -113,8 +119,11 @@ def wip(
 
     :return: WIP as a floating point number
     """
-    measures = compute_measures(truth, hypothesis, truth_transform, hypothesis_transform, **kwargs)
-    return measures['wip']
+    measures = compute_measures(
+        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
+    )
+    return measures["wip"]
+
 
 def wil(
     truth: Union[str, List[str]],
@@ -131,8 +140,10 @@ def wil(
 
     :return: WIL as a floating point number
     """
-    measures = compute_measures(truth, hypothesis, truth_transform, hypothesis_transform, **kwargs)
-    return measures['wil']
+    measures = compute_measures(
+        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
+    )
+    return measures["wil"]
 
 
 def compute_measures(
@@ -173,7 +184,9 @@ def compute_measures(
         hypothesis = t(hypothesis)
 
     # Preprocess truth and hypothesis
-    truth, hypothesis = _preprocess(truth, hypothesis, truth_transform, hypothesis_transform)
+    truth, hypothesis = _preprocess(
+        truth, hypothesis, truth_transform, hypothesis_transform
+    )
 
     # Get the operation counts (#hits, #substitutions, #deletions, #insertions)
     H, S, D, I = _get_operation_counts(truth, hypothesis)
@@ -185,28 +198,28 @@ def compute_measures(
     mer = float(S + D + I) / float(H + S + D + I)
 
     # Compute Word Information Preserved
-    wip = (float(H) / len(truth)) * (float(H) / len(hypothesis)) \
-        if hypothesis else 0
+    wip = (float(H) / len(truth)) * (float(H) / len(hypothesis)) if hypothesis else 0
 
     # Compute Word Information Lost
     wil = 1 - wip
 
     return {
-        'wer': wer,
-        'mer': mer,
-        'wil': wil,
-        'wip': wip,
+        "wer": wer,
+        "mer": mer,
+        "wil": wil,
+        "wip": wip,
     }
 
 
 ################################################################################
 # Implementation of helper methods
 
+
 def _preprocess(
     truth: Union[str, List[str]],
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform],
-    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform]
+    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform],
 ) -> Tuple[str, str]:
     """
     Pre-process the truth and hypothesis into a form that Levenshtein can handle.
@@ -233,14 +246,14 @@ def _preprocess(
     truth_chars = [chr(word2char[w]) for w in truth]
     hypothesis_chars = [chr(word2char[w]) for w in hypothesis]
 
-    truth_str = ''.join(truth_chars)
-    hypothesis_str = ''.join(hypothesis_chars)
+    truth_str = "".join(truth_chars)
+    hypothesis_str = "".join(hypothesis_chars)
 
     return truth_str, hypothesis_str
 
+
 def _get_operation_counts(
-    source_string: str,
-    destination_string: str
+    source_string: str, destination_string: str
 ) -> Tuple[int, int, int, int]:
     """
     Check how many edit operations (delete, insert, replace) are required to
@@ -255,11 +268,9 @@ def _get_operation_counts(
 
     editops = Levenshtein.editops(source_string, destination_string)
 
-    substitutions = sum(1 if op[0] == 'replace' else 0 for op in editops)
-    deletions = sum(1 if op[0] == 'delete' else 0 for op in editops)
-    insertions = sum(1 if op[0] == 'insert' else 0 for op in editops)
+    substitutions = sum(1 if op[0] == "replace" else 0 for op in editops)
+    deletions = sum(1 if op[0] == "delete" else 0 for op in editops)
+    insertions = sum(1 if op[0] == "insert" else 0 for op in editops)
     hits = len(source_string) - (substitutions + deletions)
 
     return hits, substitutions, deletions, insertions
-
-
