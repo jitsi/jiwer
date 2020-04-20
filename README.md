@@ -1,5 +1,6 @@
 # Word Error Rate for automatic speech recognition
 
+
 This repository contains a simple python package to approximate the WER of a transcript. It computes the minimum-edit distance 
 between the ground-truth sentence and the hypothesis sentence of a speech-to-text API. The minimum-edit distance is calculated
 using the python C module [python-Levenshtein](https://github.com/ztane/python-Levenshtein).
