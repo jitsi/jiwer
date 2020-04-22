@@ -10,7 +10,7 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 # setup library
 setup(
     name="jiwer",
-    version="2.0.1",
+    version="2.1.0",
     description="Approximate the WER of an ASR transcript",
     url="https://github.com/jitsi/asr-wer/",
     author="Nik Vaessen",
