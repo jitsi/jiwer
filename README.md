@@ -1,4 +1,4 @@
-# Simularity error measures for automatic speech recognition
+# JiWER: Similarity measures for automatic speech recognition evaluation
 
 This repository contains a simple python package to approximate the Word Error Rate (WER), Match Error Rate (MER), Word Information Lost (WIL) and Word Information Preserved (WIP) of a transcript.
 It computes the minimum-edit distance between the ground-truth sentence and the hypothesis sentence of a speech-to-text API.
@@ -9,7 +9,7 @@ Morris, Andrew & Maier, Viktoria & Green, Phil. (2004). [From WER and RIL to MER
 
 # Installation
 
-You should be able to install this package using pip if your python version is >= 3: 
+You should be able to install this package using pip if you're using Python >= `3.5`: 
 
 ```bash
 $ pip install jiwer
