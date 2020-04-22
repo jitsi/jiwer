@@ -11,8 +11,8 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 setup(
     name="jiwer",
     version="2.1.0",
-    description="Approximate the WER of an ASR transcript",
-    url="https://github.com/jitsi/asr-wer/",
+    description="Evaluate your speech-to-text system with similarity measures such as word error rate (WER)",
+    url="https://github.com/jitsi/jiwer/",
     author="Nik Vaessen",
     author_email="nikvaes@gmail.com",
     license="Apache 2",
