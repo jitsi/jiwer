@@ -1,8 +1,11 @@
-# Word Error Rate for automatic speech recognition
+# Simularity error measures for automatic speech recognition
 
-This repository contains a simple python package to approximate the WER of a transcript. It computes the minimum-edit distance 
-between the ground-truth sentence and the hypothesis sentence of a speech-to-text API. The minimum-edit distance is calculated
-using the python C module [python-Levenshtein](https://github.com/ztane/python-Levenshtein).
+This repository contains a simple python package to approximate the Word Error Rate (WER), Match Error Rate (MER), Word Information Lost (WIL) and Word Information Preserved (WIP) of a transcript.
+It computes the minimum-edit distance between the ground-truth sentence and the hypothesis sentence of a speech-to-text API.
+The minimum-edit distance is calculated using the python C module [python-Levenshtein](https://github.com/ztane/python-Levenshtein).
+
+_For a comparison between WER, MER and WIL, see: \
+Morris, Andrew & Maier, Viktoria & Green, Phil. (2004). [From WER and RIL to MER and WIL: improved evaluation measures for connected speech recognition.](https://www.researchgate.net/publication/221478089_From_WER_and_RIL_to_MER_and_WIL_improved_evaluation_measures_for_connected_speech_recognition)_
 
 # Installation
 
@@ -23,6 +26,25 @@ ground_truth = "hello world"
 hypothesis = "hello duck"
 
 error = wer(ground_truth, hypothesis)
+```
+
+Similarly, to get other measures:
+
+```python
+import jiwer
+
+ground_truth = "hello world"
+hypothesis = "hello duck"
+
+wer = jiwer.wer(ground_truth, hypothesis)
+mer = jiwer.mer(ground_truth, hypothesis)
+wil = jiwer.wil(ground_truth, hypothesis)
+
+# faster, because `compute_measures` only needs to perform the heavy lifting once:
+measures = jiwer.compute_measures(ground_truth, hypothesis)
+wer = measures['wer']
+mer = measures['mer']
+wil = measures['wil']
 ```
 
 You can also compute the WER over multiple sentences:

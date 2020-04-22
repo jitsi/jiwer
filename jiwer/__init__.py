@@ -1,5 +1,4 @@
-from .wer import wer
+from .measures import *
 from .transforms import *
 
 name = "jiwer"
-
