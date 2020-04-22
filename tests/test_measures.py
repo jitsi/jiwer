@@ -69,7 +69,7 @@ class TestWERInputMethods(unittest.TestCase):
             "what do you mean african or european swallow",
         ]
         hypothesis = ["i like", "python", "what you mean", "or swallow"]
-        x = jiwer.wer(ground_truth, hypothesis)
+        x = jiwer.compute_measures(ground_truth, hypothesis)
 
         # is equivalent to
 
@@ -77,15 +77,23 @@ class TestWERInputMethods(unittest.TestCase):
             "i like monthy python what do you mean african or european swallow"
         )
         hypothesis = "i like python what you mean or swallow"
-        y = jiwer.wer(ground_truth, hypothesis)
+        y = jiwer.compute_measures(ground_truth, hypothesis)
 
-        self.assertEqual(x, y)
+        self.assertDictAlmostEqual(x, y, delta=1e-9)
 
     def test_fail_on_empty_ground_truth(self):
-        def callback():
-            jiwer.wer("", "test")
+        for method in [
+            jiwer.wer,
+            jiwer.wil,
+            jiwer.wip,
+            jiwer.mer,
+            jiwer.compute_measures,
+        ]:
 
-        self.assertRaises(ValueError, callback)
+            def callback():
+                method("", "test")
+
+            self.assertRaises(ValueError, callback)
 
     def _apply_test_on(self, cases):
         for gt, h, correct_measures in cases:
