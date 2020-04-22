@@ -87,6 +87,18 @@ class TestWERInputMethods(unittest.TestCase):
 
         self.assertRaises(ValueError, callback)
 
+    def test_known_values(self):
+        # Taken from the "From WER and RIL to MER and WIL" paper, for link see README.md
+        cases = [
+            ("X", "X", _m(0, 0, 0),),
+            ("X", "X X Y Y", _m(3, 0.75, 0.75),),
+            ("X Y X", "X Z", _m(2 / 3, 2 / 3, 5 / 6),),
+            ("X", "Y", _m(1, 1, 1),),
+            ("X", "Y Z", _m(2, 1, 1),),
+        ]
+
+        self._apply_test_on(cases)
+
     def _apply_test_on(self, cases):
         for gt, h, correct_measures in cases:
             measures = jiwer.compute_measures(truth=gt, hypothesis=h)
