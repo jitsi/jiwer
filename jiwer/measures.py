@@ -208,6 +208,10 @@ def compute_measures(
         "mer": mer,
         "wil": wil,
         "wip": wip,
+        "hits": H,
+        "substitutions": S,
+        "deletions": D,
+        "insertions": I,
     }
 
 
