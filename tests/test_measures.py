@@ -110,6 +110,8 @@ class TestWERInputMethods(unittest.TestCase):
     def _apply_test_on(self, cases):
         for gt, h, correct_measures in cases:
             measures = jiwer.compute_measures(truth=gt, hypothesis=h)
+            # Remove entries we are not testing against
+            [measures.pop(k) for k in ["hits", "substitutions", "deletions", "insertions"]]
             self.assertDictAlmostEqual(measures, correct_measures, delta=1e-16)
 
     def assertDictAlmostEqual(self, a, b, places=None, msg=None, delta=None):
