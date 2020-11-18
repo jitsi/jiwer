@@ -10,7 +10,7 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 # setup library
 setup(
     name="jiwer",
-    version="2.1.0",
+    version="2.2.0",
     description="Evaluate your speech-to-text system with similarity measures such as word error rate (WER)",
     url="https://github.com/jitsi/jiwer/",
     author="Nik Vaessen",
