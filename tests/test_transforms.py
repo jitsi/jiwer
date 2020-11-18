@@ -114,7 +114,9 @@ class TestSubstituteRegexes(unittest.TestCase):
         ]
 
         _apply_test_on(
-            self, SubstituteRegexes({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"}), cases,
+            self,
+            SubstituteRegexes({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"}),
+            cases,
         )
 
 
