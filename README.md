@@ -294,7 +294,7 @@ print(jiwer.ToLowerCase()(sentences))
 
 #### ToUpperCase
 
-`jiwer.ToLowerCase()` can be used to replace every character into uppercase.
+`jiwer.ToUpperCase()` can be used to replace every character into uppercase.
 
 Example:
 ```python
