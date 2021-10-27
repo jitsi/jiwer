@@ -9,3 +9,14 @@
 
 # playground directory for running local debug code
 playground
+
+# poetry .lock file
+poetry.lock
+
+# idea specific folders
+.idea
+.vscode
+
+# virtual environments
+venv
+.venv
