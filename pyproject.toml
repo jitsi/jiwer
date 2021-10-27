@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jiwer"
-version = "2.2.0"
+version = "2.2.1"
 description = "Evaluate your speech-to-text system with similarity measures such as word error rate (WER)"
 authors = ["Nik Vaessen <nikvaes@gmail.com>"]
 readme = "README.md"
@@ -10,7 +10,7 @@ include = ["LICENCE"]
 
 [tool.poetry.dependencies]
 python = "^3.6.2"
-python-Levenshtein = "0.12.0"
+python-Levenshtein = "0.12.2"
 
 [tool.poetry.dev-dependencies]
 black = "21.9b0"
