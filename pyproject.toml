@@ -3,13 +3,20 @@ name = "jiwer"
 version = "2.2.0"
 description = "Evaluate your speech-to-text system with similarity measures such as word error rate (WER)"
 authors = ["Nik Vaessen <nikvaes@gmail.com>"]
+readme = "README.md"
 license = "Apache 2"
+repository = "https://github.com/jitsi/jiwer"
+include = ["LICENCE"]
 
 [tool.poetry.dependencies]
-python = "^3.5"
+python = "^3.6.2"
 python-Levenshtein = "0.12.2"
 
 [tool.poetry.dev-dependencies]
+black = "21.9b0"
+pytest = "^6.2.5"
+pytest-benchmark = "^3.4.1"
+flake8 = "3.8.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

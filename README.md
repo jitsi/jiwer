@@ -9,7 +9,7 @@ Morris, Andrew & Maier, Viktoria & Green, Phil. (2004). [From WER and RIL to MER
 
 # Installation
 
-You should be able to install this package using pip if you're using Python >= `3.5`: 
+You should be able to install this package using pip if you're using Python >= `3.6`: 
 
 ```bash
 $ pip install jiwer
