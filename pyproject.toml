@@ -10,7 +10,7 @@ include = ["LICENCE"]
 
 [tool.poetry.dependencies]
 python = "^3.6.2"
-python-Levenshtein = "0.12.2"
+python-Levenshtein = "0.12.0"
 
 [tool.poetry.dev-dependencies]
 black = "21.9b0"
