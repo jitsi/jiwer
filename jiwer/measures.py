@@ -38,7 +38,7 @@ from typing import List, Mapping, Tuple, Union
 
 import jiwer.transforms as tr
 
-__all__ = ["wer", "mer", "wil", "wip", "compute_measures"]
+__all__ = ["wer", "mer", "wil", "wip", "cer", "compute_measures"]
 
 ################################################################################
 # Implementation of the WER method, exposed publicly
@@ -213,6 +213,50 @@ def compute_measures(
         "deletions": D,
         "insertions": I,
     }
+
+
+################################################################################
+# Implementation of character error rate
+
+def cer(
+    truth: Union[str, List[str]],
+    hypothesis: Union[str, List[str]],
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = tr.Compose([]),
+    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = tr.Compose([]),
+    return_ops: bool = False,
+) -> Union[float, Tuple[float, Mapping[str, float]]]:
+    """
+    Calculate character error rate (CER) between a set of ground-truth sentences and
+    a set of hypothesis sentences.
+
+    :param truth: the ground-truth sentence(s) as a string or list of strings
+    :param hypothesis: the hypothesis sentence(s) as a string or list of strings
+    :param truth_transform: the transformation to apply on the truths input
+    :param hypothesis_transform: the transformation to apply on the hypothesis input
+    :param return_ops: when true also return a dictionary containing the number of
+    insertions, deletions, substitution and hits between truth and hypothesis
+    :return: CER as a floating point number
+    """
+    # Preprocess truth and hypothesis
+    truth, hypothesis = _preprocess(
+        truth, hypothesis, truth_transform, hypothesis_transform
+    )
+
+    # Get the operation counts (#hits, #substitutions, #deletions, #insertions)
+    H, S, D, I = _get_operation_counts(truth, hypothesis)
+
+    # Compute Word Error Rate
+    cer = float(S + D + I) / float(H + S + D)
+
+    if return_ops:
+        return cer, {
+            "hits": H,
+            "substitutions": S,
+            "deletions": D,
+            "insertions": I,
+        }
+
+    return cer
 
 
 ################################################################################
