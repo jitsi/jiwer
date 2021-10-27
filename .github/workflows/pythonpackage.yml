@@ -22,23 +22,27 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+    - name: Setup depedencies
+      run: |
+      poetry update
+      poetry install
     - name: Lint with flake8
       run: |
-        pip install flake8==3.8.4
         # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        poetry run flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics  
+        poetry run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics  
     - name: Check formatting with black
       run: |
-        pip install black==20.8b1
-        black . --check
+        poetry run black . --check
      
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
+        python-version: [3.6, 3.7, 3.8]
 
     steps:
     - uses: actions/checkout@v2
@@ -46,11 +50,13 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        poetry run python -m pip install --upgrade pip
+        poetry update
+        poetry install
     - name: Test with pytest
       run: |
-        pip install pytest pytest-benchmark
-        pytest
+        poetry run pytest
