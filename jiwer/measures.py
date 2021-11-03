@@ -34,11 +34,19 @@ The following measures are implemented:
 
 import Levenshtein
 
-from typing import List, Mapping, Tuple, Union
+from typing import Dict, List, Tuple, Union
 
 import jiwer.transforms as tr
 
-__all__ = ["wer", "mer", "wil", "wip", "cer", "compute_measures"]
+__all__ = [
+    "wer",
+    "mer",
+    "wil",
+    "wip",
+    "cer",
+    "compute_measures",
+    "cer_transform_without_space",
+]
 
 ################################################################################
 # Implementation of the WER method, exposed publicly
@@ -67,7 +75,7 @@ def wer(
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
-    **kwargs
+    **kwargs,
 ) -> float:
     """
     Calculate word error rate (WER) between a set of ground-truth sentences and
@@ -88,7 +96,7 @@ def mer(
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
-    **kwargs
+    **kwargs,
 ) -> float:
     """
     Calculate match error rate (MER) between a set of ground-truth sentences and
@@ -109,7 +117,7 @@ def wip(
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
-    **kwargs
+    **kwargs,
 ) -> float:
     """
     Calculate Word Information Preserved (WIP) between a set of ground-truth
@@ -130,7 +138,7 @@ def wil(
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
-    **kwargs
+    **kwargs,
 ) -> float:
     """
     Calculate Word Information Lost (WIL) between a set of ground-truth sentences
@@ -151,8 +159,8 @@ def compute_measures(
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = _default_transform,
-    **kwargs
-) -> Mapping[str, float]:
+    **kwargs,
+) -> Dict[str, float]:
     """
     Calculate error measures between a set of ground-truth sentences and a set of
     hypothesis sentences.
@@ -218,16 +226,37 @@ def compute_measures(
 ################################################################################
 # Implementation of character error rate
 
+cer_transform_without_space = tr.Compose(
+    [
+        tr.RemoveMultipleSpaces(),
+        tr.Strip(),
+        tr.SentencesToListOfWords(),
+        tr.RemoveEmptyStrings(),
+        tr.SentencesToListOfChars(),
+    ]
+)
+
+_cer_transform = tr.Compose(
+    [
+        tr.Strip(),
+        tr.SentencesToListOfChars(),
+    ]
+)
+
+
 def cer(
     truth: Union[str, List[str]],
     hypothesis: Union[str, List[str]],
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = tr.Compose([]),
-    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = tr.Compose([]),
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = _cer_transform,
+    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = _cer_transform,
     return_ops: bool = False,
-) -> Union[float, Tuple[float, Mapping[str, float]]]:
+) -> Union[float, Tuple[float, Dict[str, float]]]:
     """
     Calculate character error rate (CER) between a set of ground-truth sentences and
-    a set of hypothesis sentences.
+    a set of hypothesis sentences. By default, the CER includes space (` `) as a
+    character over which the error rate is computed. If you want to exclude spaces,
+    you should use the following truth and hypothesis transform:
+    `jiwer.cer_transform_without_space`
 
     :param truth: the ground-truth sentence(s) as a string or list of strings
     :param hypothesis: the hypothesis sentence(s) as a string or list of strings
@@ -284,6 +313,10 @@ def _preprocess(
     hypothesis = hypothesis_transform(hypothesis)
 
     # raise an error if the ground truth is empty
+    if not isinstance(truth, list):
+        raise ValueError("truth should be a list of strings after transform")
+    if not isinstance(hypothesis, list):
+        raise ValueError("hypothesis should be a list of strings after transform")
     if len(truth) == 0:
         raise ValueError("the ground truth cannot be an empty")
 
@@ -313,7 +346,6 @@ def _get_operation_counts(
     :param destination_string: the destination to transform the source string into
     :return: a tuple of #hits, #substitutions, #deletions, #insertions
     """
-
     editops = Levenshtein.editops(source_string, destination_string)
 
     substitutions = sum(1 if op[0] == "replace" else 0 for op in editops)
