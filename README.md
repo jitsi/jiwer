@@ -76,6 +76,42 @@ ground_truth = "i like monthy python what do you mean african or european swallo
 hypothesis = "i like python what you mean or swallow"
 ```
 
+# Weighted calculations
+
+In some use cases it might be desirable to treat particular words as being more or less important than others, e.g. keywords of particular relevance to a domain.
+This can be done using the optional __weights__ argument:
+
+```python
+import jiwer
+
+ground_truth = "good morning vietnam"
+hypothesis = "good morning world"
+my_weights = {'good' : 1, 'morning' : 1, 'vietnam' : 5}
+
+measures = jiwer.compute_measures(ground_truth, hypothesis, weights=my_weights)
+```
+
+Words not present in the weights dictionary are given weight equal to the __default_weight__ argument.
+By default, this value is equal to 1, so the above is equivalent to:
+
+```python
+import jiwer
+
+ground_truth = "good morning vietnam"
+hypothesis = "good morning world"
+my_weights = {'vietnam' : 5}
+
+measures = jiwer.compute_measures(ground_truth, hypothesis, weights=my_weights)
+```
+
+Note that insertions all carry equal weight, which can be controlled with the __insertion_weight__ parameter.
+If unspecified, this is equal to __default_weight__.
+
+Metrics such as (weighted) keyword error rate, which attend only to specific words, can be computed by passing in weights for the keywords and setting
+default_weight = 0.
+
+Note that weighted values are not used in the computation of optimal alignment between input and output strings.
+
 # pre-processing
 
 It might be necessary to apply some pre-processing steps on either the hypothesis or
