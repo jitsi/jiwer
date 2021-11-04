@@ -151,8 +151,8 @@ Example:
 ```python
 sentences = ["hi", "this is an example"]
 
-print(jiwer.ReduceToSingleSentence()(sentences))
-# prints: ['hi this is an example']
+print(jiwer.ReduceToListOfListOfWords()(sentences))
+# prints: [['hi'], ['this', 'is', 'an, 'example']]
 ```
 
 

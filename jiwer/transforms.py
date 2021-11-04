@@ -169,18 +169,6 @@ class ReduceToSingleSentence(AbstractTransform):
         else:
             return ["{}".format(self.word_delimiter).join(filtered_inp)]
 
-class SentencesToListOfChars(AbstractTransform):
-    def process_string(self, s: str):
-        return [c for c in s]
-
-    def process_list(self, inp: List[str]):
-        characters = []
-
-        for sentence in inp:
-            characters.extend(self.process_string(sentence))
-
-        return characters
-
 
 class RemoveSpecificWords(BaseRemoveTransform):
     def __init__(self, words_to_remove: List[str]):
