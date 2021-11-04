@@ -1,86 +1,57 @@
 import unittest
 import jiwer
 
+from .test_measures import assertDictAlmostEqual
+
 
 class TestCERInputMethods(unittest.TestCase):
     def test_input_gt_string_h_string(self):
         cases = [
-            ("This is a test", "This is a test", ),
-            ("This is a test", "", ),
-            ("This is a test", "This test", ),
+            ("This is a test", "This is a test", 0 / 14),
+            ("This is a test", "", 14 / 14),
+            ("This is a test", "This test", 5 / 14),
         ]
 
         self._apply_test_on(cases)
 
     def test_input_gt_string_h_list(self):
         cases = [
-            ("This is a test", ["This is a test"], _m(0, 0, 0)),
-            ("This is a test", [""], _m(1, 1, 1)),
-            ("This is a test", ["This test"], _m(0.5, 0.5, 0.5)),
+            ("This is a test", ["This is a test"], 0 / 14),
+            ("This is a test", [""], 14 / 14),
+            ("This is a test", ["This test"], 5 / 14),
         ]
 
         self._apply_test_on(cases)
 
     def test_input_gt_list_h_string(self):
         cases = [
-            (["This is a test"], "This is a test", _m(0, 0, 0)),
-            (["This is a test"], "", _m(1, 1, 1)),
-            (["This is a test"], "This test", _m(0.5, 0.5, 0.5)),
+            (["This is a test"], "This is a test", 0 / 14),
+            (["This is a test"], "", 14 / 14),
+            (["This is a test"], "This test", 5 / 14),
         ]
 
         self._apply_test_on(cases)
 
     def test_input_gt_list_h_list(self):
         cases = [
-            (["This is a test"], ["This is a test"], _m(0, 0, 0)),
-            (["This is a test"], [""], _m(1, 1, 1)),
-            (["This is a test"], ["This test"], _m(0.5, 0.5, 0.5)),
+            (["This is a test"], ["This is a test"], 0 / 14),
+            (["This is a test"], [""], 14 / 14),
+            (["This is a test"], ["This test"], 5 / 14),
         ]
 
         self._apply_test_on(cases)
 
-    def test_different_sentence_length(self):
-        cases = [
-            (
-                ["hello", "this", "sentence", "is fractured"],
-                ["this sentence"],
-                _m(0.6, 0.6, 0.6),
-            ),
-            (
-                "i am a short ground truth",
-                "i am a considerably longer and very much incorrect hypothesis",
-                _m(7 / 6, 0.7, 0.85),
-            ),
-        ]
+    def test_fail_on_different_sentence_length(self):
+        def callback():
+            jiwer.cer(["hello", "this", "sentence", "is fractured"], ["this sentence"])
 
-        self._apply_test_on(cases)
-
-        ground_truth = [
-            "i like monthy python",
-            "what do you mean african or european swallow",
-        ]
-        hypothesis = ["i like", "python", "what you mean", "or swallow"]
-        x = jiwer.compute_measures(ground_truth, hypothesis)
-
-        # is equivalent to
-
-        ground_truth = (
-            "i like monthy python what do you mean african or european swallow"
-        )
-        hypothesis = "i like python what you mean or swallow"
-        y = jiwer.compute_measures(ground_truth, hypothesis)
-
-        self.assertDictAlmostEqual(x, y, delta=1e-9)
+        self.assertRaises(ValueError, callback)
 
     def test_fail_on_empty_ground_truth(self):
-        for method in [
-            jiwer.cer
-        ]:
+        def callback():
+            jiwer.cer("", "test")
 
-            def callback():
-                method("", "test")
-
-            self.assertRaises(ValueError, callback)
+        self.assertRaises(ValueError, callback)
 
     def test_known_values(self):
         # Taken from the "From WER and RIL to MER and WIL" paper, for link see README.md
@@ -93,12 +64,12 @@ class TestCERInputMethods(unittest.TestCase):
             (
                 "X",
                 "X X Y Y",
-                3,
+                6,
             ),
             (
                 "X Y X",
                 "X Z",
-                1/3,
+                3 / 5,
             ),
             (
                 "X",
@@ -108,14 +79,53 @@ class TestCERInputMethods(unittest.TestCase):
             (
                 "X",
                 "Y Z",
-                2,
+                3,
             ),
         ]
 
         self._apply_test_on(cases)
 
+    def test_permutations_invariance(self):
+        cases = [
+            (
+                ["i", "am i good"],
+                ["i am", "i good"],
+                0.6,
+            ),
+            (
+                ["am i good", "i"],
+                [
+                    "i good",
+                    "i am",
+                ],
+                0.6,
+            ),
+        ]
+
+        self._apply_test_on(cases)
+
+    def test_return_dict(self):
+        return_dict = jiwer.cer(
+            ["i", "am i good"], ["i am", "y good"], return_dict=True
+        )
+
+        assertDictAlmostEqual(
+            self,
+            return_dict,
+            {
+                "cer": 0.7,
+                "hits": 6,
+                "substitutions": 1,
+                "deletions": 3,
+                "insertions": 3,
+            },
+            delta=1e-16,
+        )
+
     def _apply_test_on(self, cases):
         for gt, h, correct_cer in cases:
             cer = jiwer.cer(truth=gt, hypothesis=h)
 
-            self.assertAlmostEquals(cer, correct_cer, delta=1e-16)
+            self.assertTrue(isinstance(cer, float))
+            if isinstance(cer, float):
+                self.assertAlmostEqual(cer, correct_cer, delta=1e-16)

@@ -20,3 +20,7 @@ poetry.lock
 # virtual environments
 venv
 .venv
+
+# cache folders
+.pytest_cache
+.benchmarks
