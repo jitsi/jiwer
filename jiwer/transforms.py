@@ -17,9 +17,8 @@
 #
 
 """
-This file implements methods to transform text input. It implements some useful
-processing steps which are advised when calculating the WER,
-such as filtering out common words and standardizing abbreviations.
+This file implements the building blocks for transforming a collection
+of input strings to the desired format in order to calculate the WER.
 """
 
 import re
@@ -32,8 +31,9 @@ __all__ = [
     "AbstractTransform",
     "Compose",
     "ExpandCommonEnglishContractions",
-    "SentencesToListOfWords",
     "RemoveEmptyStrings",
+    "ReduceToListOfListOfWords",
+    "ReduceToSingleSentence",
     "RemoveKaldiNonWords",
     "RemoveMultipleSpaces",
     "RemovePunctuation",
@@ -93,28 +93,81 @@ class BaseRemoveTransform(AbstractTransform):
         return [self.process_string(s) for s in inp]
 
 
-class SentencesToListOfWords(AbstractTransform):
+class ReduceToListOfListOfWords(AbstractTransform):
+    """
+    Transforms a single input sentence, or a list of input sentences, into
+    a list of list of words, which is the expected format for calculating the
+    edit operations between two input sentences.
+
+    A sentence is assumed to be a string, where words are delimited by a token
+    (such as ` `, space). Each string is expected to contain only a single sentence.
+    Empty strings (no output) are removed for the list
+    """
+
     def __init__(self, word_delimiter: str = " "):
         """
-        Transforms one or more sentences into a list of words. A sentence is
-        assumed to be a string, where words are delimited by a token
-        (such as ` `, space). Each string is expected to contain only a single sentence.
-
         :param word_delimiter: the character which delimits words. Default is ` ` (space).
-        Default is None (sentences are not delimited)
         """
         self.word_delimiter = word_delimiter
 
     def process_string(self, s: str):
-        return s.split(self.word_delimiter)
+        return [[w for w in s.split(self.word_delimiter) if len(w) >= 1]]
 
     def process_list(self, inp: List[str]):
-        words = []
+        sentence_collection = []
 
         for sentence in inp:
-            words.extend(self.process_string(sentence))
+            list_of_words = self.process_string(sentence)[0]
 
-        return words
+            sentence_collection.append(list_of_words)
+
+        if len(sentence_collection) == 0:
+            return [[]]
+
+        return sentence_collection
+
+
+class ReduceToListOfListOfChars(AbstractTransform):
+    def process_string(self, s: str):
+        return [[w for w in s]]
+
+    def process_list(self, inp: List[str]):
+        sentence_collection = []
+
+        for sentence in inp:
+            list_of_words = self.process_string(sentence)[0]
+
+            sentence_collection.append(list_of_words)
+
+        if len(sentence_collection) == 0:
+            return [[]]
+
+        return sentence_collection
+
+
+class ReduceToSingleSentence(AbstractTransform):
+    """
+    Transforms one or more sentences into a single sentence. A sentence is
+    assumed to be a string, where words are delimited by a token
+    (such as ` `, space). Each string is expected to contain only a single sentence.
+    """
+
+    def __init__(self, word_delimiter: str = " "):
+        """
+        :param word_delimiter: the character which delimits words. Default is ` ` (space).
+        """
+        self.word_delimiter = word_delimiter
+
+    def process_string(self, s: str):
+        return s
+
+    def process_list(self, inp: List[str]):
+        filtered_inp = [i for i in inp if len(i) >= 1]
+
+        if len(filtered_inp) == 0:
+            return []
+        else:
+            return ["{}".format(self.word_delimiter).join(filtered_inp)]
 
 
 class RemoveSpecificWords(BaseRemoveTransform):

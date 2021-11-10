@@ -64,16 +64,15 @@ hypothesis = ["hello duck", "i like python"]
 error = wer(ground_truth, hypothesis)
 ```
 
-When the amount of ground-truth sentences and hypothesis sentences differ, a minimum alignment is done over the merged sentence:
+We also provide the character error rate:
 
 ```python
-ground_truth = ["i like monthy python", "what do you mean, african or european swallow"]
-hypothesis = ["i like", "python", "what you mean" , "or swallow"]
+from jiwer import cer
 
-# is equivalent to
+ground_truth = ["i can spell", "i hope"]
+hypothesis = ["i kan cpell", "i hop"]
 
-ground_truth = "i like monthy python what do you mean african or european swallow"
-hypothesis = "i like python what you mean or swallow"
+error = cer(ground_truth, hypothesis)
 ```
 
 # pre-processing
@@ -89,9 +88,9 @@ hypothesis = "i like Python?\n"
 
 transformation = jiwer.Compose([
     jiwer.ToLowerCase(),
+    jiwer.RemoveWhiteSpace(replace_by_space=True),
     jiwer.RemoveMultipleSpaces(),
-    jiwer.RemoveWhiteSpace(replace_by_space=False),
-    jiwer.SentencesToListOfWords(word_delimiter=" ")
+    jiwer.ReduceToListOfListOfWords(word_delimiter=" ")
 ]) 
 
 jiwer.wer(
@@ -106,14 +105,16 @@ By default, the following transformation is applied to both the ground truth and
 Note that is simply to get it into the right format to calculate the WER.
 
 ```python
-default_transformation = jiwer.Compose([
+wer_default = tr.Compose([
     jiwer.RemoveMultipleSpaces(),
     jiwer.Strip(),
-    jiwer.SentencesToListOfWords(),
-    jiwer.RemoveEmptyStrings()
+    jiwer.ReduceToListOfListOfWords(),
 ])
 ```
-### Transformations
+
+### transforms
+
+We provide some predefined transforms. See `jiwer.transformations`.
 
 #### Compose
 
@@ -127,18 +128,35 @@ jiwer.Compose([
 ])
 ```
 
-#### SentencesToListOfWords
+#### ReduceToListOfListOfWords
 
-`jiwer.SentencesToListOfWords(word_delimiter=" ")` can be used to transform one or more sentences into a
-list of words. The sentences can be given as a string (one sentence) or a list of strings (one or more sentences).
+`jiwer.ReduceToListOfListOfWords(word_delimiter=" ")` can be used to transform one or more sentences into a list of lists of words. The sentences can be given as a string (one sentence) or a list of strings (one or more sentences). This operation should be the final step
+of any transformation pipeline as the library internally computes the word error rate
+based on a double list of words.
 
 Example:
 ```python
 sentences = ["hi", "this is an example"]
 
-print(jiwer.SentencesToListOfWords()(sentences))
-# prints: ['hi', 'this', 'is', 'an, 'example']
+print(jiwer.ReduceToListOfListOfWords()(sentences))
+# prints: [['hi'], ['this', 'is', 'an, 'example']]
 ```
+
+#### ReduceToSingleSentence
+
+`jiwer.ReduceToSingleSentence(word_delimiter=" ")` can be used to transform multiple sentences into a a single sentence. The sentences can be given as a string (one sentence) or a list of strings (one or more sentences). This operation can be useful when the number of
+ground truth sentences and hypothesis sentences differ, and you want to do an minimal
+alignment over these lists. Note that this creates an invariance: `wer([a, b], [a, b])` might not
+be equal to `wer([b, a], [b, a])`. 
+
+Example:
+```python
+sentences = ["hi", "this is an example"]
+
+print(jiwer.ReduceToSingleSentence()(sentences))
+# prints: ['hi this is an example']
+```
+
 
 #### RemoveSpecificWords
 

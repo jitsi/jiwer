@@ -1,6 +1,7 @@
 import unittest
 
 from jiwer.transforms import *
+from jiwer.transforms import ReduceToListOfListOfChars
 
 
 def _apply_test_on(self: unittest.TestCase, tr, cases):
@@ -8,26 +9,160 @@ def _apply_test_on(self: unittest.TestCase, tr, cases):
         self.assertEqual(outp, tr(inp))
 
 
-class TestSentencesToListOfWords(unittest.TestCase):
+class TestReduceToSingleSentence(unittest.TestCase):
     def test_normal(self):
         cases = [
-            ("this is a test", ["this", "is", "a", "test"]),
-            ("", [""]),
-            (["this is one", "is two"], ["this", "is", "one", "is", "two"]),
-            (["one", "two", "three", "", "five"], ["one", "two", "three", "", "five"]),
+            ("this is a test", "this is a test"),
+            ("", ""),
+            (["this is one", "is two"], ["this is one is two"]),
+            (["one", "two", "three", "", "five six"], ["one two three five six"]),
+            ([""], []),
         ]
 
-        _apply_test_on(self, SentencesToListOfWords(), cases)
+        _apply_test_on(self, ReduceToSingleSentence(), cases)
 
     def test_delimiter(self):
         cases = [
-            ("this_is_a_test", ["this", "is", "a", "test"]),
-            ("", [""]),
-            (["this_is_one", "is_two"], ["this", "is", "one", "is", "two"]),
-            (["one", "two", "three", "", "five"], ["one", "two", "three", "", "five"]),
+            ("this_is_a_test", "this_is_a_test"),
+            ("", ""),
+            (["this_is_one", "is_two"], ["this_is_one_is_two"]),
+            (["one", "two", "three", "", "five_six"], ["one_two_three_five_six"]),
+            ([""], []),
         ]
 
-        _apply_test_on(self, SentencesToListOfWords("_"), cases)
+        _apply_test_on(self, ReduceToSingleSentence("_"), cases)
+
+
+class TestReduceToListOfListOfWords(unittest.TestCase):
+    def test_normal(self):
+        cases = [
+            ("this is a test", [["this", "is", "a", "test"]]),
+            ("", [[]]),
+            (["this is one", "is two"], [["this", "is", "one"], ["is", "two"]]),
+            (
+                ["one", "two", "three", "", "five six"],
+                [["one"], ["two"], ["three"], [], ["five", "six"]],
+            ),
+            ([], [[]]),
+            ([""], [[]]),
+            (["", "", ""], [[], [], []]),
+        ]
+
+        _apply_test_on(self, ReduceToListOfListOfWords(), cases)
+
+    def test_delimiter(self):
+        cases = [
+            ("this_is_a_test", [["this", "is", "a", "test"]]),
+            ("", [[]]),
+            (["this_is_one", "is_two"], [["this", "is", "one"], ["is", "two"]]),
+            (
+                ["one", "two", "three", "", "five_six"],
+                [["one"], ["two"], ["three"], [], ["five", "six"]],
+            ),
+            ([], [[]]),
+            ([""], [[]]),
+            (["", "", ""], [[], [], []]),
+        ]
+
+        _apply_test_on(self, ReduceToListOfListOfWords("_"), cases)
+
+
+class TestReduceToListOfListOfChars(unittest.TestCase):
+    def test_normal(self):
+        cases = [
+            (
+                "this is a test",
+                [
+                    [
+                        "t",
+                        "h",
+                        "i",
+                        "s",
+                        " ",
+                        "i",
+                        "s",
+                        " ",
+                        "a",
+                        " ",
+                        "t",
+                        "e",
+                        "s",
+                        "t",
+                    ]
+                ],
+            ),
+            ("", [[]]),
+            (
+                ["this is one", "is two"],
+                [
+                    ["t", "h", "i", "s", " ", "i", "s", " ", "o", "n", "e"],
+                    ["i", "s", " ", "t", "w", "o"],
+                ],
+            ),
+            (
+                ["one", "two", "three", "", "five six"],
+                [
+                    ["o", "n", "e"],
+                    ["t", "w", "o"],
+                    ["t", "h", "r", "e", "e"],
+                    [],
+                    ["f", "i", "v", "e", " ", "s", "i", "x"],
+                ],
+            ),
+            ([], [[]]),
+            ([""], [[]]),
+            (["", "", ""], [[], [], []]),
+        ]
+
+        _apply_test_on(self, ReduceToListOfListOfChars(), cases)
+
+    def test_delimiter(self):
+        cases = [
+            (
+                "this_is_a_test",
+                [
+                    [
+                        "t",
+                        "h",
+                        "i",
+                        "s",
+                        "_",
+                        "i",
+                        "s",
+                        "_",
+                        "a",
+                        "_",
+                        "t",
+                        "e",
+                        "s",
+                        "t",
+                    ]
+                ],
+            ),
+            ("", [[]]),
+            (
+                ["this_is_one", "is_two"],
+                [
+                    ["t", "h", "i", "s", "_", "i", "s", "_", "o", "n", "e"],
+                    ["i", "s", "_", "t", "w", "o"],
+                ],
+            ),
+            (
+                ["one", "two", "three", "", "five_six"],
+                [
+                    ["o", "n", "e"],
+                    ["t", "w", "o"],
+                    ["t", "h", "r", "e", "e"],
+                    [],
+                    ["f", "i", "v", "e", "_", "s", "i", "x"],
+                ],
+            ),
+            ([], [[]]),
+            ([""], [[]]),
+            (["", "", ""], [[], [], []]),
+        ]
+
+        _apply_test_on(self, ReduceToListOfListOfChars(), cases)
 
 
 class TestRemoveSpecificWords(unittest.TestCase):
