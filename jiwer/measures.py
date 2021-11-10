@@ -31,6 +31,7 @@ The following measures are implemented:
 - Word Information Lost (WIL)
 - Word Information Preserved (WIP)
 """
+import warnings
 
 import Levenshtein
 
@@ -38,7 +39,7 @@ from typing import Any, Dict, List, Tuple, Union
 from itertools import chain
 
 from jiwer import transforms as tr
-from jiwer.transformations import wer_default_transform, cer_default_transform
+from jiwer.transformations import wer_default, wer_standardize, cer_default_transform
 
 __all__ = [
     "wer",
@@ -56,10 +57,11 @@ __all__ = [
 def wer(
     truth: Union[str, List[str]],
     hypothesis: Union[str, List[str]],
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default_transform,
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     hypothesis_transform: Union[
         tr.Compose, tr.AbstractTransform
-    ] = wer_default_transform,
+    ] = wer_default,
+    **kwargs
 ) -> float:
     """
     Calculate word error rate (WER) between a set of ground-truth sentences and
@@ -70,7 +72,7 @@ def wer(
     :return: WER as a floating point number
     """
     measures = compute_measures(
-        truth, hypothesis, truth_transform, hypothesis_transform
+        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
     )
     return measures["wer"]
 
@@ -78,10 +80,9 @@ def wer(
 def mer(
     truth: Union[str, List[str]],
     hypothesis: Union[str, List[str]],
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default_transform,
-    hypothesis_transform: Union[
-        tr.Compose, tr.AbstractTransform
-    ] = wer_default_transform,
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    **kwargs
 ) -> float:
     """
     Calculate match error rate (MER) between a set of ground-truth sentences and
@@ -92,7 +93,7 @@ def mer(
     :return: MER as a floating point number
     """
     measures = compute_measures(
-        truth, hypothesis, truth_transform, hypothesis_transform
+        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
     )
     return measures["mer"]
 
@@ -100,10 +101,9 @@ def mer(
 def wip(
     truth: Union[str, List[str]],
     hypothesis: Union[str, List[str]],
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default_transform,
-    hypothesis_transform: Union[
-        tr.Compose, tr.AbstractTransform
-    ] = wer_default_transform,
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    **kwargs
 ) -> float:
     """
     Calculate Word Information Preserved (WIP) between a set of ground-truth
@@ -114,7 +114,7 @@ def wip(
     :return: WIP as a floating point number
     """
     measures = compute_measures(
-        truth, hypothesis, truth_transform, hypothesis_transform
+        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
     )
     return measures["wip"]
 
@@ -122,10 +122,9 @@ def wip(
 def wil(
     truth: Union[str, List[str]],
     hypothesis: Union[str, List[str]],
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default_transform,
-    hypothesis_transform: Union[
-        tr.Compose, tr.AbstractTransform
-    ] = wer_default_transform,
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    **kwargs
 ) -> float:
     """
     Calculate Word Information Lost (WIL) between a set of ground-truth sentences
@@ -136,7 +135,7 @@ def wil(
     :return: WIL as a floating point number
     """
     measures = compute_measures(
-        truth, hypothesis, truth_transform, hypothesis_transform
+        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
     )
     return measures["wil"]
 
@@ -144,10 +143,9 @@ def wil(
 def compute_measures(
     truth: Union[str, List[str]],
     hypothesis: Union[str, List[str]],
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default_transform,
-    hypothesis_transform: Union[
-        tr.Compose, tr.AbstractTransform
-    ] = wer_default_transform,
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    **kwargs
 ) -> Dict[str, float]:
     """
     Calculate error measures between a set of ground-truth sentences and a set of
@@ -179,6 +177,28 @@ def compute_measures(
     :param hypothesis_transform: the transformation to apply on the hypothesis input
     :return: a dict with WER, MER, WIP and WIL measures as floating point numbers
     """
+    # deprecated old API
+    if "standardize" in kwargs:
+        warnings.warn(
+            UserWarning(
+                "keyword argument `standardize` is deprecated. "
+                "Please use `truth_transform=jiwer.transformations.wer_standardize` and"
+                " `hypothesis_transform=jiwer.transformations.wer_standardize` instead"
+            )
+        )
+        truth_transform = wer_standardize
+        hypothesis_transform = wer_standardize
+    if "words_to_filter" in kwargs:
+        warnings.warn(
+            UserWarning(
+                "keyword argument `words_to_filter` is deprecated. "
+                "Please compose your own transform with `jiwer.transforms.RemoveSpecificWords"
+            )
+        )
+        t = tr.RemoveSpecificWords(kwargs["words_to_filter"])
+        truth = t(truth)
+        hypothesis = t(hypothesis)
+
     # validate input type
     if isinstance(truth, str):
         truth = [truth]
@@ -300,14 +320,8 @@ def _preprocess(
     :return: the preprocessed truth and hypothesis
     """
     # Apply transforms. The transforms should collapses input to a list of list of words
-    print(truth)
-    print(hypothesis)
-
     transformed_truth = truth_transform(truth)
     transformed_hypothesis = hypothesis_transform(hypothesis)
-
-    print(transformed_truth)
-    print(transformed_hypothesis)
 
     # raise an error if the ground truth is empty or the output
     # is not a list of list of strings
