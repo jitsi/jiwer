@@ -105,7 +105,7 @@ By default, the following transformation is applied to both the ground truth and
 Note that is simply to get it into the right format to calculate the WER.
 
 ```python
-wer_default_transform = tr.Compose([
+wer_default = tr.Compose([
     jiwer.RemoveMultipleSpaces(),
     jiwer.Strip(),
     jiwer.ReduceToListOfListOfWords(),
@@ -113,6 +113,8 @@ wer_default_transform = tr.Compose([
 ```
 
 ### transforms
+
+We provide some predefined transforms. See `jiwer.transformations`.
 
 #### Compose
 
@@ -129,8 +131,8 @@ jiwer.Compose([
 #### ReduceToListOfListOfWords
 
 `jiwer.ReduceToListOfListOfWords(word_delimiter=" ")` can be used to transform one or more sentences into a list of lists of words. The sentences can be given as a string (one sentence) or a list of strings (one or more sentences). This operation should be the final step
-of any transformation pipeline as the library internally computed the edit distance
-based on an double list of words.
+of any transformation pipeline as the library internally computes the word error rate
+based on a double list of words.
 
 Example:
 ```python
@@ -145,7 +147,7 @@ print(jiwer.ReduceToListOfListOfWords()(sentences))
 `jiwer.ReduceToSingleSentence(word_delimiter=" ")` can be used to transform multiple sentences into a a single sentence. The sentences can be given as a string (one sentence) or a list of strings (one or more sentences). This operation can be useful when the number of
 ground truth sentences and hypothesis sentences differ, and you want to do an minimal
 alignment over these lists. Note that this creates an invariance: `wer([a, b], [a, b])` might not
-be equal to `wer([a, b], [b, a])`. 
+be equal to `wer([b, a], [b, a])`. 
 
 Example:
 ```python

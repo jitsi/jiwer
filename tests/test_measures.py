@@ -1,5 +1,4 @@
 import unittest
-from unittest.case import TestCase
 import jiwer
 
 
@@ -84,8 +83,8 @@ class TestMeasuresContiguousSentencesTransform(unittest.TestCase):
         x = jiwer.compute_measures(
             ground_truth,
             hypothesis,
-            truth_transform=jiwer.transformations.wer_contiguous_sentences_transform,
-            hypothesis_transform=jiwer.transformations.wer_contiguous_sentences_transform,
+            truth_transform=jiwer.transformations.wer_contiguous,
+            hypothesis_transform=jiwer.transformations.wer_contiguous,
         )
 
         # is equivalent to
@@ -97,8 +96,8 @@ class TestMeasuresContiguousSentencesTransform(unittest.TestCase):
         y = jiwer.compute_measures(
             ground_truth,
             hypothesis,
-            truth_transform=jiwer.transformations.wer_contiguous_sentences_transform,
-            hypothesis_transform=jiwer.transformations.wer_contiguous_sentences_transform,
+            truth_transform=jiwer.transformations.wer_contiguous,
+            hypothesis_transform=jiwer.transformations.wer_contiguous,
         )
 
         assertDictAlmostEqual(self, x, y, delta=1e-9)
@@ -173,8 +172,8 @@ class TestMeasuresContiguousSentencesTransform(unittest.TestCase):
             measures = jiwer.compute_measures(
                 truth=gt,
                 hypothesis=h,
-                truth_transform=jiwer.transformations.wer_contiguous_sentences_transform,
-                hypothesis_transform=jiwer.transformations.wer_contiguous_sentences_transform,
+                truth_transform=jiwer.transformations.wer_contiguous,
+                hypothesis_transform=jiwer.transformations.wer_contiguous,
             )
             # Remove entries we are not testing against
             [

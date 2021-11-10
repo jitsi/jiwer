@@ -26,15 +26,17 @@ usefull in specific use cases.
 import jiwer.transforms as tr
 
 __all__ = [
-    "wer_default_transform",
-    "wer_contiguous_sentences_transform",
+    "wer_default",
+    "wer_contiguous",
+    "wer_standardize",
+    "wer_standardize_contiguous",
     "cer_default_transform",
 ]
 
 ################################################################################
 # implement transformations for WER (and accompanying measures)
 
-wer_default_transform = tr.Compose(
+wer_default = tr.Compose(
     [
         tr.RemoveMultipleSpaces(),
         tr.Strip(),
@@ -42,7 +44,7 @@ wer_default_transform = tr.Compose(
     ]
 )
 
-wer_contiguous_sentences_transform = tr.Compose(
+wer_contiguous = tr.Compose(
     [
         tr.RemoveMultipleSpaces(),
         tr.Strip(),
@@ -50,6 +52,29 @@ wer_contiguous_sentences_transform = tr.Compose(
         tr.ReduceToListOfListOfWords(),
     ]
 )
+
+
+wer_standardize = tr.Compose(
+    [
+        tr.ToLowerCase(),
+        tr.ExpandCommonEnglishContractions(),
+        tr.RemoveKaldiNonWords(),
+        tr.RemoveWhiteSpace(replace_by_space=True),
+        tr.ReduceToListOfListOfWords(),
+    ]
+)
+
+wer_standardize_contiguous = tr.Compose(
+    [
+        tr.ToLowerCase(),
+        tr.ExpandCommonEnglishContractions(),
+        tr.RemoveKaldiNonWords(),
+        tr.RemoveWhiteSpace(replace_by_space=True),
+        tr.ReduceToSingleSentence(),
+        tr.ReduceToListOfListOfWords(),
+    ]
+)
+
 
 ################################################################################
 # implement transformations for CER
