@@ -58,9 +58,7 @@ def wer(
     truth: Union[str, List[str]],
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
-    hypothesis_transform: Union[
-        tr.Compose, tr.AbstractTransform
-    ] = wer_default,
+    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     **kwargs
 ) -> float:
     """
