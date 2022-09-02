@@ -9,7 +9,7 @@ repository = "https://github.com/jitsi/jiwer"
 include = ["LICENCE"]
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
+python = "^3.7"
 levenshtein = "0.20.2"
 
 [tool.poetry.dev-dependencies]
