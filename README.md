@@ -15,7 +15,7 @@ You should be able to install this package using [poetry](https://python-poetry.
 $ poetry add jiwer
 ```
 
-Or, if you prefer old-fashioned pip and you're using Python >= `3.6`:
+Or, if you prefer old-fashioned pip and you're using Python >= `3.7`:
 
 ```bash
 $ pip install jiwer
@@ -105,7 +105,9 @@ By default, the following transformation is applied to both the ground truth and
 Note that is simply to get it into the right format to calculate the WER.
 
 ```python
-wer_default = tr.Compose([
+import jiwer 
+
+wer_default = jiwer.Compose([
     jiwer.RemoveMultipleSpaces(),
     jiwer.Strip(),
     jiwer.ReduceToListOfListOfWords(),
@@ -122,20 +124,29 @@ We provide some predefined transforms. See `jiwer.transformations`.
 
 Example:
 ```python
+import jiwer 
+
 jiwer.Compose([
     jiwer.RemoveMultipleSpaces(),
-    jiwer.SentencesToListOfWords()
+    jiwer.ReduceToListOfListOfWords()
 ])
 ```
 
+Note that each transformation needs to end with `jiwer.ReduceToListOfListOfWords()`, as the library internally computes the word error rate
+based on a double list of words.
+`
+
 #### ReduceToListOfListOfWords
 
-`jiwer.ReduceToListOfListOfWords(word_delimiter=" ")` can be used to transform one or more sentences into a list of lists of words. The sentences can be given as a string (one sentence) or a list of strings (one or more sentences). This operation should be the final step
+`jiwer.ReduceToListOfListOfWords(word_delimiter=" ")` can be used to transform one or more sentences into a list of lists of words. 
+The sentences can be given as a string (one sentence) or a list of strings (one or more sentences). This operation should be the final step
 of any transformation pipeline as the library internally computes the word error rate
 based on a double list of words.
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["hi", "this is an example"]
 
 print(jiwer.ReduceToListOfListOfWords()(sentences))
@@ -144,13 +155,17 @@ print(jiwer.ReduceToListOfListOfWords()(sentences))
 
 #### ReduceToSingleSentence
 
-`jiwer.ReduceToSingleSentence(word_delimiter=" ")` can be used to transform multiple sentences into a a single sentence. The sentences can be given as a string (one sentence) or a list of strings (one or more sentences). This operation can be useful when the number of
-ground truth sentences and hypothesis sentences differ, and you want to do an minimal
+`jiwer.ReduceToSingleSentence(word_delimiter=" ")` can be used to transform multiple sentences into a single sentence. 
+The sentences can be given as a string (one sentence) or a list of strings (one or more sentences). 
+This operation can be useful when the number of
+ground truth sentences and hypothesis sentences differ, and you want to do a minimal
 alignment over these lists. Note that this creates an invariance: `wer([a, b], [a, b])` might not
 be equal to `wer([b, a], [b, a])`. 
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["hi", "this is an example"]
 
 print(jiwer.ReduceToSingleSentence()(sentences))
@@ -164,6 +179,8 @@ print(jiwer.ReduceToSingleSentence()(sentences))
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["yhe awesome", "the apple is not a pear", "yhe"]
 
 print(jiwer.RemoveSpecificWords(["yhe", "the", "a"])(sentences))
@@ -174,11 +191,14 @@ print(jiwer.RemoveSpecificWords(["yhe", "the", "a"])(sentences))
 
 `jiwer.RemoveWhiteSpace(replace_by_space=False)` can be used to filter out white space.
 The whitespace characters are ` `, `\t`, `\n`, `\r`, `\x0b` and `\x0c`.
-Note that by default space (` `) is also removed, which will make it impossible to split a sentence into words by using `SentencesToListOfWords`.
+Note that by default space (` `) is also removed, which will make it impossible to split a sentence into a list of words by using `ReduceToListOfListOfWords` 
+or `ReduceToSingleSentence`.
 This can be prevented by replacing all whitespace with the space character. 
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["this is an example", "hello\tworld\n\r"]
 
 print(jiwer.RemoveWhiteSpace()(sentences))
@@ -197,6 +217,8 @@ print(jiwer.RemoveWhiteSpace(replace_by_space=True)(sentences))
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["this is an example!", "hello. goodbye"]
 
 print(jiwer.RemovePunctuation()(sentences))
@@ -209,6 +231,8 @@ print(jiwer.RemovePunctuation()(sentences))
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["this is   an   example ", "  hello goodbye  ", "  "]
 
 print(jiwer.RemoveMultipleSpaces()(sentences))
@@ -222,6 +246,8 @@ print(jiwer.RemoveMultipleSpaces()(sentences))
 
 Example:
 ```python
+import jiwer 
+
 sentences = [" this is an example ", "  hello goodbye  ", "  "]
 
 print(jiwer.Strip()(sentences))
@@ -236,6 +262,8 @@ print(jiwer.Strip()(sentences))
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["", "this is an example", " ",  "                "]
 
 print(jiwer.RemoveEmptyStrings()(sentences))
@@ -265,6 +293,8 @@ around markdown rendering constrains.
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["she'll make sure you can't make it", "let's party!"]
 
 print(jiwer.ExpandCommonEnglishContractions()(sentences))
@@ -280,6 +310,8 @@ For example, if you're substituting `foo` into `bar`, the word `foobar` will NOT
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["you're pretty", "your book", "foobar"]
 
 print(jiwer.SubstituteWords({"pretty": "awesome", "you": "i", "'re": " am", 'foo': 'bar'})(sentences))
@@ -294,6 +326,8 @@ print(jiwer.SubstituteWords({"pretty": "awesome", "you": "i", "'re": " am", 'foo
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["is the world doomed or loved?", "edibles are allegedly cultivated"]
 
 # note: the regex string "\b(\w+)ed\b", matches every word ending in 'ed', 
@@ -309,6 +343,8 @@ print(jiwer.SubstituteRegexes({r"doom": r"sacr", r"\b(\w+)ed\b": r"\1"})(sentenc
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["You're PRETTY"]
 
 print(jiwer.ToLowerCase()(sentences))
@@ -322,6 +358,8 @@ print(jiwer.ToLowerCase()(sentences))
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["You're amazing"]
 
 print(jiwer.ToUpperCase()(sentences))
@@ -336,6 +374,8 @@ with hypotheses from the Kaldi project, which can output non-words such as `[lau
 
 Example:
 ```python
+import jiwer 
+
 sentences = ["you <unk> like [laugh]"]
 
 print(jiwer.RemoveKaldiNonWords()(sentences))
