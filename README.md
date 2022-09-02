@@ -2,7 +2,7 @@
 
 This repository contains a simple python package to approximate the Word Error Rate (WER), Match Error Rate (MER), Word Information Lost (WIL) and Word Information Preserved (WIP) of a transcript.
 It computes the minimum-edit distance between the ground-truth sentence and the hypothesis sentence of a speech-to-text API.
-The minimum-edit distance is calculated using the python C module [python-Levenshtein](https://github.com/ztane/python-Levenshtein).
+The minimum-edit distance is calculated using the Python C module [Levenshtein](https://github.com/maxbachmann/Levenshtein).
 
 _For a comparison between WER, MER and WIL, see: \
 Morris, Andrew & Maier, Viktoria & Green, Phil. (2004). [From WER and RIL to MER and WIL: improved evaluation measures for connected speech recognition.](https://www.researchgate.net/publication/221478089_From_WER_and_RIL_to_MER_and_WIL_improved_evaluation_measures_for_connected_speech_recognition)_
