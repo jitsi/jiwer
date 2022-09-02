@@ -20,7 +20,7 @@ This file is intended to provide the default transformation which need
 to be applied to input text in order to compute the WER (or similar measures).
 
 It also prevents some alternative transformations which might be
-usefull in specific use cases.
+useful in specific use cases.
 """
 
 import jiwer.transforms as tr
