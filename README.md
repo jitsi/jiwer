@@ -15,7 +15,7 @@ You should be able to install this package using [poetry](https://python-poetry.
 $ poetry add jiwer
 ```
 
-Or, if you prefer old-fashioned pip and you're using Python >= `3.6`:
+Or, if you prefer old-fashioned pip and you're using Python >= `3.7`:
 
 ```bash
 $ pip install jiwer
