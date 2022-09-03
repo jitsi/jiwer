@@ -176,6 +176,8 @@ print(jiwer.ReduceToSingleSentence()(sentences))
 #### RemoveSpecificWords
 
 `jiwer.RemoveSpecificWords(words_to_remove: List[str])` can be used to filter out certain words.
+As words are replaced with a ` ` character, make sure to that `jiwer.RemoveMultipleSpaces`, 
+`jiwer.Strip()` and `jiwer.RemoveEmptyStrings` are present in the composition _after_  `jiwer.RemoveSpecificWords`.
 
 Example:
 ```python
@@ -184,7 +186,8 @@ import jiwer
 sentences = ["yhe awesome", "the apple is not a pear", "yhe"]
 
 print(jiwer.RemoveSpecificWords(["yhe", "the", "a"])(sentences))
-# prints: ["awesome", "apple is pear", ""]
+# prints: ['  awesome', '  apple is not   pear', ' ']
+# note the extra spaces
 ```
 
 #### RemoveWhiteSpace
@@ -194,6 +197,9 @@ The whitespace characters are ` `, `\t`, `\n`, `\r`, `\x0b` and `\x0c`.
 Note that by default space (` `) is also removed, which will make it impossible to split a sentence into a list of words by using `ReduceToListOfListOfWords` 
 or `ReduceToSingleSentence`.
 This can be prevented by replacing all whitespace with the space character. 
+If so, make sure that `jiwer.RemoveMultipleSpaces`, 
+`jiwer.Strip()` and `jiwer.RemoveEmptyStrings` are present in the composition _after_  `jiwer.RemoveWhiteSpace`.
+
 
 Example:
 ```python
