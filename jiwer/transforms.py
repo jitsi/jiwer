@@ -21,8 +21,10 @@ This file implements the building blocks for transforming a collection
 of input strings to the desired format in order to calculate the WER.
 """
 
+import sys
 import re
 import string
+import unicodedata
 
 from typing import Union, List, Mapping
 
@@ -189,9 +191,12 @@ class RemoveWhiteSpace(BaseRemoveTransform):
 
 class RemovePunctuation(BaseRemoveTransform):
     def __init__(self):
-        characters = [c for c in string.punctuation]
+        codepoints = range(sys.maxunicode + 1)
+        punctuation = set(
+            chr(i) for i in codepoints if unicodedata.category(chr(i)).startswith("P")
+        )
 
-        super().__init__(characters)
+        super().__init__(list(punctuation))
 
 
 class RemoveMultipleSpaces(AbstractTransform):

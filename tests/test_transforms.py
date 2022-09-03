@@ -205,6 +205,16 @@ class TestRemovePunctuation(unittest.TestCase):
         cases = [
             (["this is an example!", "this is an example"]),
             (["hello. goodbye", "hello goodbye"]),
+            (["this sentence has no punctuation", "this sentence has no punctuation"]),
+        ]
+
+        _apply_test_on(self, RemovePunctuation(), cases)
+
+    def test_non_ascii_punctuation(self):
+        cases = [
+            (["word༆’'", "word"]),
+            (["‘no’", "no"]),
+            (["“yes”", "yes"]),
         ]
 
         _apply_test_on(self, RemovePunctuation(), cases)

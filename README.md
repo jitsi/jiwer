@@ -211,9 +211,8 @@ print(jiwer.RemoveWhiteSpace(replace_by_space=True)(sentences))
 
 #### RemovePunctuation
 
-`jiwer.RemovePunctuation()` can be used to filter out punctuation. The punctuation characters are:
-
-``'!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'``
+`jiwer.RemovePunctuation()` can be used to filter out punctuation. The punctuation characters are defined as
+all unicode characters whose catogary name starts with `P`. See https://www.unicode.org/reports/tr44/#General_Category_Values. 
 
 Example:
 ```python
