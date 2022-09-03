@@ -59,7 +59,6 @@ def wer(
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
-    **kwargs
 ) -> float:
     """
     Calculate word error rate (WER) between a set of ground-truth sentences and
@@ -70,7 +69,7 @@ def wer(
     :return: WER as a floating point number
     """
     measures = compute_measures(
-        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
+        truth, hypothesis, truth_transform, hypothesis_transform
     )
     return measures["wer"]
 
@@ -80,7 +79,6 @@ def mer(
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
-    **kwargs
 ) -> float:
     """
     Calculate match error rate (MER) between a set of ground-truth sentences and
@@ -91,7 +89,7 @@ def mer(
     :return: MER as a floating point number
     """
     measures = compute_measures(
-        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
+        truth, hypothesis, truth_transform, hypothesis_transform
     )
     return measures["mer"]
 
@@ -101,7 +99,6 @@ def wip(
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
-    **kwargs
 ) -> float:
     """
     Calculate Word Information Preserved (WIP) between a set of ground-truth
@@ -112,7 +109,7 @@ def wip(
     :return: WIP as a floating point number
     """
     measures = compute_measures(
-        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
+        truth, hypothesis, truth_transform, hypothesis_transform
     )
     return measures["wip"]
 
@@ -122,7 +119,6 @@ def wil(
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
-    **kwargs
 ) -> float:
     """
     Calculate Word Information Lost (WIL) between a set of ground-truth sentences
@@ -133,7 +129,7 @@ def wil(
     :return: WIL as a floating point number
     """
     measures = compute_measures(
-        truth, hypothesis, truth_transform, hypothesis_transform, **kwargs
+        truth, hypothesis, truth_transform, hypothesis_transform
     )
     return measures["wil"]
 
@@ -143,7 +139,6 @@ def compute_measures(
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
-    **kwargs
 ) -> Dict[str, float]:
     """
     Calculate error measures between a set of ground-truth sentences and a set of
@@ -175,28 +170,6 @@ def compute_measures(
     :param hypothesis_transform: the transformation to apply on the hypothesis input
     :return: a dict with WER, MER, WIP and WIL measures as floating point numbers
     """
-    # deprecated old API
-    if "standardize" in kwargs:
-        warnings.warn(
-            UserWarning(
-                "keyword argument `standardize` is deprecated. "
-                "Please use `truth_transform=jiwer.transformations.wer_standardize` and"
-                " `hypothesis_transform=jiwer.transformations.wer_standardize` instead"
-            )
-        )
-        truth_transform = wer_standardize
-        hypothesis_transform = wer_standardize
-    if "words_to_filter" in kwargs:
-        warnings.warn(
-            UserWarning(
-                "keyword argument `words_to_filter` is deprecated. "
-                "Please compose your own transform with `jiwer.transforms.RemoveSpecificWords"
-            )
-        )
-        t = tr.RemoveSpecificWords(kwargs["words_to_filter"])
-        truth = t(truth)
-        hypothesis = t(hypothesis)
-
     # validate input type
     if isinstance(truth, str):
         truth = [truth]
