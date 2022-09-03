@@ -21,8 +21,10 @@ This file implements the building blocks for transforming a collection
 of input strings to the desired format in order to calculate the WER.
 """
 
+import sys
 import re
 import string
+import unicodedata
 
 from typing import Union, List, Mapping
 
@@ -170,9 +172,33 @@ class ReduceToSingleSentence(AbstractTransform):
             return ["{}".format(self.word_delimiter).join(filtered_inp)]
 
 
-class RemoveSpecificWords(BaseRemoveTransform):
+class SubstituteRegexes(AbstractTransform):
+    def __init__(self, substitutions: Mapping[str, str]):
+        self.substitutions = substitutions
+
+    def process_string(self, s: str):
+        for key, value in self.substitutions.items():
+            s = re.sub(key, value, s)
+
+        return s
+
+
+class SubstituteWords(AbstractTransform):
+    def __init__(self, substitutions: Mapping[str, str]):
+        self.substitutions = substitutions
+
+    def process_string(self, s: str):
+        for key, value in self.substitutions.items():
+            s = re.sub(r"\b{}\b".format(re.escape(key)), value, s)
+
+        return s
+
+
+class RemoveSpecificWords(SubstituteWords):
     def __init__(self, words_to_remove: List[str]):
-        super().__init__(words_to_remove)
+        mapping = {word: " " for word in words_to_remove}
+
+        super().__init__(mapping)
 
 
 class RemoveWhiteSpace(BaseRemoveTransform):
@@ -189,9 +215,12 @@ class RemoveWhiteSpace(BaseRemoveTransform):
 
 class RemovePunctuation(BaseRemoveTransform):
     def __init__(self):
-        characters = [c for c in string.punctuation]
+        codepoints = range(sys.maxunicode + 1)
+        punctuation = set(
+            chr(i) for i in codepoints if unicodedata.category(chr(i)).startswith("P")
+        )
 
-        super().__init__(characters)
+        super().__init__(list(punctuation))
 
 
 class RemoveMultipleSpaces(AbstractTransform):
@@ -233,28 +262,6 @@ class ExpandCommonEnglishContractions(AbstractTransform):
         s = re.sub(r"\'t", " not", s)
         s = re.sub(r"\'ve", " have", s)
         s = re.sub(r"\'m", " am", s)
-
-        return s
-
-
-class SubstituteWords(AbstractTransform):
-    def __init__(self, substitutions: Mapping[str, str]):
-        self.substitutions = substitutions
-
-    def process_string(self, s: str):
-        for key, value in self.substitutions.items():
-            s = re.sub(r"\b{}\b".format(re.escape(key)), value, s)
-
-        return s
-
-
-class SubstituteRegexes(AbstractTransform):
-    def __init__(self, substitutions: Mapping[str, str]):
-        self.substitutions = substitutions
-
-    def process_string(self, s: str):
-        for key, value in self.substitutions.items():
-            s = re.sub(key, value, s)
 
         return s
 

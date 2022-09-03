@@ -168,18 +168,26 @@ class TestReduceToListOfListOfChars(unittest.TestCase):
 class TestRemoveSpecificWords(unittest.TestCase):
     def test_normal(self):
         cases = [
-            ("yhe about that bug", " about that bug"),
-            ("yeah about that bug", " about that bug"),
-            ("one bug", "one bug"),
-            (["yhe", "about", "bug"], ["", "about", "bug"]),
-            (["yeah", "about", "bug"], ["", "about", "bug"]),
-            (["one", "bug"], ["one", "bug"]),
-            (["yhe about bug"], [" about bug"]),
-            (["yeah about bug"], [" about bug"]),
+            (["yhe about that bug"], ["  about that bug"]),
+            (["yeah about that bug"], ["  about that bug"]),
             (["one bug"], ["one bug"]),
+            (["yhe", "about", "bug"], [" ", "about", "bug"]),
+            (["yeah", "about", "bug"], [" ", "about", "bug"]),
+            (["one", "bug"], ["one", "bug"]),
+            (["yhe about bug"], ["  about bug"]),
+            (["yeah about bug"], ["  about bug"]),
+            (["about bug yhe"], ["about bug  "]),
+            (["one bug"], ["one bug"]),
+            (["he asked a helpful question"], ["  asked   helpful question"]),
+            (["normal sentence"], ["normal sentence"]),
+            (["yhe awesome", "  awesome"]),
+            (["the apple is not a pear", "  apple is not   pear"]),
+            (["yhe", " "]),
         ]
 
-        _apply_test_on(self, RemoveSpecificWords(["yhe", "yeah"]), cases)
+        _apply_test_on(
+            self, RemoveSpecificWords(["yhe", "yeah", "a", "he", "the"]), cases
+        )
 
 
 class TestRemoveWhiteSpace(unittest.TestCase):
@@ -205,6 +213,16 @@ class TestRemovePunctuation(unittest.TestCase):
         cases = [
             (["this is an example!", "this is an example"]),
             (["hello. goodbye", "hello goodbye"]),
+            (["this sentence has no punctuation", "this sentence has no punctuation"]),
+        ]
+
+        _apply_test_on(self, RemovePunctuation(), cases)
+
+    def test_non_ascii_punctuation(self):
+        cases = [
+            (["word༆’'", "word"]),
+            (["‘no’", "no"]),
+            (["“yes”", "yes"]),
         ]
 
         _apply_test_on(self, RemovePunctuation(), cases)
