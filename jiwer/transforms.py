@@ -22,6 +22,7 @@ of input strings to the desired format in order to calculate the WER.
 """
 
 import sys
+import functools
 import re
 import string
 import unicodedata
@@ -213,14 +214,20 @@ class RemoveWhiteSpace(BaseRemoveTransform):
         super().__init__(characters, replace_token=replace_token)
 
 
+@functools.lru_cache(1)
+def _get_punctuation_characters():
+    """Compute the punctuation characters only once and memoize."""
+    codepoints = range(sys.maxunicode + 1)
+    punctuation = set(
+        chr(i) for i in codepoints if unicodedata.category(chr(i)).startswith("P")
+    )
+    return punctuation
+
+
 class RemovePunctuation(BaseRemoveTransform):
     def __init__(self):
-        codepoints = range(sys.maxunicode + 1)
-        punctuation = set(
-            chr(i) for i in codepoints if unicodedata.category(chr(i)).startswith("P")
-        )
-
-        super().__init__(list(punctuation))
+        punctuation_characters = _get_punctuation_characters()
+        super().__init__(punctuation_characters)
 
 
 class RemoveMultipleSpaces(AbstractTransform):
