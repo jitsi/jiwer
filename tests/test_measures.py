@@ -178,7 +178,15 @@ class TestMeasuresContiguousSentencesTransform(unittest.TestCase):
             # Remove entries we are not testing against
             [
                 measures.pop(k)
-                for k in ["hits", "substitutions", "deletions", "insertions"]
+                for k in [
+                    "hits",
+                    "substitutions",
+                    "deletions",
+                    "insertions",
+                    "ops",
+                    "truth",
+                    "hypothesis",
+                ]
             ]
             assertDictAlmostEqual(self, measures, correct_measures, delta=1e-16)
 
@@ -305,6 +313,15 @@ class TestMeasuresDefaultTransform(unittest.TestCase):
             # Remove entries we are not testing against
             [
                 measures.pop(k)
-                for k in ["hits", "substitutions", "deletions", "insertions"]
+                for k in [
+                    "hits",
+                    "substitutions",
+                    "deletions",
+                    "insertions",
+                    "ops",
+                    "truth",
+                    "hypothesis",
+                ]
             ]
+            print(measures)
             assertDictAlmostEqual(self, measures, correct_measures, delta=1e-16)

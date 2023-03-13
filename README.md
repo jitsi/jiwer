@@ -75,6 +75,92 @@ hypothesis = ["i kan cpell", "i hop"]
 error = cer(ground_truth, hypothesis)
 ```
 
+# alignment
+
+With `jiwer.compute_measures`, you also get the alignment between the ground-truth and hypothesis.
+
+We provide the alignment as a tuple of `(op, truth_idx_start, truth_idx_end, hyp_idx_start, hyp_idx_end)`, where `op` is one of
+    `equal`, `replace`, `delete`, or `insert`.
+
+This looks like the following:
+
+```python3
+import jiwer
+
+out = jiwer.compute_measures("short one here", "shoe order one")
+print(out['ops'])
+# [[('insert', 0, 0, 0, 1), ('replace', 0, 1, 1, 2), ('equal', 1, 2, 2, 3), ('delete', 2, 3, 3, 3)]]
+```
+
+To visualize the alignment, you can use `jiwer.visualize_measures()`
+
+For example:
+
+```python3
+import jiwer
+
+out = jiwer.compute_measures(
+    ["short one here", "quite a bit of longer sentence"],
+    ["shoe order one", "quite bit of an even longest sentence here"],
+)
+
+print(jiwer.visualize_measures(out))
+```
+Gives the following output
+```text
+sentence 1
+REF:    # short one here 
+HYP: shoe order one    * 
+        I     S        D 
+
+sentence 2
+REF: quite a bit of  #    #  longer sentence    # 
+HYP: quite * bit of an even longest sentence here 
+           D         I    I       S             I 
+
+number of sentences: 2
+substitutions=2 deletions=2 insertions=4 hits=5	
+
+mer=61.54%
+wil=74.75%
+wip=25.25%
+wer=88.89%
+```
+
+Note that if you can print the CER alignment with `jiwer.cer(return_dict=True)` and `jiwer.visualize_measures(visualize_cer=True)`.
+
+# command-line interface
+
+JiWER provides a simple CLI, which should be available after installation. 
+
+For details, see `jiwer --help`.
+
+```text
+$ jiwer --help
+Usage: jiwer [OPTIONS]
+
+  JiWER is a python tool and API for computing the word-error-rate of ASR systems. To
+  use this CLI, store the ground-truth and hypothesis sentences in a text
+  file, where each sentence is delimited by a new-line character. The text
+  files are expected to have an equal number of lines, unless the `-j` flag is
+  used. The `-j` flag joins computation of the WER by doing a global
+  alignment.
+
+Options:
+  --gt PATH     Path to new-line delimited text file of ground-truth
+                sentences.  [required]
+  --hp PATH     Path to new-line delimited text file of hypothesis sentences.
+                [required]
+  -c, --cer     Compute CER instead of WER.
+  -a, --align   Print alignment of each sentence.
+  -g, --global  Apply a global alignment between ground-truth and hypothesis
+                sentences before computing the WER.
+  --help        Show this message and exit.
+```
+
+Note that the CLI does not support a custom pre-processing (as described below). Any pre-processing
+should be done on the text files manually before calling JiWER when using the CLI. 
+
 # pre-processing
 
 It might be necessary to apply some pre-processing steps on either the hypothesis or

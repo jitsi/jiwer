@@ -141,10 +141,9 @@ def compute_measures(
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
 ) -> Dict[str, float]:
     """
-    Calculate error measures between a set of ground-truth sentences and a set of
-    hypothesis sentences.
+    Calculate error measures and alignment between a list of ground-truth sentences and a list of hypothesis sentences.
 
-    The set of sentences can be given as a string or a list of strings. A string
+    The list of sentences can be given as a string or a list of strings. A string
     input is assumed to be a single sentence. A list of strings is assumed to be
     multiple sentences which need to be evaluated independently. Each word in a
     sentence is separated by one or more spaces. A sentence is not expected to end
@@ -162,13 +161,35 @@ def compute_measures(
        list of words
 
     Any non-default transformation is required to reduce the input to at least
-    one list of words in order to facility the computation of the edit distance.
+    one list of words in order to facilitate the computation of the edit distance.
+
+    This method returns a dictionary with the following keys:
+        - 'wer' the word-error-rate as a float
+        - 'mer' the match-error-rate as a float
+        - 'wil' the word-information-lost as a float
+        - 'wip' the word-information-preserved as a float
+        - 'hits' the total number of hits as an int
+        - 'deletions' the total number of deletions as an int
+        - 'insertions' the total number of insertions as an int
+        - 'substitutions' the total number of substitutions as an int
+        - 'edits' a double list of edits, one list for each ground truth and hypothesis pair.
+        - 'ops' a double list of operations, one list for each ground-truth and hypothesis pair
+        - 'truth' the input list of ground truths sentences as a list of list of words
+        - 'hypothesis' the input list of hypothesis sentences as a list of list of words
+
+    The alignment between each pair of ground truth and hypothesis is given by the 'ops' key-value pair.
+    The 'ops' list gives the alignment as a sequence of tuples
+    (op, truth_idx_start, truth_idx_end, hyp_idx_start, hyp_idx_end), where `op` is one of
+    `equal`, `replace`, `delete`, `insert`. Here `truth_idx_start` and `truth_idx_end` refer to indexes of one or more
+    words in the ground-truth sentence, and `hyp_idx_start` and `hyp_idx_start` refer to indexes of one or more words
+    in the hypothesis sentence. These indexes are easy to use with the `truth` and `hypothesis` lists which are also
+    presented in the output dictionary.
 
     :param truth: the ground-truth sentence(s) as a string or list of strings
     :param hypothesis: the hypothesis sentence(s) as a string or list of strings
     :param truth_transform: the transformation to apply on the truths input
     :param hypothesis_transform: the transformation to apply on the hypothesis input
-    :return: a dict with WER, MER, WIP and WIL measures as floating point numbers
+    :return: a dict with the specified keys.
     """
     # validate input type
     if isinstance(truth, str):
@@ -189,7 +210,6 @@ def compute_measures(
 
     # also keep track of the total number of ground truth words and hypothesis words
     gt_tokens, hp_tokens = 0, 0
-    all_edit_ops = []
     all_ops = []
 
     for groundtruth_sentence, hypothesis_sentence in zip(truth_as_chars, hp_as_chars):
@@ -208,7 +228,6 @@ def compute_measures(
         I += insertions
         gt_tokens += len(groundtruth_sentence)
         hp_tokens += len(hypothesis_sentence)
-        all_edit_ops.append(edit_ops_list)
         all_ops.append(Opcodes.from_editops(edit_ops).as_list())
 
     # Compute Word Error Rate
@@ -232,7 +251,6 @@ def compute_measures(
         "substitutions": S,
         "deletions": D,
         "insertions": I,
-        "edits": all_edit_ops,
         "ops": all_ops,
         "truth": truth_transformed,
         "hypothesis": hp_transformed,
@@ -274,6 +292,9 @@ def cer(
         "substitutions": r["substitutions"],
         "deletions": r["deletions"],
         "insertions": r["insertions"],
+        "ops": r["ops"],
+        "truth": r["truth"],
+        "hypothesis": r["hypothesis"],
     }
 
     if return_dict:
