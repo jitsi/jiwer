@@ -11,6 +11,7 @@ include = ["LICENCE"]
 [tool.poetry.dependencies]
 python = "^3.7"
 rapidfuzz = "2.13.7"
+click = "^8.1.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.8.0"
