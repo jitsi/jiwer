@@ -36,6 +36,8 @@ import rapidfuzz
 from typing import Any, Dict, List, Tuple, Union
 from itertools import chain
 
+from rapidfuzz.distance import Editop, Editops, Opcodes
+
 from jiwer import transforms as tr
 from jiwer.transformations import wer_default, cer_default_transform
 
@@ -177,7 +179,7 @@ def compute_measures(
         raise ValueError("one or more groundtruths are empty strings")
 
     # Preprocess truth and hypothesis
-    truth, hypothesis = _preprocess(
+    (truth_transformed, truth_as_chars), (hp_transformed, hp_as_chars) = _preprocess(
         truth, hypothesis, truth_transform, hypothesis_transform
     )
 
@@ -187,12 +189,18 @@ def compute_measures(
 
     # also keep track of the total number of ground truth words and hypothesis words
     gt_tokens, hp_tokens = 0, 0
+    all_edit_ops = []
+    all_ops = []
 
-    for groundtruth_sentence, hypothesis_sentence in zip(truth, hypothesis):
+    for groundtruth_sentence, hypothesis_sentence in zip(truth_as_chars, hp_as_chars):
         # Get the operation counts (#hits, #substitutions, #deletions, #insertions)
-        hits, substitutions, deletions, insertions = _get_operation_counts(
-            groundtruth_sentence, hypothesis_sentence
-        )
+        edit_ops = _get_edit_operations(groundtruth_sentence, hypothesis_sentence)
+        edit_ops_list = edit_ops.as_list()
+
+        substitutions = sum(1 if op[0] == "replace" else 0 for op in edit_ops_list)
+        deletions = sum(1 if op[0] == "delete" else 0 for op in edit_ops_list)
+        insertions = sum(1 if op[0] == "insert" else 0 for op in edit_ops_list)
+        hits = len(groundtruth_sentence) - (substitutions + deletions)
 
         H += hits
         S += substitutions
@@ -200,6 +208,8 @@ def compute_measures(
         I += insertions
         gt_tokens += len(groundtruth_sentence)
         hp_tokens += len(hypothesis_sentence)
+        all_edit_ops.append(edit_ops_list)
+        all_ops.append(Opcodes.from_editops(edit_ops).as_list())
 
     # Compute Word Error Rate
     wer = float(S + D + I) / float(H + S + D)
@@ -222,6 +232,10 @@ def compute_measures(
         "substitutions": S,
         "deletions": D,
         "insertions": I,
+        "edits": all_edit_ops,
+        "ops": all_ops,
+        "truth": truth_transformed,
+        "hypothesis": hp_transformed,
     }
 
 
@@ -277,10 +291,11 @@ def _preprocess(
     hypothesis: List[str],
     truth_transform: Union[tr.Compose, tr.AbstractTransform],
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform],
-) -> Tuple[List[str], List[str]]:
+) -> Tuple[Tuple[List[str], List[str]], Tuple[List[str], List[str]]]:
     """
-    Pre-process the truth and hypothesis into a form such that the Levenshtein
-    library can compute the edit operations.can handle.
+    Pre-process the truth and hypothesis by applying the transforms, and then convert
+    each word into a unique character such that we can compute the levenshtein distance
+    on word-level, which is required to the word-error-rate.
 
     :param truth: the ground-truth sentence(s) as a string or list of strings
     :param hypothesis: the hypothesis sentence(s) as a string or list of strings
@@ -330,7 +345,7 @@ def _preprocess(
         for sentence in transformed_hypothesis
     ]
 
-    return truth_chars, hypothesis_chars
+    return (transformed_truth, truth_chars), (transformed_hypothesis, hypothesis_chars)
 
 
 def _is_list_of_list_of_strings(x: Any, require_non_empty_lists: bool):
@@ -350,9 +365,7 @@ def _is_list_of_list_of_strings(x: Any, require_non_empty_lists: bool):
     return True
 
 
-def _get_operation_counts(
-    source_string: str, destination_string: str
-) -> Tuple[int, int, int, int]:
+def _get_edit_operations(source_string: str, destination_string: str) -> Editops:
     """
     Check how many edit operations (delete, insert, replace) are required to
     transform the source string into the destination string. The number of hits
@@ -361,13 +374,8 @@ def _get_operation_counts(
 
     :param source_string: the source string to transform into the destination string
     :param destination_string: the destination to transform the source string into
-    :return: a tuple of #hits, #substitutions, #deletions, #insertions
+    :return: a list of operations (replace, delete, or insert) required to go from source to target string
     """
     editops = rapidfuzz.distance.Levenshtein.editops(source_string, destination_string)
 
-    substitutions = sum(1 if op.tag == "replace" else 0 for op in editops)
-    deletions = sum(1 if op.tag == "delete" else 0 for op in editops)
-    insertions = sum(1 if op.tag == "insert" else 0 for op in editops)
-    hits = len(source_string) - (substitutions + deletions)
-
-    return hits, substitutions, deletions, insertions
+    return editops
