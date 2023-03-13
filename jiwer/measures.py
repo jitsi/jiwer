@@ -25,21 +25,19 @@ commonly used to measure the performance for an automatic speech recognition
 The following measures are implemented:
 
 - Word Error Rate (WER), which is where this library got its name from. This
-  has has long been (and arguably still is) the de facto standard for computing
+  has long been (and arguably still is) the de facto standard for computing
   ASR performance.
 - Match Error Rate (MER)
 - Word Information Lost (WIL)
 - Word Information Preserved (WIP)
 """
-import warnings
-
-import Levenshtein
+import rapidfuzz
 
 from typing import Any, Dict, List, Tuple, Union
 from itertools import chain
 
 from jiwer import transforms as tr
-from jiwer.transformations import wer_default, wer_standardize, cer_default_transform
+from jiwer.transformations import wer_default, cer_default_transform
 
 __all__ = [
     "wer",
@@ -365,11 +363,11 @@ def _get_operation_counts(
     :param destination_string: the destination to transform the source string into
     :return: a tuple of #hits, #substitutions, #deletions, #insertions
     """
-    editops = Levenshtein.editops(source_string, destination_string)
+    editops = rapidfuzz.distance.Levenshtein.editops(source_string, destination_string)
 
-    substitutions = sum(1 if op[0] == "replace" else 0 for op in editops)
-    deletions = sum(1 if op[0] == "delete" else 0 for op in editops)
-    insertions = sum(1 if op[0] == "insert" else 0 for op in editops)
+    substitutions = sum(1 if op.tag == "replace" else 0 for op in editops)
+    deletions = sum(1 if op.tag == "delete" else 0 for op in editops)
+    insertions = sum(1 if op.tag == "insert" else 0 for op in editops)
     hits = len(source_string) - (substitutions + deletions)
 
     return hits, substitutions, deletions, insertions
