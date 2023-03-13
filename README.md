@@ -127,7 +127,7 @@ wip=25.25%
 wer=88.89%
 ```
 
-Note that if you can print the CER alignment with `jiwer.cer(return_dict=True)` and `jiwer.visualize_measures(visualize_cer=True)`.
+Note that you can print the CER alignment with `jiwer.cer(return_dict=True)` and `jiwer.visualize_measures(visualize_cer=True)`.
 
 # command-line interface
 

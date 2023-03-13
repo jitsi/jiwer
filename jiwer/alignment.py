@@ -30,8 +30,9 @@ def visualize_measures(measure_output: Dict, visualize_cer: bool = False) -> str
     Given the output dictionary of `jiwer.compute_measures()`, construct a string which
     visualizes the alignment between all pairs of ground-truth and hypothesis pairs.
 
-    The constructed string also include the values of all measures. If `visualize_cer` is given, the
-    output dictionary is expected to have come from the `jiwer.cer()` method instead.
+    The constructed string also include the values of all measures. If `visualize_cer`
+    is given, the output dictionary is expected to have come from the `jiwer.cer()`
+    method instead.
     """
     if visualize_cer and "cer" not in measure_output:
         raise ValueError(

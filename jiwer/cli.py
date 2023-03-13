@@ -63,7 +63,8 @@ import jiwer
     "global_alignment",
     is_flag=True,
     default=False,
-    help="Apply a global alignment between ground-truth and hypothesis sentences before computing the WER.",
+    help="Apply a global alignment between ground-truth and hypothesis sentences "
+    "before computing the WER.",
 )
 def cli(
     ground_truth_file: pathlib.Path,
@@ -73,10 +74,11 @@ def cli(
     global_alignment: bool,
 ):
     """
-    JiWER is a python tool for computing the word-error-rate of ASR systems. To use this CLI, store the ground-truth and
-    hypothesis sentences in a text file, where each sentence is delimited by a new-line character.
-    The text files are expected to have an equal number of lines, unless the `-j` flag is used. The `-j` flag joins
-    computation of the WER by doing a global alignment.
+    JiWER is a python tool for computing the word-error-rate of ASR systems. To use
+    this CLI, store the ground-truth and hypothesis sentences in a text file, where
+    each sentence is delimited by a new-line character.
+    The text files are expected to have an equal number of lines, unless the `-j` flag
+    is used. The `-j` flag joins computation of the WER by doing a global alignment.
 
     """
     with ground_truth_file.open("r") as f:
@@ -87,7 +89,8 @@ def cli(
 
     if not global_alignment and len(gt_sentences) != len(hp_sentences):
         raise ValueError(
-            f"number of sentences does not match, got {len(gt_sentences)=} and {len(hp_sentences)=}"
+            f"number of sentences does not match, "
+            f"got {len(gt_sentences)=} and {len(hp_sentences)=}"
         )
 
     if global_alignment and compute_cer:
