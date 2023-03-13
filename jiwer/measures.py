@@ -36,10 +36,10 @@ import rapidfuzz
 from typing import Any, Dict, List, Tuple, Union
 from itertools import chain
 
-from rapidfuzz.distance import Editop, Editops, Opcodes
+from rapidfuzz.distance import Editops, Opcodes
 
 from jiwer import transforms as tr
-from jiwer.transformations import wer_default, cer_default_transform
+from jiwer.transformations import wer_default, cer_default
 
 __all__ = [
     "wer",
@@ -264,10 +264,10 @@ def compute_measures(
 def cer(
     truth: Union[str, List[str]],
     hypothesis: Union[str, List[str]],
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = cer_default_transform,
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = cer_default,
     hypothesis_transform: Union[
         tr.Compose, tr.AbstractTransform
-    ] = cer_default_transform,
+    ] = cer_default,
     return_dict: bool = False,
 ) -> Union[float, Dict[str, Union[float, int]]]:
     """
@@ -279,10 +279,9 @@ def cer(
     :param hypothesis: the hypothesis sentence(s) as a string or list of strings
     :param truth_transform: the transformation to apply on the truths input
     :param hypothesis_transform: the transformation to apply on the hypothesis input
-    :param return_dict: when true, return a dictionary containing the CER and the number of
-    insertions, deletions, substitution and hits between truth and hypothesis. When false,
-    only return the CER as a floating point number
-    :return: CER as a floating point number, or dictionary containing CER, #hits, #substitutions, #deletions and #insertions
+    :param return_dict: when true, return a dictionary containing the same keys as `compute_meassures`, expext
+    wer, mer, wip and wil are deleted and cer is added. When false, only return the CER as a floating point number
+    :return: CER as a floating point number, or a dictionary with values similar to output of `compute_measures`.
     """
     r = compute_measures(truth, hypothesis, truth_transform, hypothesis_transform)
 

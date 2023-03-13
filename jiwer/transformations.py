@@ -30,7 +30,7 @@ __all__ = [
     "wer_contiguous",
     "wer_standardize",
     "wer_standardize_contiguous",
-    "cer_default_transform",
+    "cer_default",
 ]
 
 ################################################################################
@@ -79,7 +79,7 @@ wer_standardize_contiguous = tr.Compose(
 ################################################################################
 # implement transformations for CER
 
-cer_default_transform = tr.Compose(
+cer_default = tr.Compose(
     [
         tr.Strip(),
         tr.ReduceToListOfListOfChars(),

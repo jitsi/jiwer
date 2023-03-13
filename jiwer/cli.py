@@ -97,8 +97,8 @@ def cli(
         out = jiwer.compute_measures(
             gt_sentences,
             hp_sentences,
-            truth_transform=jiwer.cer_default_transform,
-            hypothesis_transform=jiwer.cer_default_transform,
+            truth_transform=jiwer.cer_default,
+            hypothesis_transform=jiwer.cer_default,
         )
         out["cer"] = out["wer"]
         del out["wer"]
