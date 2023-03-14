@@ -118,6 +118,16 @@ class TestCERInputMethods(unittest.TestCase):
                 "substitutions": 1,
                 "deletions": 3,
                 "insertions": 3,
+                "ops": [
+                    [("equal", 0, 1, 0, 1), ("insert", 1, 1, 1, 4)],
+                    [
+                        ("replace", 0, 1, 0, 1),
+                        ("delete", 1, 4, 1, 1),
+                        ("equal", 4, 9, 1, 6),
+                    ],
+                ],
+                "truth": [["i"], ["a", "m", " ", "i", " ", "g", "o", "o", "d"]],
+                "hypothesis": [["i", " ", "a", "m"], ["y", " ", "g", "o", "o", "d"]],
             },
             delta=1e-16,
         )
