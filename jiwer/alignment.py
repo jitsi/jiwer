@@ -39,7 +39,9 @@ def visualize_measures(measure_output: Dict, visualize_cer: bool = False) -> str
             f"visualize_cer={visualize_cer} while measure dictionary does not contain CER"
         )
     if not visualize_cer and "cer" in measure_output:
-        raise ValueError(f"visualize_cer={visualize_cer} while measure dictionary contains CER")
+        raise ValueError(
+            f"visualize_cer={visualize_cer} while measure dictionary contains CER"
+        )
 
     truth = measure_output["truth"]
     hypo = measure_output["hypothesis"]

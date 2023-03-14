@@ -265,9 +265,7 @@ def cer(
     truth: Union[str, List[str]],
     hypothesis: Union[str, List[str]],
     truth_transform: Union[tr.Compose, tr.AbstractTransform] = cer_default,
-    hypothesis_transform: Union[
-        tr.Compose, tr.AbstractTransform
-    ] = cer_default,
+    hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = cer_default,
     return_dict: bool = False,
 ) -> Union[float, Dict[str, Union[float, int]]]:
     """
