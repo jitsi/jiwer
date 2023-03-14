@@ -89,8 +89,9 @@ def cli(
 
     if not global_alignment and len(gt_sentences) != len(hp_sentences):
         raise ValueError(
-            f"number of sentences does not match, "
-            f"got {len(gt_sentences)=} and {len(hp_sentences)=}"
+            f"Number of sentences does not match. "
+            f"{ground_truth_file} contains {len(gt_sentences)} lines."
+            f"{hypothesis_file} contains {len(hp_sentences)=} lines."
         )
 
     if global_alignment and compute_cer:
