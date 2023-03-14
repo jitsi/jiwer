@@ -75,7 +75,7 @@ hypothesis = ["i kan cpell", "i hop"]
 error = cer(ground_truth, hypothesis)
 ```
 
-# alignment
+# Alignment
 
 With `jiwer.compute_measures`, you also get the alignment between the ground-truth and hypothesis.
 
@@ -129,7 +129,7 @@ wer=88.89%
 
 Note that you can print the CER alignment with `jiwer.cer(return_dict=True)` and `jiwer.visualize_measures(visualize_cer=True)`.
 
-# command-line interface
+# Command-line interface
 
 JiWER provides a simple CLI, which should be available after installation. 
 
