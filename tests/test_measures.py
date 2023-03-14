@@ -323,5 +323,4 @@ class TestMeasuresDefaultTransform(unittest.TestCase):
                     "hypothesis",
                 ]
             ]
-            print(measures)
             assertDictAlmostEqual(self, measures, correct_measures, delta=1e-16)
