@@ -98,7 +98,7 @@ def _construct_comparison_string(
             ref = ["#" for _ in range(len(hyp))]
             op_char = "i"
         else:
-            raise ValueError(f"unparseable op {name=}")
+            raise ValueError(f"unparseable op name={name}")
 
         op_chars = [op_char for _ in range(len(ref))]
         for gt, hp, c in zip(ref, hyp, op_chars):
