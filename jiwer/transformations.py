@@ -19,11 +19,11 @@
 This file is intended to provide the default transformation which need
 to be applied to input text in order to compute the WER (or similar measures).
 
-It also prevents some alternative transformations which might be
+It also implements some alternative transformations which might be
 useful in specific use cases.
 """
 
-import jiwer.transforms as tr
+import jiwer.transform_blocks as tr
 
 __all__ = [
     "wer_default",
@@ -31,9 +31,10 @@ __all__ = [
     "wer_standardize",
     "wer_standardize_contiguous",
     "cer_default",
+    "cer_contiguous",
 ]
 
-################################################################################
+########################################################################################
 # implement transformations for WER (and accompanying measures)
 
 wer_default = tr.Compose(
@@ -43,6 +44,9 @@ wer_default = tr.Compose(
         tr.ReduceToListOfListOfWords(),
     ]
 )
+"""
+This is...
+"""
 
 wer_contiguous = tr.Compose(
     [
@@ -52,7 +56,9 @@ wer_contiguous = tr.Compose(
         tr.ReduceToListOfListOfWords(),
     ]
 )
-
+"""
+This is...
+"""
 
 wer_standardize = tr.Compose(
     [
@@ -63,6 +69,9 @@ wer_standardize = tr.Compose(
         tr.ReduceToListOfListOfWords(),
     ]
 )
+"""
+This is...
+"""
 
 wer_standardize_contiguous = tr.Compose(
     [
@@ -74,10 +83,13 @@ wer_standardize_contiguous = tr.Compose(
         tr.ReduceToListOfListOfWords(),
     ]
 )
+"""
+This is...
+"""
 
-
-################################################################################
+########################################################################################
 # implement transformations for CER
+
 
 cer_default = tr.Compose(
     [
@@ -85,3 +97,17 @@ cer_default = tr.Compose(
         tr.ReduceToListOfListOfChars(),
     ]
 )
+"""
+This is...
+"""
+
+cer_contiguous = tr.Compose(
+    [
+        tr.Strip(),
+        tr.ReduceToSingleSentence(),
+        tr.ReduceToListOfListOfChars(),
+    ]
+)
+"""
+This is...
+"""

@@ -24,3 +24,5 @@ venv
 # cache folders
 .pytest_cache
 .benchmarks
+/docs/site/
+/site/

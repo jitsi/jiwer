@@ -98,32 +98,28 @@ def cli(
         raise ValueError("--global and --cer are mutually exclusive.")
 
     if compute_cer:
-        out = jiwer.compute_measures(
+        out = jiwer.process_characters(
             gt_sentences,
             hp_sentences,
-            truth_transform=jiwer.cer_default,
-            hypothesis_transform=jiwer.cer_default,
         )
-        out["cer"] = out["wer"]
-        del out["wer"]
     else:
         if global_alignment:
-            out = jiwer.compute_measures(
+            out = jiwer.process_words(
                 gt_sentences,
                 hp_sentences,
-                truth_transform=jiwer.wer_contiguous,
+                reference_transform=jiwer.wer_contiguous,
                 hypothesis_transform=jiwer.wer_contiguous,
             )
         else:
-            out = jiwer.compute_measures(gt_sentences, hp_sentences)
+            out = jiwer.process_words(gt_sentences, hp_sentences)
 
     if show_alignment:
-        print(jiwer.visualize_measures(out, visualize_cer=compute_cer))
+        print(jiwer.visualize_alignment(out, show_measures=True))
     else:
-        if "wer" in out:
-            print(out["wer"])
-        elif "cer" in out:
-            print(out["cer"])
+        if compute_cer:
+            print(out.cer)
+        else:
+            print(out.wer)
 
 
 if __name__ == "__main__":
