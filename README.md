@@ -32,7 +32,7 @@ $ pip install jiwer
 
 ## Usage
 
-The most simple use-case is computing the edit distance between two strings:
+The most simple use-case is computing the word error rate between two strings:
 
 ```python
 from jiwer import wer
