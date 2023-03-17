@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://nikvaessen.github.io/jiwer/</loc>
+         <loc>https://jitsi.github.io/jiwer/</loc>
          <lastmod>2023-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://nikvaessen.github.io/jiwer/cli/</loc>
+         <loc>https://jitsi.github.io/jiwer/cli/</loc>
          <lastmod>2023-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://nikvaessen.github.io/jiwer/usage/</loc>
+         <loc>https://jitsi.github.io/jiwer/usage/</loc>
          <lastmod>2023-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -21,27 +21,27 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://nikvaessen.github.io/jiwer/reference/alignment/</loc>
+         <loc>https://jitsi.github.io/jiwer/reference/alignment/</loc>
          <lastmod>2023-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://nikvaessen.github.io/jiwer/reference/measures/</loc>
+         <loc>https://jitsi.github.io/jiwer/reference/measures/</loc>
          <lastmod>2023-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://nikvaessen.github.io/jiwer/reference/process/</loc>
+         <loc>https://jitsi.github.io/jiwer/reference/process/</loc>
          <lastmod>2023-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://nikvaessen.github.io/jiwer/reference/transformations/</loc>
+         <loc>https://jitsi.github.io/jiwer/reference/transformations/</loc>
          <lastmod>2023-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://nikvaessen.github.io/jiwer/reference/transforms/</loc>
+         <loc>https://jitsi.github.io/jiwer/reference/transforms/</loc>
          <lastmod>2023-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
