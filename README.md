@@ -6,7 +6,7 @@ The minimum-edit distance is calculated using [RapidFuzz](https://github.com/max
 
 ## Documentation
 
-For further info, see the documentation at [nikvaessen.com/jiwer](https://nikvaessen.com/jiwer).
+For further info, see the documentation at [jitsi.github.io/jiwer](https://jitsi.github.io/jiwer).
 
 ## Installation
 
