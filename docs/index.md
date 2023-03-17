@@ -1,6 +1,6 @@
 # JiWER
 
-Jiwer is a simple and fast python package to evaluate an automatic speech recognition system.
+JiWER is a simple and fast python package to evaluate an automatic speech recognition system.
 It supports the following measures:
 
 1. word error rate (WER)

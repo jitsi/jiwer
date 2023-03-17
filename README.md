@@ -1,8 +1,16 @@
-# JiWER: Similarity measures for automatic speech recognition evaluation
+# JiWER
 
-This repository contains a simple python package to approximate the Word Error Rate (WER), Match Error Rate (MER), Word Information Lost (WIL) and Word Information Preserved (WIP) of a transcript.
-It computes the minimum-edit distance between the reference sentence and the hypothesis sentence of a speech-to-text API.
-The minimum-edit distance is calculated using [RapidFuzz](https://github.com/maxbachmann/RapidFuzz), which uses C++ under the hood.
+JiWER is a simple and fast python package to evaluate an automatic speech recognition system.
+It supports the following measures:
+
+1. word error rate (WER)
+2. match error rate (MER)
+3. word information lost (WIL) 
+4. word information preserved (WIP) 
+5. character error rate (CER)
+
+These measures are computed with the use of the minimum-edit distance between one or more reference and hypothesis sentences.
+The minimum-edit distance is calculated using [RapidFuzz](https://github.com/maxbachmann/RapidFuzz), which uses C++ under the hood, and is therefore faster than a pure python implementation.
 
 ## Documentation
 
