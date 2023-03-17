@@ -99,22 +99,22 @@ class AbstractTransform(object):
 
 class Compose(object):
     """
-       Chain multiple transformations back-to-back to create a pipeline combining multiple
-       transformations.
+    Chain multiple transformations back-to-back to create a pipeline combining multiple
+    transformations.
 
-       Note that each transformation needs to end with either `ReduceToListOfListOfWords`
-       or `ReduceToListOfListOfChars`, depending on whether word error rate,
-       or character error rate is desired.
+    Note that each transformation needs to end with either `ReduceToListOfListOfWords`
+    or `ReduceToListOfListOfChars`, depending on whether word error rate,
+    or character error rate is desired.
 
-       Example:
-           ```python3
-           import jiwer
+    Example:
+        ```python3
+        import jiwer
 
-           jiwer.Compose([
-               jiwer.RemoveMultipleSpaces(),
-               jiwer.ReduceToListOfListOfWords()
-           ])
-           ```
+        jiwer.Compose([
+            jiwer.RemoveMultipleSpaces(),
+            jiwer.ReduceToListOfListOfWords()
+        ])
+        ```
     """
 
     def __init__(self, transforms: List[AbstractTransform]):
