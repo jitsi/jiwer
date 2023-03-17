@@ -1,0 +1,2137 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for jiwer.">
+      
+      
+      
+        <link rel="canonical" href="https://nikvaessen.github.io/jiwer/reference/measures/">
+      
+      
+        <link rel="prev" href="../alignment/">
+      
+      
+        <link rel="next" href="../process/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
+    
+    
+      
+        <title>measures - jiwer_website</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#measures" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="jiwer_website" class="md-header__button md-logo" aria-label="jiwer_website" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            jiwer_website
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              measures
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jitsi/jiwer" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jitsi/jiwer
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../docs/" class="md-tabs__link">
+      jiwer
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../docs/usage/" class="md-tabs__link">
+      Usage
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../docs/cli/" class="md-tabs__link">
+      Command-line interface
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../alignment/" class="md-tabs__link md-tabs__link--active">
+        API reference
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="jiwer_website" class="md-nav__button md-logo" aria-label="jiwer_website" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    jiwer_website
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jitsi/jiwer" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jitsi/jiwer
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/" class="md-nav__link">
+        jiwer
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/usage/" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/cli/" class="md-nav__link">
+        Command-line interface
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          API reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alignment/" class="md-nav__link">
+        alignment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          measures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        measures
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#measures" class="md-nav__link">
+    measures
+  </a>
+  
+    <nav class="md-nav" aria-label="measures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#measures.cer" class="md-nav__link">
+    cer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measures.compute_measures" class="md-nav__link">
+    compute_measures()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measures.mer" class="md-nav__link">
+    mer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measures.wer" class="md-nav__link">
+    wer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measures.wil" class="md-nav__link">
+    wil()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measures.wip" class="md-nav__link">
+    wip()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../process/" class="md-nav__link">
+        process
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transformations/" class="md-nav__link">
+        transformations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transforms/" class="md-nav__link">
+        transforms
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#measures" class="md-nav__link">
+    measures
+  </a>
+  
+    <nav class="md-nav" aria-label="measures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#measures.cer" class="md-nav__link">
+    cer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measures.compute_measures" class="md-nav__link">
+    compute_measures()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measures.mer" class="md-nav__link">
+    mer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measures.wer" class="md-nav__link">
+    wer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measures.wil" class="md-nav__link">
+    wil()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measures.wip" class="md-nav__link">
+    wip()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>measures</h1>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="measures" class="doc doc-heading">
+          <span class="doc doc-object-name doc-module-name">measures</span>
+
+
+<a href="#measures" class="headerlink" title="Permanent link">#</a></h2>
+
+  <div class="doc doc-contents first">
+  
+      <p>Convenience methods for calculating a number of similarity error
+measures between a reference and hypothesis sentence.
+These measures are
+commonly used to measure the performance for an automatic speech recognition
+(ASR) system.</p>
+<p>The following measures are implemented:</p>
+<ul>
+<li>Word Error Rate (WER), which is where this library got its name from. This
+  has long been (and arguably still is) the de facto standard for computing
+  ASR performance.</li>
+<li>Match Error Rate (MER)</li>
+<li>Word Information Lost (WIL)</li>
+<li>Word Information Preserved (WIP)</li>
+<li>Character Error Rate (CER)</li>
+</ul>
+<p>Note that these functions merely call
+<a class="autorefs autorefs-internal" href="../process/#process.process_words">jiwer.process_words</a> and
+<a class="autorefs autorefs-internal" href="../process/#process.process_characters">jiwer.process_characters</a>.
+It is more efficient to call <code>process_words</code> or <code>process_characters</code> and access the
+results from the
+<a class="autorefs autorefs-internal" href="../process/#process.WordOutput">jiwer.WordOutput</a> and
+<a class="autorefs autorefs-internal" href="../process/#process.CharacterOutput">jiwer.CharacterOutput</a>
+classes.</p>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="measures.cer" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">cer</span>
+
+
+<a href="#measures.cer" class="headerlink" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">cer</span><span class="p">(</span>
+    <span class="n">reference</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="o">=</span><span class="n">cer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">cer_default</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">truth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="o">=</span><span class="n">cer_default</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Calculate the character error rate (CER) between one or more reference and
+hypothesis sentences.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>reference</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The reference sentence(s)</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The hypothesis sentence(s)</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>reference_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the reference string(s)</p></td>
+          <td>
+                <code>cer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the hypothesis string(s)</p></td>
+          <td>
+                <code>cer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>return_dict</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Deprecated option to return the more results in a dict instead of
+         returning only the cer as a single float value</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>truth</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>Deprecated, renamed to <code>reference</code></p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>truth_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>Deprecated, renamed to <code>reference_transform</code></p></td>
+          <td>
+                <code>cer_default</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+<details class="deprecated">
+  <summary>Deprecated</summary>
+  <p>Argument <code>return_dict</code> will be deprecated. Please use
+<a class="autorefs autorefs-internal" href="../process/#process.process_characters">jiwer.process_characters</a> instead.</p>
+<p>Arguments <code>truth</code> and <code>truth_transform</code> have been renamed to respectively
+<code>reference</code> and <code>reference_transform</code>. Therefore, the keyword arguments
+ <code>truth</code> and <code>truth_transform</code> will be removed in the next release.
+ At the same time, <code>reference</code> and <code>reference_transform</code> will lose their
+ default value.</p>
+</details>
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The character error rate of the given reference and hypothesis
+     sentence(s).</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>jiwer/measures.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">cer</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">cer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">cer_default</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">cer_default</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the character error rate (CER) between one or more reference and</span>
+<span class="sd">    hypothesis sentences.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference: The reference sentence(s)</span>
+<span class="sd">        hypothesis: The hypothesis sentence(s)</span>
+<span class="sd">        reference_transform: The transformation(s) to apply to the reference string(s)</span>
+<span class="sd">        hypothesis_transform: The transformation(s) to apply to the hypothesis string(s)</span>
+<span class="sd">        return_dict: Deprecated option to return the more results in a dict instead of</span>
+<span class="sd">                     returning only the cer as a single float value</span>
+<span class="sd">        truth: Deprecated, renamed to `reference`</span>
+<span class="sd">        truth_transform: Deprecated, renamed to `reference_transform`</span>
+
+<span class="sd">    Deprecated:</span>
+<span class="sd">        Argument `return_dict` will be deprecated. Please use</span>
+<span class="sd">        [jiwer.process_characters][process.process_characters] instead.</span>
+
+<span class="sd">        Arguments `truth` and `truth_transform` have been renamed to respectively</span>
+<span class="sd">        `reference` and `reference_transform`. Therefore, the keyword arguments</span>
+<span class="sd">         `truth` and `truth_transform` will be removed in the next release.</span>
+<span class="sd">         At the same time, `reference` and `reference_transform` will lose their</span>
+<span class="sd">         default value.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The character error rate of the given reference and hypothesis</span>
+<span class="sd">                 sentence(s).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">_deprecate_truth</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">truth</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">truth_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">process_characters</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">,</span> <span class="n">reference_transform</span><span class="p">,</span> <span class="n">hypothesis_transform</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">return_dict</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="ne">DeprecationWarning</span><span class="p">(</span>
+                <span class="s2">&quot;`return_dict` is deprecated, &quot;</span>
+                <span class="s2">&quot;please use jiwer.process_characters() instead.&quot;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;cer&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">cer</span><span class="p">,</span>
+            <span class="s2">&quot;hits&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">hits</span><span class="p">,</span>
+            <span class="s2">&quot;substitutions&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">substitutions</span><span class="p">,</span>
+            <span class="s2">&quot;deletions&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">deletions</span><span class="p">,</span>
+            <span class="s2">&quot;insertions&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">insertions</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">cer</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="measures.compute_measures" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">compute_measures</span>
+
+
+<a href="#measures.compute_measures" class="headerlink" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">compute_measures</span><span class="p">(</span>
+    <span class="n">truth</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Efficiently computes all measures using only one function call.</p>
+
+<details class="deprecated">
+  <summary>Deprecated</summary>
+  <p>Deprecated method. Superseded by <a class="autorefs autorefs-internal" href="../process/#process.process_words">jiwer.process_words</a>.
+This method will be removed on next release.</p>
+</details>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>truth</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The reference sentence(s)</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The hypothesis sentence(s)</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>truth_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the reference string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the hypothesis string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>dict</code>
+          </td>
+          <td><p>A dictionary containing key-value pairs for all measures.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>jiwer/measures.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">compute_measures</span><span class="p">(</span>
+    <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Efficiently computes all measures using only one function call.</span>
+
+<span class="sd">    Deprecated:</span>
+<span class="sd">        Deprecated method. Superseded by [jiwer.process_words][process.process_words].</span>
+<span class="sd">        This method will be removed on next release.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        truth: The reference sentence(s)</span>
+<span class="sd">        hypothesis: The hypothesis sentence(s)</span>
+<span class="sd">        truth_transform: The transformation(s) to apply to the reference string(s)</span>
+<span class="sd">        hypothesis_transform: The transformation(s) to apply to the hypothesis string(s)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (dict): A dictionary containing key-value pairs for all measures.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="ne">DeprecationWarning</span><span class="p">(</span>
+            <span class="s2">&quot;jiwer.compute_measures() is deprecated. Please use jiwer.process_words().&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">process_words</span><span class="p">(</span>
+        <span class="n">reference</span><span class="o">=</span><span class="n">truth</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="o">=</span><span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="o">=</span><span class="n">truth_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">hypothesis_transform</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;wer&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">wer</span><span class="p">,</span>
+        <span class="s2">&quot;mer&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">mer</span><span class="p">,</span>
+        <span class="s2">&quot;wil&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">wil</span><span class="p">,</span>
+        <span class="s2">&quot;wip&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">wip</span><span class="p">,</span>
+        <span class="s2">&quot;hits&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">hits</span><span class="p">,</span>
+        <span class="s2">&quot;substitutions&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">substitutions</span><span class="p">,</span>
+        <span class="s2">&quot;deletions&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">deletions</span><span class="p">,</span>
+        <span class="s2">&quot;insertions&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">insertions</span><span class="p">,</span>
+        <span class="s2">&quot;ops&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">alignments</span><span class="p">,</span>
+        <span class="s2">&quot;truth&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">references</span><span class="p">,</span>
+        <span class="s2">&quot;hypothesis&quot;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">hypotheses</span><span class="p">,</span>
+    <span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="measures.mer" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">mer</span>
+
+
+<a href="#measures.mer" class="headerlink" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">mer</span><span class="p">(</span>
+    <span class="n">reference</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Calculate the match error rate (MER) between one or more reference and
+hypothesis sentences.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>reference</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The reference sentence(s)</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The hypothesis sentence(s)</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>reference_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the reference string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the hypothesis string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>truth</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>Deprecated, renamed to <code>reference</code></p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>truth_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>Deprecated, renamed to <code>reference_transform</code></p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+<details class="deprecated">
+  <summary>Deprecated</summary>
+  <p>Arguments <code>truth</code> and <code>truth_transform</code> have been renamed to respectively
+<code>reference</code> and <code>reference_transform</code>. Therefore, the keyword arguments
+ <code>truth</code> and <code>truth_transform</code> will be removed in the next release.
+ At the same time, <code>reference</code> and <code>reference_transform</code> will lose their
+ default value.</p>
+</details>
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The match error rate of the given reference and
+     hypothesis sentence(s).</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>jiwer/measures.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mer</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the match error rate (MER) between one or more reference and</span>
+<span class="sd">    hypothesis sentences.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference: The reference sentence(s)</span>
+<span class="sd">        hypothesis: The hypothesis sentence(s)</span>
+<span class="sd">        reference_transform: The transformation(s) to apply to the reference string(s)</span>
+<span class="sd">        hypothesis_transform: The transformation(s) to apply to the hypothesis string(s)</span>
+<span class="sd">        truth: Deprecated, renamed to `reference`</span>
+<span class="sd">        truth_transform: Deprecated, renamed to `reference_transform`</span>
+
+<span class="sd">    Deprecated:</span>
+<span class="sd">        Arguments `truth` and `truth_transform` have been renamed to respectively</span>
+<span class="sd">        `reference` and `reference_transform`. Therefore, the keyword arguments</span>
+<span class="sd">         `truth` and `truth_transform` will be removed in the next release.</span>
+<span class="sd">         At the same time, `reference` and `reference_transform` will lose their</span>
+<span class="sd">         default value.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The match error rate of the given reference and</span>
+<span class="sd">                 hypothesis sentence(s).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">_deprecate_truth</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">truth</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">truth_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">process_words</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">,</span> <span class="n">reference_transform</span><span class="p">,</span> <span class="n">hypothesis_transform</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">mer</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="measures.wer" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">wer</span>
+
+
+<a href="#measures.wer" class="headerlink" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">wer</span><span class="p">(</span>
+    <span class="n">reference</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Calculate the word error rate (WER) between one or more reference and
+hypothesis sentences.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>reference</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The reference sentence(s)</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The hypothesis sentence(s)</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>reference_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the reference string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the hypothesis string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>truth</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>Deprecated, renamed to <code>reference</code></p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>truth_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>Deprecated, renamed to <code>reference_transform</code></p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+<details class="deprecated">
+  <summary>Deprecated</summary>
+  <p>Arguments <code>truth</code> and <code>truth_transform</code> have been renamed to respectively
+<code>reference</code> and <code>reference_transform</code>. Therefore, the keyword arguments
+ <code>truth</code> and <code>truth_transform</code> will be removed in the next release.
+ At the same time, <code>reference</code> and <code>reference_transform</code> will lose their
+ default value.</p>
+</details>
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The word error rate of the given reference and
+     hypothesis sentence(s).</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>jiwer/measures.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">wer</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the word error rate (WER) between one or more reference and</span>
+<span class="sd">    hypothesis sentences.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference: The reference sentence(s)</span>
+<span class="sd">        hypothesis: The hypothesis sentence(s)</span>
+<span class="sd">        reference_transform: The transformation(s) to apply to the reference string(s)</span>
+<span class="sd">        hypothesis_transform: The transformation(s) to apply to the hypothesis string(s)</span>
+<span class="sd">        truth: Deprecated, renamed to `reference`</span>
+<span class="sd">        truth_transform: Deprecated, renamed to `reference_transform`</span>
+
+<span class="sd">    Deprecated:</span>
+<span class="sd">        Arguments `truth` and `truth_transform` have been renamed to respectively</span>
+<span class="sd">        `reference` and `reference_transform`. Therefore, the keyword arguments</span>
+<span class="sd">         `truth` and `truth_transform` will be removed in the next release.</span>
+<span class="sd">         At the same time, `reference` and `reference_transform` will lose their</span>
+<span class="sd">         default value.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The word error rate of the given reference and</span>
+<span class="sd">                 hypothesis sentence(s).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">_deprecate_truth</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">truth</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">truth_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">process_words</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">,</span> <span class="n">reference_transform</span><span class="p">,</span> <span class="n">hypothesis_transform</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">wer</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="measures.wil" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">wil</span>
+
+
+<a href="#measures.wil" class="headerlink" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">wil</span><span class="p">(</span>
+    <span class="n">reference</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Calculate the word information lost (WIL) between one or more reference and
+hypothesis sentences.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>reference</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The reference sentence(s)</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The hypothesis sentence(s)</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>reference_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the reference string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the hypothesis string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>truth</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>Deprecated, renamed to <code>reference</code></p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>truth_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>Deprecated, renamed to <code>reference_transform</code></p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+<details class="deprecated">
+  <summary>Deprecated</summary>
+  <p>Arguments <code>truth</code> and <code>truth_transform</code> have been renamed to respectively
+<code>reference</code> and <code>reference_transform</code>. Therefore, the keyword arguments
+<code>truth</code> and <code>truth_transform</code> will be removed in the next release.
+ At the same time, <code>reference</code> and <code>reference_transform</code> will lose their
+ default value.</p>
+</details>
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The word information lost of the given reference and
+     hypothesis sentence(s).</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>jiwer/measures.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">wil</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the word information lost (WIL) between one or more reference and</span>
+<span class="sd">    hypothesis sentences.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference: The reference sentence(s)</span>
+<span class="sd">        hypothesis: The hypothesis sentence(s)</span>
+<span class="sd">        reference_transform: The transformation(s) to apply to the reference string(s)</span>
+<span class="sd">        hypothesis_transform: The transformation(s) to apply to the hypothesis string(s)</span>
+<span class="sd">        truth: Deprecated, renamed to `reference`</span>
+<span class="sd">        truth_transform: Deprecated, renamed to `reference_transform`</span>
+
+<span class="sd">    Deprecated:</span>
+<span class="sd">        Arguments `truth` and `truth_transform` have been renamed to respectively</span>
+<span class="sd">        `reference` and `reference_transform`. Therefore, the keyword arguments</span>
+<span class="sd">        `truth` and `truth_transform` will be removed in the next release.</span>
+<span class="sd">         At the same time, `reference` and `reference_transform` will lose their</span>
+<span class="sd">         default value.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The word information lost of the given reference and</span>
+<span class="sd">                 hypothesis sentence(s).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">_deprecate_truth</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">truth</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">truth_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">process_words</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">,</span> <span class="n">reference_transform</span><span class="p">,</span> <span class="n">hypothesis_transform</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">wil</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="measures.wip" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">wip</span>
+
+
+<a href="#measures.wip" class="headerlink" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">wip</span><span class="p">(</span>
+    <span class="n">reference</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Calculate the word information preserved (WIP) between one or more reference and
+hypothesis sentences.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>reference</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The reference sentence(s)</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The hypothesis sentence(s)</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>reference_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the reference string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the hypothesis string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>truth</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>Deprecated, renamed to <code>reference</code></p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>truth_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>Deprecated, renamed to <code>reference_transform</code></p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+<details class="deprecated">
+  <summary>Deprecated</summary>
+  <p>Arguments <code>truth</code> and <code>truth_transform</code> have been renamed to respectively
+<code>reference</code> and <code>reference_transform</code>. Therefore, the keyword arguments
+ <code>truth</code> and <code>truth_transform</code> will be removed in the next release.
+ At the same time, <code>reference</code> and <code>reference_transform</code> will lose their
+ default value.</p>
+</details>
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The word information preserved of the given reference and
+     hypothesis sentence(s).</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>jiwer/measures.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">wip</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the word information preserved (WIP) between one or more reference and</span>
+<span class="sd">    hypothesis sentences.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference: The reference sentence(s)</span>
+<span class="sd">        hypothesis: The hypothesis sentence(s)</span>
+<span class="sd">        reference_transform: The transformation(s) to apply to the reference string(s)</span>
+<span class="sd">        hypothesis_transform: The transformation(s) to apply to the hypothesis string(s)</span>
+<span class="sd">        truth: Deprecated, renamed to `reference`</span>
+<span class="sd">        truth_transform: Deprecated, renamed to `reference_transform`</span>
+
+<span class="sd">    Deprecated:</span>
+<span class="sd">        Arguments `truth` and `truth_transform` have been renamed to respectively</span>
+<span class="sd">        `reference` and `reference_transform`. Therefore, the keyword arguments</span>
+<span class="sd">         `truth` and `truth_transform` will be removed in the next release.</span>
+<span class="sd">         At the same time, `reference` and `reference_transform` will lose their</span>
+<span class="sd">         default value.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The word information preserved of the given reference and</span>
+<span class="sd">                 hypothesis sentence(s).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">_deprecate_truth</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">truth</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">truth_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">process_words</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">,</span> <span class="n">reference_transform</span><span class="p">,</span> <span class="n">hypothesis_transform</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">wip</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      
+    
+  </body>
+</html>

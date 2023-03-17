@@ -16,7 +16,32 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://nikvaessen.github.io/jiwer/reference/SUMMARY/</loc>
+         <loc>None</loc>
+         <lastmod>2023-03-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://nikvaessen.github.io/jiwer/reference/alignment/</loc>
+         <lastmod>2023-03-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://nikvaessen.github.io/jiwer/reference/measures/</loc>
+         <lastmod>2023-03-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://nikvaessen.github.io/jiwer/reference/process/</loc>
+         <lastmod>2023-03-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://nikvaessen.github.io/jiwer/reference/transformations/</loc>
+         <lastmod>2023-03-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://nikvaessen.github.io/jiwer/reference/transforms/</loc>
          <lastmod>2023-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>

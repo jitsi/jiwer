@@ -1,0 +1,1795 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for jiwer.">
+      
+      
+      
+        <link rel="canonical" href="https://nikvaessen.github.io/jiwer/reference/process/">
+      
+      
+        <link rel="prev" href="../measures/">
+      
+      
+        <link rel="next" href="../transformations/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
+    
+    
+      
+        <title>process - jiwer_website</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#process" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="jiwer_website" class="md-header__button md-logo" aria-label="jiwer_website" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            jiwer_website
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              process
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jitsi/jiwer" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jitsi/jiwer
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../docs/" class="md-tabs__link">
+      jiwer
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../docs/usage/" class="md-tabs__link">
+      Usage
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../docs/cli/" class="md-tabs__link">
+      Command-line interface
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../alignment/" class="md-tabs__link md-tabs__link--active">
+        API reference
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="jiwer_website" class="md-nav__button md-logo" aria-label="jiwer_website" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    jiwer_website
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jitsi/jiwer" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jitsi/jiwer
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/" class="md-nav__link">
+        jiwer
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/usage/" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/cli/" class="md-nav__link">
+        Command-line interface
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          API reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alignment/" class="md-nav__link">
+        alignment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../measures/" class="md-nav__link">
+        measures
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          process
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        process
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#process" class="md-nav__link">
+    process
+  </a>
+  
+    <nav class="md-nav" aria-label="process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#process.AlignmentChunk" class="md-nav__link">
+    AlignmentChunk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process.CharacterOutput" class="md-nav__link">
+    CharacterOutput
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process.WordOutput" class="md-nav__link">
+    WordOutput
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process.process_characters" class="md-nav__link">
+    process_characters()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process.process_words" class="md-nav__link">
+    process_words()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transformations/" class="md-nav__link">
+        transformations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transforms/" class="md-nav__link">
+        transforms
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#process" class="md-nav__link">
+    process
+  </a>
+  
+    <nav class="md-nav" aria-label="process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#process.AlignmentChunk" class="md-nav__link">
+    AlignmentChunk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process.CharacterOutput" class="md-nav__link">
+    CharacterOutput
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process.WordOutput" class="md-nav__link">
+    WordOutput
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process.process_characters" class="md-nav__link">
+    process_characters()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process.process_words" class="md-nav__link">
+    process_words()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>process</h1>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="process" class="doc doc-heading">
+          <span class="doc doc-object-name doc-module-name">process</span>
+
+
+<a href="#process" class="headerlink" title="Permanent link">#</a></h2>
+
+  <div class="doc doc-contents first">
+  
+      <p>The core algorithm(s) for processing a one or more reference and hypothesis sentences
+so that measures can be computed and an alignment can be visualized.</p>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="process.AlignmentChunk" class="doc doc-heading">
+        <span class="doc doc-object-name doc-class-name">AlignmentChunk</span>
+
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#process.AlignmentChunk" class="headerlink" title="Permanent link">#</a></h3>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Define an alignment between two subsequence of the reference and hypothesis.</p>
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>type</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>one of <code>equal</code>, <code>substitute</code>, <code>insert</code>, or <code>delete</code></p></td>
+        </tr>
+        <tr>
+          <td><code>ref_start_idx</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>the start index of the reference subsequence</p></td>
+        </tr>
+        <tr>
+          <td><code>ref_end_idx</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>the end index of the reference subsequence</p></td>
+        </tr>
+        <tr>
+          <td><code>hyp_start_idx</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>the start index of the hypothesis subsequence</p></td>
+        </tr>
+        <tr>
+          <td><code>hyp_end_idx</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>the end index of the hypothesis subsequence</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        <details class="quote">
+          <summary>Source code in <code>jiwer/process.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">AlignmentChunk</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Define an alignment between two subsequence of the reference and hypothesis.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        type: one of `equal`, `substitute`, `insert`, or `delete`</span>
+<span class="sd">        ref_start_idx: the start index of the reference subsequence</span>
+<span class="sd">        ref_end_idx: the end index of the reference subsequence</span>
+<span class="sd">        hyp_start_idx: the start index of the hypothesis subsequence</span>
+<span class="sd">        hyp_end_idx: the end index of the hypothesis subsequence</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="n">ref_start_idx</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">ref_end_idx</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="n">hyp_start_idx</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">hyp_end_idx</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;replace&quot;</span><span class="p">,</span> <span class="s2">&quot;insert&quot;</span><span class="p">,</span> <span class="s2">&quot;delete&quot;</span><span class="p">,</span> <span class="s2">&quot;equal&quot;</span><span class="p">,</span> <span class="s2">&quot;substitute&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># rapidfuzz uses replace instead of substitute... For consistency, we change it</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;replace&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;substitute&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_start_idx</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_end_idx</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;ref_start_idx=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_start_idx</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;is larger &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;than ref_end_idx=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_end_idx</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyp_start_idx</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyp_end_idx</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;hyp_start_idx=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">hyp_start_idx</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;is larger &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;than hyp_end_idx=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">hyp_end_idx</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="process.CharacterOutput" class="doc doc-heading">
+        <span class="doc doc-object-name doc-class-name">CharacterOutput</span>
+
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#process.CharacterOutput" class="headerlink" title="Permanent link">#</a></h3>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>The output of calculating the character-level levenshtein distance between one or
+more reference and hypothesis sentence(s).</p>
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>references</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The reference sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>hypotheses</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The hypothesis sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>alignments</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="process.AlignmentChunk" href="#process.AlignmentChunk">AlignmentChunk</a>]]</code>
+          </td>
+          <td><p>The alignment between reference and hypothesis sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>cer</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The character error rate</p></td>
+        </tr>
+        <tr>
+          <td><code>hits</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>The number of correct characters between reference and hypothesis
+  sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>substitutions</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>The number of substitutions required to transform hypothesis
+           sentences to reference sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>insertions</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>The number of insertions required to transform hypothesis
+           sentences to reference sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>deletions</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>The number of deletions required to transform hypothesis
+           sentences to reference sentences</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        <details class="quote">
+          <summary>Source code in <code>jiwer/process.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">CharacterOutput</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The output of calculating the character-level levenshtein distance between one or</span>
+<span class="sd">    more reference and hypothesis sentence(s).</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        references: The reference sentences</span>
+<span class="sd">        hypotheses: The hypothesis sentences</span>
+<span class="sd">        alignments: The alignment between reference and hypothesis sentences</span>
+<span class="sd">        cer: The character error rate</span>
+<span class="sd">        hits: The number of correct characters between reference and hypothesis</span>
+<span class="sd">              sentences</span>
+<span class="sd">        substitutions: The number of substitutions required to transform hypothesis</span>
+<span class="sd">                       sentences to reference sentences</span>
+<span class="sd">        insertions: The number of insertions required to transform hypothesis</span>
+<span class="sd">                       sentences to reference sentences</span>
+<span class="sd">        deletions: The number of deletions required to transform hypothesis</span>
+<span class="sd">                       sentences to reference sentences</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># processed input data</span>
+    <span class="n">references</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+    <span class="n">hypotheses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+
+    <span class="c1"># alignment</span>
+    <span class="n">alignments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AlignmentChunk</span><span class="p">]]</span>
+
+    <span class="c1"># measures</span>
+    <span class="n">cer</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="c1"># stats</span>
+    <span class="n">hits</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">substitutions</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">insertions</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">deletions</span><span class="p">:</span> <span class="nb">int</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="process.WordOutput" class="doc doc-heading">
+        <span class="doc doc-object-name doc-class-name">WordOutput</span>
+
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#process.WordOutput" class="headerlink" title="Permanent link">#</a></h3>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>The output of calculating the word-level levenshtein distance between one or more
+reference and hypothesis sentence(s).</p>
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>references</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The reference sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>hypotheses</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The hypothesis sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>alignments</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="process.AlignmentChunk" href="#process.AlignmentChunk">AlignmentChunk</a>]]</code>
+          </td>
+          <td><p>The alignment between reference and hypothesis sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>wer</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The word error rate</p></td>
+        </tr>
+        <tr>
+          <td><code>mer</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The match error rate</p></td>
+        </tr>
+        <tr>
+          <td><code>wil</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The word information lost measure</p></td>
+        </tr>
+        <tr>
+          <td><code>wip</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The word information preserved measure</p></td>
+        </tr>
+        <tr>
+          <td><code>hits</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>The number of correct words between reference and hypothesis sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>substitutions</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>The number of substitutions required to transform hypothesis
+           sentences to reference sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>insertions</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>The number of insertions required to transform hypothesis
+           sentences to reference sentences</p></td>
+        </tr>
+        <tr>
+          <td><code>deletions</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>The number of deletions required to transform hypothesis
+           sentences to reference sentences</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        <details class="quote">
+          <summary>Source code in <code>jiwer/process.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">WordOutput</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The output of calculating the word-level levenshtein distance between one or more</span>
+<span class="sd">    reference and hypothesis sentence(s).</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        references: The reference sentences</span>
+<span class="sd">        hypotheses: The hypothesis sentences</span>
+<span class="sd">        alignments: The alignment between reference and hypothesis sentences</span>
+<span class="sd">        wer: The word error rate</span>
+<span class="sd">        mer: The match error rate</span>
+<span class="sd">        wil: The word information lost measure</span>
+<span class="sd">        wip: The word information preserved measure</span>
+<span class="sd">        hits: The number of correct words between reference and hypothesis sentences</span>
+<span class="sd">        substitutions: The number of substitutions required to transform hypothesis</span>
+<span class="sd">                       sentences to reference sentences</span>
+<span class="sd">        insertions: The number of insertions required to transform hypothesis</span>
+<span class="sd">                       sentences to reference sentences</span>
+<span class="sd">        deletions: The number of deletions required to transform hypothesis</span>
+<span class="sd">                       sentences to reference sentences</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># processed input data</span>
+    <span class="n">references</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+    <span class="n">hypotheses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+
+    <span class="c1"># alignment</span>
+    <span class="n">alignments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AlignmentChunk</span><span class="p">]]</span>
+
+    <span class="c1"># measures</span>
+    <span class="n">wer</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">mer</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">wil</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">wip</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="c1"># stats</span>
+    <span class="n">hits</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">substitutions</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">insertions</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">deletions</span><span class="p">:</span> <span class="nb">int</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="process.process_characters" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">process_characters</span>
+
+
+<a href="#process.process_characters" class="headerlink" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">process_characters</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="o">=</span><span class="n">cer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">cer_default</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Compute the character-level levenshtein distance and alignment between one or more
+reference and hypothesis sentences. Based on the result, the character error rate
+can be computed.</p>
+<p>Note that the by default this method includes space (<code></code>) as a
+character over which the error rate is computed. If this is not desired, the
+reference and hypothesis transform need to be modified.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>reference</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The reference sentence(s)</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The hypothesis sentence(s)</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>reference_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the reference string(s)</p></td>
+          <td>
+                <code>cer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the hypothesis string(s)</p></td>
+          <td>
+                <code>cer_default</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="process.CharacterOutput" href="#process.CharacterOutput">CharacterOutput</a></code>
+          </td>
+          <td><p>The processed reference and hypothesis sentences.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>jiwer/process.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">process_characters</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">cer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">cer_default</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CharacterOutput</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the character-level levenshtein distance and alignment between one or more</span>
+<span class="sd">    reference and hypothesis sentences. Based on the result, the character error rate</span>
+<span class="sd">    can be computed.</span>
+
+<span class="sd">    Note that the by default this method includes space (` `) as a</span>
+<span class="sd">    character over which the error rate is computed. If this is not desired, the</span>
+<span class="sd">    reference and hypothesis transform need to be modified.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference: The reference sentence(s)</span>
+<span class="sd">        hypothesis: The hypothesis sentence(s)</span>
+<span class="sd">        reference_transform: The transformation(s) to apply to the reference string(s)</span>
+<span class="sd">        hypothesis_transform: The transformation(s) to apply to the hypothesis string(s)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (CharacterOutput): The processed reference and hypothesis sentences.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># make sure the transforms end with tr.ReduceToListOfListOfChars(),</span>
+
+    <span class="c1"># it&#39;s the same as word processing, just every word is of length 1</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">process_words</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">,</span> <span class="n">reference_transform</span><span class="p">,</span> <span class="n">hypothesis_transform</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">CharacterOutput</span><span class="p">(</span>
+        <span class="n">references</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">references</span><span class="p">,</span>
+        <span class="n">hypotheses</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">hypotheses</span><span class="p">,</span>
+        <span class="n">alignments</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">alignments</span><span class="p">,</span>
+        <span class="n">cer</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">wer</span><span class="p">,</span>
+        <span class="n">hits</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">hits</span><span class="p">,</span>
+        <span class="n">substitutions</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">substitutions</span><span class="p">,</span>
+        <span class="n">insertions</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">insertions</span><span class="p">,</span>
+        <span class="n">deletions</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">deletions</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="process.process_words" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">process_words</span>
+
+
+<a href="#process.process_words" class="headerlink" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">process_words</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">,</span>
+    <span class="n">hypothesis</span><span class="p">,</span>
+    <span class="n">reference_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Compute the word-level levenshtein distance and alignment between one or more
+reference and hypothesis sentences. Based on the result, multiple measures
+can be computed, such as the word error rate.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>reference</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The reference sentence(s)</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
+          </td>
+          <td><p>The hypothesis sentence(s)</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>reference_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the reference string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hypothesis_transform</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.Compose">Compose</span>, <span title="jiwer.transforms">tr</span>.<span title="jiwer.transforms.AbstractTransform">AbstractTransform</span>]</code>
+          </td>
+          <td><p>The transformation(s) to apply to the hypothesis string(s)</p></td>
+          <td>
+                <code>wer_default</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="process.WordOutput" href="#process.WordOutput">WordOutput</a></code>
+          </td>
+          <td><p>The processed reference and hypothesis sentences</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>jiwer/process.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">process_words</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WordOutput</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the word-level levenshtein distance and alignment between one or more</span>
+<span class="sd">    reference and hypothesis sentences. Based on the result, multiple measures</span>
+<span class="sd">    can be computed, such as the word error rate.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference: The reference sentence(s)</span>
+<span class="sd">        hypothesis: The hypothesis sentence(s)</span>
+<span class="sd">        reference_transform: The transformation(s) to apply to the reference string(s)</span>
+<span class="sd">        hypothesis_transform: The transformation(s) to apply to the hypothesis string(s)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (WordOutput): The processed reference and hypothesis sentences</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># validate input type</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">reference</span> <span class="o">=</span> <span class="p">[</span><span class="n">reference</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hypothesis</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">hypothesis</span> <span class="o">=</span> <span class="p">[</span><span class="n">hypothesis</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">reference</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;one or more references are empty strings&quot;</span><span class="p">)</span>
+
+    <span class="c1"># pre-process reference and hypothesis by applying transforms</span>
+    <span class="n">ref_transformed</span> <span class="o">=</span> <span class="n">_apply_transform</span><span class="p">(</span>
+        <span class="n">reference</span><span class="p">,</span> <span class="n">reference_transform</span><span class="p">,</span> <span class="n">is_reference</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="n">hyp_transformed</span> <span class="o">=</span> <span class="n">_apply_transform</span><span class="p">(</span>
+        <span class="n">hypothesis</span><span class="p">,</span> <span class="n">hypothesis_transform</span><span class="p">,</span> <span class="n">is_reference</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ref_transformed</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hyp_transformed</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;After applying the transforms on the reference and hypothesis sentences, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;their lengths must match. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Instead got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ref_transformed</span><span class="p">)</span><span class="si">}</span><span class="s2"> reference and &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hyp_transformed</span><span class="p">)</span><span class="si">}</span><span class="s2"> hypothesis sentences.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Change each word into a unique character in order to compute</span>
+    <span class="c1"># word-level levenshtein distance</span>
+    <span class="n">ref_as_chars</span><span class="p">,</span> <span class="n">hyp_as_chars</span> <span class="o">=</span> <span class="n">_word2char</span><span class="p">(</span><span class="n">ref_transformed</span><span class="p">,</span> <span class="n">hyp_transformed</span><span class="p">)</span>
+
+    <span class="c1"># keep track of total hits, substitutions, deletions and insertions</span>
+    <span class="c1"># across all input sentences</span>
+    <span class="n">num_hits</span><span class="p">,</span> <span class="n">num_substitutions</span><span class="p">,</span> <span class="n">num_deletions</span><span class="p">,</span> <span class="n">num_insertions</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="c1"># also keep track of the total number of words in the reference and hypothesis</span>
+    <span class="n">num_rf_words</span><span class="p">,</span> <span class="n">num_hp_words</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="c1"># anf finally, keep track of the alignment between each reference and hypothesis</span>
+    <span class="n">alignments</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">reference_sentence</span><span class="p">,</span> <span class="n">hypothesis_sentence</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ref_as_chars</span><span class="p">,</span> <span class="n">hyp_as_chars</span><span class="p">):</span>
+        <span class="c1"># Get the required edit operations to transform reference into hypothesis</span>
+        <span class="n">edit_ops</span> <span class="o">=</span> <span class="n">rapidfuzz</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">Levenshtein</span><span class="o">.</span><span class="n">editops</span><span class="p">(</span>
+            <span class="n">reference_sentence</span><span class="p">,</span> <span class="n">hypothesis_sentence</span>
+        <span class="p">)</span>
+
+        <span class="c1"># count the number of edits of each type</span>
+        <span class="n">substitutions</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;replace&quot;</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">edit_ops</span><span class="p">)</span>
+        <span class="n">deletions</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;delete&quot;</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">edit_ops</span><span class="p">)</span>
+        <span class="n">insertions</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;insert&quot;</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">edit_ops</span><span class="p">)</span>
+        <span class="n">hits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">reference_sentence</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">substitutions</span> <span class="o">+</span> <span class="n">deletions</span><span class="p">)</span>
+
+        <span class="c1"># update state</span>
+        <span class="n">num_hits</span> <span class="o">+=</span> <span class="n">hits</span>
+        <span class="n">num_substitutions</span> <span class="o">+=</span> <span class="n">substitutions</span>
+        <span class="n">num_deletions</span> <span class="o">+=</span> <span class="n">deletions</span>
+        <span class="n">num_insertions</span> <span class="o">+=</span> <span class="n">insertions</span>
+        <span class="n">num_rf_words</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">reference_sentence</span><span class="p">)</span>
+        <span class="n">num_hp_words</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hypothesis_sentence</span><span class="p">)</span>
+        <span class="n">alignments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">AlignmentChunk</span><span class="p">(</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span>
+                    <span class="n">ref_start_idx</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">src_start</span><span class="p">,</span>
+                    <span class="n">ref_end_idx</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">src_end</span><span class="p">,</span>
+                    <span class="n">hyp_start_idx</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">dest_start</span><span class="p">,</span>
+                    <span class="n">hyp_end_idx</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">dest_end</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">Opcodes</span><span class="o">.</span><span class="n">from_editops</span><span class="p">(</span><span class="n">edit_ops</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Compute all measures</span>
+    <span class="n">S</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="n">num_substitutions</span><span class="p">,</span> <span class="n">num_deletions</span><span class="p">,</span> <span class="n">num_insertions</span><span class="p">,</span> <span class="n">num_hits</span>
+
+    <span class="n">wer</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">S</span> <span class="o">+</span> <span class="n">D</span> <span class="o">+</span> <span class="n">I</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">H</span> <span class="o">+</span> <span class="n">S</span> <span class="o">+</span> <span class="n">D</span><span class="p">)</span>
+    <span class="n">mer</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">S</span> <span class="o">+</span> <span class="n">D</span> <span class="o">+</span> <span class="n">I</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">H</span> <span class="o">+</span> <span class="n">S</span> <span class="o">+</span> <span class="n">D</span> <span class="o">+</span> <span class="n">I</span><span class="p">)</span>
+    <span class="n">wip</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_rf_words</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_hp_words</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_hp_words</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+        <span class="k">else</span> <span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="n">wil</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">wip</span>
+
+    <span class="c1"># return all output</span>
+    <span class="k">return</span> <span class="n">WordOutput</span><span class="p">(</span>
+        <span class="n">references</span><span class="o">=</span><span class="n">ref_transformed</span><span class="p">,</span>
+        <span class="n">hypotheses</span><span class="o">=</span><span class="n">hyp_transformed</span><span class="p">,</span>
+        <span class="n">alignments</span><span class="o">=</span><span class="n">alignments</span><span class="p">,</span>
+        <span class="n">wer</span><span class="o">=</span><span class="n">wer</span><span class="p">,</span>
+        <span class="n">mer</span><span class="o">=</span><span class="n">mer</span><span class="p">,</span>
+        <span class="n">wil</span><span class="o">=</span><span class="n">wil</span><span class="p">,</span>
+        <span class="n">wip</span><span class="o">=</span><span class="n">wip</span><span class="p">,</span>
+        <span class="n">hits</span><span class="o">=</span><span class="n">num_hits</span><span class="p">,</span>
+        <span class="n">substitutions</span><span class="o">=</span><span class="n">num_substitutions</span><span class="p">,</span>
+        <span class="n">insertions</span><span class="o">=</span><span class="n">num_insertions</span><span class="p">,</span>
+        <span class="n">deletions</span><span class="o">=</span><span class="n">num_deletions</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      
+    
+  </body>
+</html>
