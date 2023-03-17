@@ -1290,22 +1290,22 @@ or character error rate is desired.</p>
 <span class="normal">131</span>
 <span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Compose</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">       Chain multiple transformations back-to-back to create a pipeline combining multiple</span>
-<span class="sd">       transformations.</span>
+<span class="sd">    Chain multiple transformations back-to-back to create a pipeline combining multiple</span>
+<span class="sd">    transformations.</span>
 
-<span class="sd">       Note that each transformation needs to end with either `ReduceToListOfListOfWords`</span>
-<span class="sd">       or `ReduceToListOfListOfChars`, depending on whether word error rate,</span>
-<span class="sd">       or character error rate is desired.</span>
+<span class="sd">    Note that each transformation needs to end with either `ReduceToListOfListOfWords`</span>
+<span class="sd">    or `ReduceToListOfListOfChars`, depending on whether word error rate,</span>
+<span class="sd">    or character error rate is desired.</span>
 
-<span class="sd">       Example:</span>
-<span class="sd">           ```python3</span>
-<span class="sd">           import jiwer</span>
+<span class="sd">    Example:</span>
+<span class="sd">        ```python3</span>
+<span class="sd">        import jiwer</span>
 
-<span class="sd">           jiwer.Compose([</span>
-<span class="sd">               jiwer.RemoveMultipleSpaces(),</span>
-<span class="sd">               jiwer.ReduceToListOfListOfWords()</span>
-<span class="sd">           ])</span>
-<span class="sd">           ```</span>
+<span class="sd">        jiwer.Compose([</span>
+<span class="sd">            jiwer.RemoveMultipleSpaces(),</span>
+<span class="sd">            jiwer.ReduceToListOfListOfWords()</span>
+<span class="sd">        ])</span>
+<span class="sd">        ```</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transforms</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">AbstractTransform</span><span class="p">]):</span>
