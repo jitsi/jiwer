@@ -353,6 +353,7 @@ class RemoveSpecificWords(SubstituteWords):
         # note the extra spaces
         ```
     """
+
     def __init__(self, words_to_remove: List[str]):
         """
         Args:
@@ -431,6 +432,7 @@ class RemovePunctuation(BaseRemoveTransform):
         # prints: ['this is an example', "hello goodbye"]
         ```
     """
+
     def __init__(self):
         punctuation_characters = _get_punctuation_characters()
         super().__init__(punctuation_characters)
@@ -452,6 +454,7 @@ class RemoveMultipleSpaces(AbstractTransform):
         ```
 
     """
+
     def process_string(self, s: str):
         return re.sub(r"\s\s+", " ", s)
 
@@ -474,6 +477,7 @@ class Strip(AbstractTransform):
         # note that there is an empty string left behind which might need to be cleaned up
         ```
     """
+
     def process_string(self, s: str):
         return s.strip()
 
@@ -492,6 +496,7 @@ class RemoveEmptyStrings(AbstractTransform):
         # prints: ['this is an example']
         ```
     """
+
     def process_string(self, s: str):
         return s.strip()
 
@@ -531,6 +536,7 @@ class ExpandCommonEnglishContractions(AbstractTransform):
         ```
 
     """
+
     def process_string(self, s: str):
         # definitely a non exhaustive list
 
@@ -566,6 +572,7 @@ class ToLowerCase(AbstractTransform):
         # prints: ["you're pretty"]
         ```
     """
+
     def process_string(self, s: str):
         return s.lower()
 
@@ -585,6 +592,7 @@ class ToUpperCase(AbstractTransform):
         # prints: ["YOU'RE AMAZING"]
         ```
     """
+
     def process_string(self, s: str):
         return s.upper()
 
@@ -607,5 +615,6 @@ class RemoveKaldiNonWords(AbstractTransform):
         # note the extra spaces
         ```
     """
+
     def process_string(self, s: str):
         return re.sub(r"[<\[][^>\]]*[>\]]", "", s)
