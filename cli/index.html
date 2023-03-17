@@ -10,27 +10,27 @@
       
       
       
-        <link rel="canonical" href="https://nikvaessen.github.io/jiwer/docs/usage/">
+        <link rel="canonical" href="https://nikvaessen.github.io/jiwer/cli/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../usage/">
       
       
-        <link rel="next" href="../cli/">
+        <link rel="next" href="../reference/alignment/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
-        <title>Usage - jiwer_website</title>
+        <title>Command-line interface - jiwer</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.c4a75a56.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -46,9 +46,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,11 +72,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#usage" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -89,7 +84,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="jiwer_website" class="md-header__button md-logo" aria-label="jiwer_website" data-md-component="logo">
+    <a href=".." title="jiwer" class="md-header__button md-logo" aria-label="jiwer" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -102,13 +97,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            jiwer_website
+            jiwer
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Usage
+              Command-line interface
             
           </span>
         </div>
@@ -177,8 +172,20 @@
 
 
   <li class="md-tabs__item">
-    <a href="../" class="md-tabs__link">
+    <a href=".." class="md-tabs__link">
       jiwer
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../usage/" class="md-tabs__link">
+      Usage
     </a>
   </li>
 
@@ -192,18 +199,6 @@
 
   <li class="md-tabs__item">
     <a href="./" class="md-tabs__link md-tabs__link--active">
-      Usage
-    </a>
-  </li>
-
-      
-        
-  
-  
-
-
-  <li class="md-tabs__item">
-    <a href="../cli/" class="md-tabs__link">
       Command-line interface
     </a>
   </li>
@@ -218,7 +213,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../reference/alignment/" class="md-tabs__link">
+      <a href="../reference/alignment/" class="md-tabs__link">
         API reference
       </a>
     </li>
@@ -252,13 +247,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="jiwer_website" class="md-nav__button md-logo" aria-label="jiwer_website" data-md-component="logo">
+    <a href=".." title="jiwer" class="md-nav__button md-logo" aria-label="jiwer" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
-    jiwer_website
+    jiwer
   </label>
   
     <div class="md-nav__source">
@@ -283,8 +278,23 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href=".." class="md-nav__link">
         jiwer
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        Usage
       </a>
     </li>
   
@@ -304,28 +314,11 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Usage
-      </a>
-      
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../cli/" class="md-nav__link">
         Command-line interface
       </a>
+      
     </li>
   
 
@@ -365,7 +358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/alignment/" class="md-nav__link">
+      <a href="../reference/alignment/" class="md-nav__link">
         alignment
       </a>
     </li>
@@ -379,7 +372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/measures/" class="md-nav__link">
+      <a href="../reference/measures/" class="md-nav__link">
         measures
       </a>
     </li>
@@ -393,7 +386,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/process/" class="md-nav__link">
+      <a href="../reference/process/" class="md-nav__link">
         process
       </a>
     </li>
@@ -407,7 +400,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/transformations/" class="md-nav__link">
+      <a href="../reference/transformations/" class="md-nav__link">
         transformations
       </a>
     </li>
@@ -421,7 +414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/transforms/" class="md-nav__link">
+      <a href="../reference/transforms/" class="md-nav__link">
         transforms
       </a>
     </li>
@@ -452,8 +445,6 @@
   
   
   
-    
-  
   
 </nav>
                   </div>
@@ -471,93 +462,32 @@
   
 
 
-<h1 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h1>
-<p>The most simple use-case is computing the edit distance between two strings:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jiwer</span> <span class="kn">import</span> <span class="n">wer</span>
+  <h1>Command-line interface</h1>
 
-<span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;hello world&quot;</span>
-<span class="n">hypothesis</span> <span class="o">=</span> <span class="s2">&quot;hello duck&quot;</span>
+<p>JiWER provides a simple CLI, which should be available after installation. </p>
+<p>For details, see <code>jiwer --help</code>.</p>
+<div class="highlight"><pre><span></span><code>$ jiwer --help
+Usage: jiwer [OPTIONS]
 
-<span class="n">error</span> <span class="o">=</span> <span class="n">wer</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
+  JiWER is a python tool for computing the word-error-rate of ASR systems. To
+  use this CLI, store the reference and hypothesis sentences in a text file,
+  where each sentence is delimited by a new-line character. The text files are
+  expected to have an equal number of lines, unless the `-g` flag is used. The
+  `-g` flag joins computation of the WER by doing a global minimal alignment.
+
+Options:
+  -r, --reference PATH   Path to new-line delimited text file of reference
+                         sentences.  [required]
+  -h, --hypothesis PATH  Path to new-line delimited text file of hypothesis
+                         sentences.  [required]
+  -c, --cer              Compute CER instead of WER.
+  -a, --align            Print alignment of each sentence.
+  -g, --global           Apply a global minimal alignment between reference
+                         and hypothesis sentences before computing the WER.
+  --help                 Show this message and exit.
 </code></pre></div>
-<p>Similarly, to get other measures:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">jiwer</span>
-
-<span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;hello world&quot;</span>
-<span class="n">hypothesis</span> <span class="o">=</span> <span class="s2">&quot;hello duck&quot;</span>
-
-<span class="n">wer</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">wer</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
-<span class="n">mer</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">mer</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
-<span class="n">wil</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">wil</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
-
-<span class="c1"># faster, because `compute_measures` only needs to perform the heavy lifting once:</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">process_words</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
-<span class="n">wer</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">wer</span>
-<span class="n">mer</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">mer</span>
-<span class="n">wil</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">wil</span>
-</code></pre></div>
-<p>You can also compute the WER over multiple sentences:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jiwer</span> <span class="kn">import</span> <span class="n">wer</span>
-
-<span class="n">reference</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="s2">&quot;i like monthy python&quot;</span><span class="p">]</span>
-<span class="n">hypothesis</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hello duck&quot;</span><span class="p">,</span> <span class="s2">&quot;i like python&quot;</span><span class="p">]</span>
-
-<span class="n">error</span> <span class="o">=</span> <span class="n">wer</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
-</code></pre></div>
-<p>We also provide the character error rate:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">jiwer</span>
-
-<span class="n">reference</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;i can spell&quot;</span><span class="p">,</span> <span class="s2">&quot;i hope&quot;</span><span class="p">]</span>
-<span class="n">hypothesis</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;i kan cpell&quot;</span><span class="p">,</span> <span class="s2">&quot;i hop&quot;</span><span class="p">]</span>
-
-<span class="n">error</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">cer</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
-
-<span class="c1"># if you also want the alignment</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">process_characters</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
-<span class="n">error</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">cer</span>
-</code></pre></div>
-<h1 id="alignment">Alignment<a class="headerlink" href="#alignment" title="Permanent link">#</a></h1>
-<p>With <code>jiwer.process_words</code>, you also get the alignment between the ground-truth and hypothesis.</p>
-<p>We provide the alignment as a list of <code>(op, ref_start_idx, ref_idx_end, hyp_idx_start, hyp_idx_end)</code>, where <code>op</code> is one of
-    <code>equal</code>, <code>replace</code>, <code>delete</code>, or <code>insert</code>.</p>
-<p>This looks like the following:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">jiwer</span>
-
-<span class="n">out</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">process_words</span><span class="p">(</span><span class="s2">&quot;short one here&quot;</span><span class="p">,</span> <span class="s2">&quot;shoe order one&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">alignments</span><span class="p">)</span>
-<span class="c1"># [[[AlignmentChunk(type=&#39;insert&#39;, ref_start_idx=0, ref_end_idx=0, hyp_start_idx=0, hyp_end_idx=1), ...]]</span>
-</code></pre></div>
-<p>To visualize the alignment, you can use <code>jiwer.visualize_alignment()</code></p>
-<p>For example:</p>
-<p><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">jiwer</span>
-
-<span class="n">out</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">process_words</span><span class="p">(</span>
-    <span class="p">[</span><span class="s2">&quot;short one here&quot;</span><span class="p">,</span> <span class="s2">&quot;quite a bit of longer sentence&quot;</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">&quot;shoe order one&quot;</span><span class="p">,</span> <span class="s2">&quot;quite bit of an even longest sentence here&quot;</span><span class="p">],</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">jiwer</span><span class="o">.</span><span class="n">visualize_alignment</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
-</code></pre></div>
-Gives the following output
-<div class="highlight"><pre><span></span><code>sentence 1
-REF: **** short one here
-HYP: shoe order one ****
-        I     S        D
-
-sentence 2
-REF: quite a bit of ** ****  longer sentence ****
-HYP: quite * bit of an even longest sentence here
-           D         I    I       S             I
-
-number of sentences: 2
-substitutions=2 deletions=2 insertions=4 hits=5
-
-mer=61.54%
-wil=74.75%
-wip=25.25%
-wer=88.89%
-</code></pre></div></p>
-<p>Note that it also possible to visualize the character-level alignment, simply use the output of <code>jiwer.process_characters()</code> instead. </p>
+<p>Note that the CLI does not support a custom pre-processing (as described below). Any pre-processing
+should be done on the text files manually before calling JiWER when using the CLI. </p>
 
 
 
@@ -600,10 +530,10 @@ wer=88.89%
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      <script src="../assets/javascripts/bundle.efa0ade1.min.js"></script>
       
     
   </body>
