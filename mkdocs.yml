@@ -1,6 +1,6 @@
-site_name: "jiwer_website"
+site_name: "jiwer"
 site_description: "Documentation for jiwer."
-site_url: "https://nikvaessen.github.io/jiwer"
+site_url: "https://nikvaessen.github.io/jiwer/"
 repo_url: "https://github.com/jitsi/jiwer"
 edit_uri: "blob/master/docs/"
 repo_name: "jitsi/jiwer"
@@ -32,9 +32,9 @@ plugins:
 - autorefs
 
 nav:
-  - jiwer: docs/index.md
-  - Usage: docs/usage.md
-  - Command-line interface: docs/cli.md
+  - jiwer: index.md
+  - Usage: usage.md
+  - Command-line interface: cli.md
   - API reference: reference/
 
 markdown_extensions:

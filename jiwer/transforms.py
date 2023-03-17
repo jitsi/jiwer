@@ -22,15 +22,15 @@ of input strings to the desired format in order to calculate the WER of CER.
 
 In principle, for word error rate calculations, every string of a sentence needs to be
 collapsed into a list of strings, where each string is a *single* word.
-This is done with [transform_blocks.ReduceToListOfListOfWords][].
+This is done with [transforms.ReduceToListOfListOfWords][].
 A composition of multiple transformations must therefore *always* end with
-[transform_blocks.ReduceToListOfListOfWords][].
+[transforms.ReduceToListOfListOfWords][].
 
 For the character error rate, every string of a sentence also needs to be collapsed into
 a list of strings, but here each string is a *single* character.
-This is done with [transform_blocks.ReduceToListOfListOfChars][]. Similarly, a
+This is done with [transforms.ReduceToListOfListOfChars][]. Similarly, a
 composition of multiple transformations must therefore also always end with
-[transform_blocks.ReduceToListOfListOfChars][].
+[transforms.ReduceToListOfListOfChars][].
 """
 
 import sys
