@@ -4,7 +4,7 @@ site_url: "https://nikvaessen.github.io/jiwer"
 repo_url: "https://github.com/jitsi/jiwer"
 edit_uri: "blob/master/docs/"
 repo_name: "jitsi/jiwer"
-site_dir: "jiwer"
+site_dir: "site"
 
 theme:
   name: "material"
