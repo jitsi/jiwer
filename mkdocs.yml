@@ -1,6 +1,6 @@
-site_name: "jiwer"
+site_name: "jiwer_website"
 site_description: "Documentation for jiwer."
-# site_url: "https://mkdocstrings.github.io/"
+site_url: "https://nikvaessen.github.io/jiwer"
 repo_url: "https://github.com/jitsi/jiwer"
 edit_uri: "blob/master/docs/"
 repo_name: "jitsi/jiwer"
