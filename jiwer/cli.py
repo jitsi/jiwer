@@ -28,14 +28,16 @@ import jiwer
 
 @click.command()
 @click.option(
-    "--gt",
-    "ground_truth_file",
+    "-r",
+    "--reference",
+    "reference_file",
     type=pathlib.Path,
     required=True,
-    help="Path to new-line delimited text file of ground-truth sentences.",
+    help="Path to new-line delimited text file of reference sentences.",
 )
 @click.option(
-    "--hp",
+    "-h",
+    "--hypothesis",
     "hypothesis_file",
     type=pathlib.Path,
     required=True,
@@ -63,11 +65,11 @@ import jiwer
     "global_alignment",
     is_flag=True,
     default=False,
-    help="Apply a global alignment between ground-truth and hypothesis sentences "
+    help="Apply a global minimal alignment between reference and hypothesis sentences "
     "before computing the WER.",
 )
 def cli(
-    ground_truth_file: pathlib.Path,
+    reference_file: pathlib.Path,
     hypothesis_file: pathlib.Path,
     compute_cer: bool,
     show_alignment: bool,
@@ -75,55 +77,56 @@ def cli(
 ):
     """
     JiWER is a python tool for computing the word-error-rate of ASR systems. To use
-    this CLI, store the ground-truth and hypothesis sentences in a text file, where
+    this CLI, store the reference and hypothesis sentences in a text file, where
     each sentence is delimited by a new-line character.
-    The text files are expected to have an equal number of lines, unless the `-j` flag
-    is used. The `-j` flag joins computation of the WER by doing a global alignment.
+    The text files are expected to have an equal number of lines, unless the `-g` flag
+    is used. The `-g` flag joins computation of the WER by doing a global minimal
+    alignment.
 
     """
-    with ground_truth_file.open("r") as f:
-        gt_sentences = [ln.strip() for ln in f.readlines() if len(ln.strip()) > 1]
+    with reference_file.open("r") as f:
+        reference_sentences = [
+            ln.strip() for ln in f.readlines() if len(ln.strip()) > 1
+        ]
 
     with hypothesis_file.open("r") as f:
-        hp_sentences = [ln.strip() for ln in f.readlines() if len(ln.strip()) > 1]
+        hypothesis_sentences = [
+            ln.strip() for ln in f.readlines() if len(ln.strip()) > 1
+        ]
 
-    if not global_alignment and len(gt_sentences) != len(hp_sentences):
+    if not global_alignment and len(reference_sentences) != len(hypothesis_sentences):
         raise ValueError(
             f"Number of sentences does not match. "
-            f"{ground_truth_file} contains {len(gt_sentences)} lines."
-            f"{hypothesis_file} contains {len(hp_sentences)} lines."
+            f"{reference_file} contains {len(reference_sentences)} lines."
+            f"{hypothesis_file} contains {len(hypothesis_sentences)} lines."
         )
 
     if global_alignment and compute_cer:
         raise ValueError("--global and --cer are mutually exclusive.")
 
     if compute_cer:
-        out = jiwer.compute_measures(
-            gt_sentences,
-            hp_sentences,
-            truth_transform=jiwer.cer_default,
-            hypothesis_transform=jiwer.cer_default,
+        out = jiwer.process_characters(
+            reference_sentences,
+            hypothesis_sentences,
         )
-        out["cer"] = out["wer"]
-        del out["wer"]
     else:
         if global_alignment:
-            out = jiwer.compute_measures(
-                gt_sentences,
-                hp_sentences,
-                truth_transform=jiwer.wer_contiguous,
+            out = jiwer.process_words(
+                reference_sentences,
+                hypothesis_sentences,
+                reference_transform=jiwer.wer_contiguous,
                 hypothesis_transform=jiwer.wer_contiguous,
             )
         else:
-            out = jiwer.compute_measures(gt_sentences, hp_sentences)
+            out = jiwer.process_words(reference_sentences, hypothesis_sentences)
 
     if show_alignment:
-        print(jiwer.visualize_measures(out, visualize_cer=compute_cer))
+        print(jiwer.visualize_alignment(out, show_measures=True))
     else:
-        if "wer" in out:
-            print(out["wer"])
-        elif "cer" in out:
-            print(out["cer"])
+        if compute_cer:
+            print(out.cer)
+        else:
+            print(out.wer)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,47 @@
+site_name: "jiwer"
+site_description: "Documentation for jiwer."
+site_url: "https://nikvaessen.github.io/jiwer/"
+repo_url: "https://github.com/jitsi/jiwer"
+edit_uri: "blob/master/docs/"
+repo_name: "jitsi/jiwer"
+site_dir: "site"
+
+theme:
+  name: "material"
+  features:
+    - content.code.annotate
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+
+plugins:
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [jiwer]
+        options:
+          separate_signature: true
+          show_root_heading: true
+          show_root_members_full_path: false
+- search
+- gen-files:
+    scripts:
+    - docs/gen_ref_pages.py
+- literate-nav:
+    nav_file: SUMMARY.md
+- autorefs
+
+nav:
+  - jiwer: index.md
+  - Usage: usage.md
+  - Command-line interface: cli.md
+  - API reference: reference/
+
+markdown_extensions:
+  - toc:
+      permalink: "#"
+  - pymdownx.superfences
+
+watch:
+- docs
+- jiwer
