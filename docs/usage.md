@@ -58,7 +58,7 @@ error = output.cer
 
 # Alignment
 
-With `jiwer.process_words`, you also get the alignment between the ground-truth and hypothesis.
+With `jiwer.process_words`, you also get the alignment between the reference and hypothesis.
 
 We provide the alignment as a list of `(op, ref_start_idx, ref_idx_end, hyp_idx_start, hyp_idx_end)`, where `op` is one of
     `equal`, `replace`, `delete`, or `insert`.

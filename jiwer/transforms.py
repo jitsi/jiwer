@@ -105,7 +105,7 @@ class Compose(object):
        Note that each transformation needs to end with either `ReduceToListOfListOfWords`
        or `ReduceToListOfListOfChars`, depending on whether word error rate,
        or character error rate is desired.
-    +
+
        Example:
            ```python3
            import jiwer
