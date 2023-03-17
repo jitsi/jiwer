@@ -17,7 +17,8 @@
 #
 
 """
-The ...
+The core algorithm(s) for processing a one or more reference and hypothesis sentences
+so that measures can be computed and an alignment can be visualized.
 """
 
 from dataclasses import dataclass
@@ -29,7 +30,7 @@ import rapidfuzz
 
 from rapidfuzz.distance import Opcodes
 
-from jiwer import transform_blocks as tr
+from jiwer import transforms as tr
 from jiwer.transformations import wer_default, cer_default
 
 

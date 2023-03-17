@@ -110,7 +110,7 @@ class TestMeasuresContiguousSentencesTransform(unittest.TestCase):
 
         assert_dict_almost_equal(self, x_dict, y_dict, delta=1e-9)
 
-    def test_fail_on_empty_ground_truth(self):
+    def test_fail_on_empty_reference(self):
         for method in [
             jiwer.wer,
             jiwer.wil,
@@ -240,7 +240,7 @@ class TestMeasuresDefaultTransform(unittest.TestCase):
 
             self.assertRaises(ValueError, callback)
 
-    def test_fail_on_empty_ground_truth(self):
+    def test_fail_on_empty_reference(self):
         for method in [
             jiwer.process_words,
             jiwer.wer,

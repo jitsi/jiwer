@@ -23,7 +23,7 @@ It also implements some alternative transformations which might be
 useful in specific use cases.
 """
 
-import jiwer.transform_blocks as tr
+import jiwer.transforms as tr
 
 __all__ = [
     "wer_default",

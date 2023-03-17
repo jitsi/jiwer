@@ -1,7 +1,7 @@
 import unittest
 
-from jiwer.transform_blocks import *
-from jiwer.transform_blocks import ReduceToListOfListOfChars
+from jiwer.transforms import *
+from jiwer.transforms import ReduceToListOfListOfChars
 
 
 def _apply_test_on(self: unittest.TestCase, tr, cases):
