@@ -1,11 +1,13 @@
 import unittest
+import pytest
+
 import jiwer
 
-from .test_measures import assertDictAlmostEqual
+from .test_measures import assert_dict_almost_equal
 
 
 class TestCERInputMethods(unittest.TestCase):
-    def test_input_gt_string_h_string(self):
+    def test_input_ref_string_hyp_string(self):
         cases = [
             ("This is a test", "This is a test", 0 / 14),
             ("This is a test", "", 14 / 14),
@@ -14,7 +16,7 @@ class TestCERInputMethods(unittest.TestCase):
 
         self._apply_test_on(cases)
 
-    def test_input_gt_string_h_list(self):
+    def test_input_ref_string_hyp_list(self):
         cases = [
             ("This is a test", ["This is a test"], 0 / 14),
             ("This is a test", [""], 14 / 14),
@@ -23,7 +25,7 @@ class TestCERInputMethods(unittest.TestCase):
 
         self._apply_test_on(cases)
 
-    def test_input_gt_list_h_string(self):
+    def test_input_ref_list_hyp_string(self):
         cases = [
             (["This is a test"], "This is a test", 0 / 14),
             (["This is a test"], "", 14 / 14),
@@ -32,7 +34,7 @@ class TestCERInputMethods(unittest.TestCase):
 
         self._apply_test_on(cases)
 
-    def test_input_gt_list_h_list(self):
+    def test_input_ref_list_hyp_list(self):
         cases = [
             (["This is a test"], ["This is a test"], 0 / 14),
             (["This is a test"], [""], 14 / 14),
@@ -47,7 +49,7 @@ class TestCERInputMethods(unittest.TestCase):
 
         self.assertRaises(ValueError, callback)
 
-    def test_fail_on_empty_ground_truth(self):
+    def test_fail_on_empty_reference(self):
         def callback():
             jiwer.cer("", "test")
 
@@ -105,11 +107,13 @@ class TestCERInputMethods(unittest.TestCase):
         self._apply_test_on(cases)
 
     def test_return_dict(self):
-        return_dict = jiwer.cer(
-            ["i", "am i good"], ["i am", "y good"], return_dict=True
-        )
+        # TODO: remove unit test once deprecated
+        with pytest.deprecated_call():
+            return_dict = jiwer.cer(
+                ["i", "am i good"], ["i am", "y good"], return_dict=True
+            )
 
-        assertDictAlmostEqual(
+        assert_dict_almost_equal(
             self,
             return_dict,
             {
@@ -123,8 +127,8 @@ class TestCERInputMethods(unittest.TestCase):
         )
 
     def _apply_test_on(self, cases):
-        for gt, h, correct_cer in cases:
-            cer = jiwer.cer(truth=gt, hypothesis=h)
+        for ref, hyp, correct_cer in cases:
+            cer = jiwer.cer(reference=ref, hypothesis=hyp)
 
             self.assertTrue(isinstance(cer, float))
             if isinstance(cer, float):

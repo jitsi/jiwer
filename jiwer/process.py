@@ -188,9 +188,9 @@ def process_words(
     alignments = []
 
     for reference_sentence, hypothesis_sentence in zip(ref_as_chars, hyp_as_chars):
-        # Get the required edit operations to transform hypothesis into reference
+        # Get the required edit operations to transform reference into hypothesis
         edit_ops = rapidfuzz.distance.Levenshtein.editops(
-            hypothesis_sentence, reference_sentence
+            reference_sentence, hypothesis_sentence
         )
 
         # count the number of edits of each type
@@ -210,10 +210,10 @@ def process_words(
             [
                 AlignmentChunk(
                     type=op.tag,
-                    hyp_start_idx=op.src_start,
-                    hyp_end_idx=op.src_end,
-                    ref_start_idx=op.dest_start,
-                    ref_end_idx=op.dest_end,
+                    ref_start_idx=op.src_start,
+                    ref_end_idx=op.src_end,
+                    hyp_start_idx=op.dest_start,
+                    hyp_end_idx=op.dest_end,
                 )
                 for op in Opcodes.from_editops(edit_ops)
             ]

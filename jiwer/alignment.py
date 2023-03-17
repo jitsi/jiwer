@@ -112,21 +112,24 @@ def visualize_alignment(
         final_str += f"substitutions={output.substitutions} "
         final_str += f"deletions={output.deletions} "
         final_str += f"insertions={output.insertions} "
-        final_str += f"hits={output.hits}\t\n"
+        final_str += f"hits={output.hits}\n"
 
         if is_cer:
-            final_str += f"\ncer={output.cer*100:.2f}%"
+            final_str += f"\ncer={output.cer*100:.2f}%\n"
         else:
             final_str += f"\nmer={output.mer*100:.2f}%"
             final_str += f"\nwil={output.wil*100:.2f}%"
             final_str += f"\nwip={output.wip*100:.2f}%"
-            final_str += f"\nwer={output.wer*100:.2f}%"
+            final_str += f"\nwer={output.wer*100:.2f}%\n"
+    else:
+        # remove last newline
+        final_str = final_str[:-1]
 
     return final_str
 
 
 def _construct_comparison_string(
-    truth: List[str],
+    reference: List[str],
     hypothesis: List[str],
     ops: List[AlignmentChunk],
     include_space_seperator: bool = False,
@@ -137,25 +140,30 @@ def _construct_comparison_string(
 
     for op in ops:
         if op.type == "equal" or op.type == "substitute":
-            ref = truth[op.ref_start_idx : op.ref_end_idx]
+            ref = reference[op.ref_start_idx : op.ref_end_idx]
             hyp = hypothesis[op.hyp_start_idx : op.hyp_end_idx]
             op_char = " " if op.type == "equal" else "s"
         elif op.type == "delete":
-            ref = truth[op.ref_start_idx : op.ref_end_idx]
+            ref = reference[op.ref_start_idx : op.ref_end_idx]
             hyp = ["*" for _ in range(len(ref))]
             op_char = "d"
         elif op.type == "insert":
             hyp = hypothesis[op.hyp_start_idx : op.hyp_end_idx]
-            ref = ["#" for _ in range(len(hyp))]
+            ref = ["*" for _ in range(len(hyp))]
             op_char = "i"
         else:
             raise ValueError(f"unparseable op name={op.type}")
 
         op_chars = [op_char for _ in range(len(ref))]
-        for gt, hp, c in zip(ref, hyp, op_chars):
-            str_len = max(len(gt), len(hp), len(c))
+        for rf, hp, c in zip(ref, hyp, op_chars):
+            str_len = max(len(rf), len(hp), len(c))
 
-            ref_str += f"{gt:>{str_len}}"
+            if rf == "*":
+                rf = "".join(["*"] * str_len)
+            elif hp == "*":
+                hp = "".join(["*"] * str_len)
+
+            ref_str += f"{rf:>{str_len}}"
             hyp_str += f"{hp:>{str_len}}"
             op_str += f"{c.upper():>{str_len}}"
 
@@ -164,4 +172,8 @@ def _construct_comparison_string(
                 hyp_str += " "
                 op_str += " "
 
-    return f"{ref_str}\n{hyp_str}\n{op_str}\n"
+    if include_space_seperator:
+        # remove last space
+        return f"{ref_str[:-1]}\n{hyp_str[:-1]}\n{op_str[:-1]}\n"
+    else:
+        return f"{ref_str}\n{hyp_str}\n{op_str}\n"

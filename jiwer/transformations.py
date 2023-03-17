@@ -45,7 +45,11 @@ wer_default = tr.Compose(
     ]
 )
 """
-This is...
+This is the default transformation when using `proces_words`. Each input string will 
+have its leading and tailing white space removed. 
+Thereafter multiple spaces between words are also removed. 
+Then each string is transformed into a list with lists of strings, where each string
+is a single word.
 """
 
 wer_contiguous = tr.Compose(
@@ -57,7 +61,8 @@ wer_contiguous = tr.Compose(
     ]
 )
 """
-This is...
+This is can be used instead of `wer_default` when the number of reference and hypothesis 
+sentences differ. 
 """
 
 wer_standardize = tr.Compose(
@@ -66,11 +71,15 @@ wer_standardize = tr.Compose(
         tr.ExpandCommonEnglishContractions(),
         tr.RemoveKaldiNonWords(),
         tr.RemoveWhiteSpace(replace_by_space=True),
+        tr.RemoveMultipleSpaces(),
+        tr.Strip(),
         tr.ReduceToListOfListOfWords(),
     ]
 )
 """
-This is...
+This transform attempts to standardize the strings by setting all characters to lower
+case, expanding common contractions, and removing non-words. Then the default operations
+are applied.  
 """
 
 wer_standardize_contiguous = tr.Compose(
@@ -79,12 +88,15 @@ wer_standardize_contiguous = tr.Compose(
         tr.ExpandCommonEnglishContractions(),
         tr.RemoveKaldiNonWords(),
         tr.RemoveWhiteSpace(replace_by_space=True),
+        tr.RemoveMultipleSpaces(),
+        tr.Strip(),
         tr.ReduceToSingleSentence(),
         tr.ReduceToListOfListOfWords(),
     ]
 )
 """
-This is...
+This is the same as `wer_standize`, but this version can be usd when the number of
+reference and hypothesis sentences differ. 
 """
 
 ########################################################################################
@@ -98,7 +110,9 @@ cer_default = tr.Compose(
     ]
 )
 """
-This is...
+This is the default transformation when using `process_characters`. Each input string
+will  have its leading and tailing white space removed. Then each string is 
+transformed into a list with lists of strings, where each string is a single character. 
 """
 
 cer_contiguous = tr.Compose(
@@ -109,5 +123,6 @@ cer_contiguous = tr.Compose(
     ]
 )
 """
-This is...
+This can used instead of `cer_default` when the number of reference and hypothesis 
+sentences differ.
 """

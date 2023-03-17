@@ -417,6 +417,8 @@ def _deprecate_truth(
                 "keyword argument `truth` is deprecated, please use `reference`."
             )
         )
+        if reference is not None:
+            raise ValueError("cannot give `reference` and `truth`")
         reference = truth
     if truth_transform is not None:
         warnings.warn(
@@ -427,7 +429,7 @@ def _deprecate_truth(
         )
         reference_transform = truth_transform
 
-    if reference == () or hypothesis == ():
+    if reference is None or hypothesis is None:
         raise ValueError(
             "detected default values for reference or hypothesis arguments, "
             "please provide actual string or list of strings"
