@@ -57,7 +57,7 @@ def visualize_alignment(
             ["shoe order one", "quite bit of an even longest sentence here"],
         )
 
-        print(jiwer.visualize_measures(out))
+        print(jiwer.visualize_alignment(out))
         ```
         will produce this visualization:
         ```txt
