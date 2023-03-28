@@ -359,6 +359,50 @@ class TestMeasuresDefaultTransform(unittest.TestCase):
                 method(reference="only ref")
                 method(hypothesis="only hypothesis")
 
+    def test_deprecated_truth_and_ref_with_transform(self):
+        wer_transform = jiwer.Compose(
+            [
+                jiwer.ToLowerCase(),
+                jiwer.RemoveMultipleSpaces(),
+                jiwer.Strip(),
+                jiwer.ReduceToListOfListOfWords(),
+            ]
+        )
+        cer_transform = jiwer.Compose(
+            [
+                jiwer.ToLowerCase(),
+                jiwer.RemoveMultipleSpaces(),
+                jiwer.Strip(),
+                jiwer.ReduceToListOfListOfWords(),
+            ]
+        )
+
+        for key, method in [
+            ("wer", jiwer.wer),
+            ("mer", jiwer.mer),
+            ("wil", jiwer.wil),
+            ("wip", jiwer.wip),
+            ("cer", jiwer.cer),
+        ]:
+            if key == "cer":
+                tr = cer_transform
+            else:
+                tr = wer_transform
+
+            result = method(
+                truth="This is a short Sentence with a few Words with upper and Lower cases",
+                hypothesis="His is a short Sentence with a few Words with upper and Lower cases",
+                truth_transform=tr,
+                hypothesis_transform=tr,
+            )
+            result_same = method(
+                reference="This is a short Sentence with a few Words with upper and Lower cases",
+                hypothesis="His is a short Sentence with a few Words with upper and Lower cases",
+                reference_transform=tr,
+                hypothesis_transform=tr,
+            )
+            self.assertAlmostEqual(result, result_same)
+
 
 def test_deprecate_compute_measures():
     # TODO: remove once deprecated
