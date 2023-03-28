@@ -675,7 +675,7 @@ classes.</p>
     <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">cer_default</span><span class="p">,</span>
     <span class="n">return_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">truth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">truth_transform</span><span class="o">=</span><span class="n">cer_default</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -763,7 +763,7 @@ hypothesis sentences.</p>
           </td>
           <td><p>Deprecated, renamed to <code>reference_transform</code></p></td>
           <td>
-                <code>cer_default</code>
+                <code>None</code>
           </td>
         </tr>
     </tbody>
@@ -800,7 +800,8 @@ hypothesis sentences.</p>
 
       <details class="quote">
         <summary>Source code in <code>jiwer/measures.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">333</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">332</span>
+<span class="normal">333</span>
 <span class="normal">334</span>
 <span class="normal">335</span>
 <span class="normal">336</span>
@@ -869,15 +870,14 @@ hypothesis sentences.</p>
 <span class="normal">399</span>
 <span class="normal">400</span>
 <span class="normal">401</span>
-<span class="normal">402</span>
-<span class="normal">403</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">cer</span><span class="p">(</span>
+<span class="normal">402</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">cer</span><span class="p">(</span>
     <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">cer_default</span><span class="p">,</span>
     <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">cer_default</span><span class="p">,</span>
     <span class="n">return_dict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">cer_default</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the character error rate (CER) between one or more reference and</span>
@@ -913,12 +913,12 @@ hypothesis sentences.</p>
         <span class="n">reference_transform</span><span class="p">,</span>
         <span class="n">hypothesis_transform</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">=</span> <span class="n">_deprecate_truth</span><span class="p">(</span>
-        <span class="n">reference</span><span class="p">,</span>
-        <span class="n">hypothesis</span><span class="p">,</span>
-        <span class="n">truth</span><span class="p">,</span>
-        <span class="n">reference_transform</span><span class="p">,</span>
-        <span class="n">truth_transform</span><span class="p">,</span>
-        <span class="n">hypothesis_transform</span><span class="p">,</span>
+        <span class="n">reference</span><span class="o">=</span><span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="o">=</span><span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">truth</span><span class="o">=</span><span class="n">truth</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="o">=</span><span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">truth_transform</span><span class="o">=</span><span class="n">truth_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">hypothesis_transform</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">process_characters</span><span class="p">(</span>
@@ -1047,7 +1047,8 @@ This method will be removed on next release.</p>
 
       <details class="quote">
         <summary>Source code in <code>jiwer/measures.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">278</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">277</span>
+<span class="normal">278</span>
 <span class="normal">279</span>
 <span class="normal">280</span>
 <span class="normal">281</span>
@@ -1094,8 +1095,7 @@ This method will be removed on next release.</p>
 <span class="normal">322</span>
 <span class="normal">323</span>
 <span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">compute_measures</span><span class="p">(</span>
+<span class="normal">325</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">compute_measures</span><span class="p">(</span>
     <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
@@ -1165,7 +1165,7 @@ This method will be removed on next release.</p>
     <span class="n">reference_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
     <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
     <span class="n">truth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">truth_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -1242,7 +1242,7 @@ hypothesis sentences.</p>
           </td>
           <td><p>Deprecated, renamed to <code>reference_transform</code></p></td>
           <td>
-                <code>wer_default</code>
+                <code>None</code>
           </td>
         </tr>
     </tbody>
@@ -1277,7 +1277,8 @@ hypothesis sentences.</p>
 
       <details class="quote">
         <summary>Source code in <code>jiwer/measures.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">118</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
+<span class="normal">118</span>
 <span class="normal">119</span>
 <span class="normal">120</span>
 <span class="normal">121</span>
@@ -1325,14 +1326,13 @@ hypothesis sentences.</p>
 <span class="normal">163</span>
 <span class="normal">164</span>
 <span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mer</span><span class="p">(</span>
+<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mer</span><span class="p">(</span>
     <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
     <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
     <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the match error rate (MER) between one or more reference and</span>
@@ -1363,12 +1363,12 @@ hypothesis sentences.</p>
         <span class="n">reference_transform</span><span class="p">,</span>
         <span class="n">hypothesis_transform</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">=</span> <span class="n">_deprecate_truth</span><span class="p">(</span>
-        <span class="n">reference</span><span class="p">,</span>
-        <span class="n">hypothesis</span><span class="p">,</span>
-        <span class="n">truth</span><span class="p">,</span>
-        <span class="n">reference_transform</span><span class="p">,</span>
-        <span class="n">truth_transform</span><span class="p">,</span>
-        <span class="n">hypothesis_transform</span><span class="p">,</span>
+        <span class="n">reference</span><span class="o">=</span><span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="o">=</span><span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">truth</span><span class="o">=</span><span class="n">truth</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="o">=</span><span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">truth_transform</span><span class="o">=</span><span class="n">truth_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">hypothesis_transform</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">process_words</span><span class="p">(</span>
@@ -1397,7 +1397,7 @@ hypothesis sentences.</p>
     <span class="n">reference_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
     <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
     <span class="n">truth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">truth_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -1474,7 +1474,7 @@ hypothesis sentences.</p>
           </td>
           <td><p>Deprecated, renamed to <code>reference_transform</code></p></td>
           <td>
-                <code>wer_default</code>
+                <code>None</code>
           </td>
         </tr>
     </tbody>
@@ -1557,14 +1557,13 @@ hypothesis sentences.</p>
 <span class="normal">111</span>
 <span class="normal">112</span>
 <span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">wer</span><span class="p">(</span>
+<span class="normal">114</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">wer</span><span class="p">(</span>
     <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
     <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
     <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the word error rate (WER) between one or more reference and</span>
@@ -1595,18 +1594,17 @@ hypothesis sentences.</p>
         <span class="n">reference_transform</span><span class="p">,</span>
         <span class="n">hypothesis_transform</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">=</span> <span class="n">_deprecate_truth</span><span class="p">(</span>
-        <span class="n">reference</span><span class="p">,</span>
-        <span class="n">hypothesis</span><span class="p">,</span>
-        <span class="n">truth</span><span class="p">,</span>
-        <span class="n">reference_transform</span><span class="p">,</span>
-        <span class="n">truth_transform</span><span class="p">,</span>
-        <span class="n">hypothesis_transform</span><span class="p">,</span>
+        <span class="n">reference</span><span class="o">=</span><span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="o">=</span><span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">truth</span><span class="o">=</span><span class="n">truth</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="o">=</span><span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">truth_transform</span><span class="o">=</span><span class="n">truth_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">hypothesis_transform</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">process_words</span><span class="p">(</span>
         <span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">,</span> <span class="n">reference_transform</span><span class="p">,</span> <span class="n">hypothesis_transform</span>
     <span class="p">)</span>
-
     <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">wer</span>
 </code></pre></div></td></tr></table></div>
       </details>
@@ -1629,7 +1627,7 @@ hypothesis sentences.</p>
     <span class="n">reference_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
     <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
     <span class="n">truth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">truth_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -1706,7 +1704,7 @@ hypothesis sentences.</p>
           </td>
           <td><p>Deprecated, renamed to <code>reference_transform</code></p></td>
           <td>
-                <code>wer_default</code>
+                <code>None</code>
           </td>
         </tr>
     </tbody>
@@ -1741,7 +1739,8 @@ hypothesis sentences.</p>
 
       <details class="quote">
         <summary>Source code in <code>jiwer/measures.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">222</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">221</span>
+<span class="normal">222</span>
 <span class="normal">223</span>
 <span class="normal">224</span>
 <span class="normal">225</span>
@@ -1789,14 +1788,13 @@ hypothesis sentences.</p>
 <span class="normal">267</span>
 <span class="normal">268</span>
 <span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">wil</span><span class="p">(</span>
+<span class="normal">270</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">wil</span><span class="p">(</span>
     <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
     <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
     <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the word information lost (WIL) between one or more reference and</span>
@@ -1827,12 +1825,12 @@ hypothesis sentences.</p>
         <span class="n">reference_transform</span><span class="p">,</span>
         <span class="n">hypothesis_transform</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">=</span> <span class="n">_deprecate_truth</span><span class="p">(</span>
-        <span class="n">reference</span><span class="p">,</span>
-        <span class="n">hypothesis</span><span class="p">,</span>
-        <span class="n">truth</span><span class="p">,</span>
-        <span class="n">reference_transform</span><span class="p">,</span>
-        <span class="n">truth_transform</span><span class="p">,</span>
-        <span class="n">hypothesis_transform</span><span class="p">,</span>
+        <span class="n">reference</span><span class="o">=</span><span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="o">=</span><span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">truth</span><span class="o">=</span><span class="n">truth</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="o">=</span><span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">truth_transform</span><span class="o">=</span><span class="n">truth_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">hypothesis_transform</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">process_words</span><span class="p">(</span>
@@ -1861,7 +1859,7 @@ hypothesis sentences.</p>
     <span class="n">reference_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
     <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
     <span class="n">truth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">truth_transform</span><span class="o">=</span><span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -1938,7 +1936,7 @@ hypothesis sentences.</p>
           </td>
           <td><p>Deprecated, renamed to <code>reference_transform</code></p></td>
           <td>
-                <code>wer_default</code>
+                <code>None</code>
           </td>
         </tr>
     </tbody>
@@ -1973,7 +1971,8 @@ hypothesis sentences.</p>
 
       <details class="quote">
         <summary>Source code in <code>jiwer/measures.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">170</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">169</span>
+<span class="normal">170</span>
 <span class="normal">171</span>
 <span class="normal">172</span>
 <span class="normal">173</span>
@@ -2021,14 +2020,13 @@ hypothesis sentences.</p>
 <span class="normal">215</span>
 <span class="normal">216</span>
 <span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">wip</span><span class="p">(</span>
+<span class="normal">218</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">wip</span><span class="p">(</span>
     <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
     <span class="n">hypothesis_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
     <span class="n">truth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
+    <span class="n">truth_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the word information preserved (WIP) between one or more reference and</span>
@@ -2059,12 +2057,12 @@ hypothesis sentences.</p>
         <span class="n">reference_transform</span><span class="p">,</span>
         <span class="n">hypothesis_transform</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">=</span> <span class="n">_deprecate_truth</span><span class="p">(</span>
-        <span class="n">reference</span><span class="p">,</span>
-        <span class="n">hypothesis</span><span class="p">,</span>
-        <span class="n">truth</span><span class="p">,</span>
-        <span class="n">reference_transform</span><span class="p">,</span>
-        <span class="n">truth_transform</span><span class="p">,</span>
-        <span class="n">hypothesis_transform</span><span class="p">,</span>
+        <span class="n">reference</span><span class="o">=</span><span class="n">reference</span><span class="p">,</span>
+        <span class="n">hypothesis</span><span class="o">=</span><span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">truth</span><span class="o">=</span><span class="n">truth</span><span class="p">,</span>
+        <span class="n">reference_transform</span><span class="o">=</span><span class="n">reference_transform</span><span class="p">,</span>
+        <span class="n">truth_transform</span><span class="o">=</span><span class="n">truth_transform</span><span class="p">,</span>
+        <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">hypothesis_transform</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">process_words</span><span class="p">(</span>
