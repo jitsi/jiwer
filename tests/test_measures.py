@@ -373,7 +373,7 @@ class TestMeasuresDefaultTransform(unittest.TestCase):
                 jiwer.ToLowerCase(),
                 jiwer.RemoveMultipleSpaces(),
                 jiwer.Strip(),
-                jiwer.ReduceToListOfListOfWords(),
+                jiwer.ReduceToListOfListOfChars(),
             ]
         )
 
