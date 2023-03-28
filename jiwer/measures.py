@@ -69,7 +69,7 @@ def wer(
     reference_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     truth: Union[str, List[str]] = None,
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = None,
 ) -> float:
     """
     Calculate the word error rate (WER) between one or more reference and
@@ -100,18 +100,17 @@ def wer(
         reference_transform,
         hypothesis_transform,
     ) = _deprecate_truth(
-        reference,
-        hypothesis,
-        truth,
-        reference_transform,
-        truth_transform,
-        hypothesis_transform,
+        reference=reference,
+        hypothesis=hypothesis,
+        truth=truth,
+        reference_transform=reference_transform,
+        truth_transform=truth_transform,
+        hypothesis_transform=hypothesis_transform,
     )
 
     output = process_words(
         reference, hypothesis, reference_transform, hypothesis_transform
     )
-
     return output.wer
 
 
@@ -121,7 +120,7 @@ def mer(
     reference_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     truth: Union[str, List[str]] = None,
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = None,
 ) -> float:
     """
     Calculate the match error rate (MER) between one or more reference and
@@ -152,12 +151,12 @@ def mer(
         reference_transform,
         hypothesis_transform,
     ) = _deprecate_truth(
-        reference,
-        hypothesis,
-        truth,
-        reference_transform,
-        truth_transform,
-        hypothesis_transform,
+        reference=reference,
+        hypothesis=hypothesis,
+        truth=truth,
+        reference_transform=reference_transform,
+        truth_transform=truth_transform,
+        hypothesis_transform=hypothesis_transform,
     )
 
     output = process_words(
@@ -173,7 +172,7 @@ def wip(
     reference_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     truth: Union[str, List[str]] = None,
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = None,
 ) -> float:
     """
     Calculate the word information preserved (WIP) between one or more reference and
@@ -204,12 +203,12 @@ def wip(
         reference_transform,
         hypothesis_transform,
     ) = _deprecate_truth(
-        reference,
-        hypothesis,
-        truth,
-        reference_transform,
-        truth_transform,
-        hypothesis_transform,
+        reference=reference,
+        hypothesis=hypothesis,
+        truth=truth,
+        reference_transform=reference_transform,
+        truth_transform=truth_transform,
+        hypothesis_transform=hypothesis_transform,
     )
 
     output = process_words(
@@ -225,7 +224,7 @@ def wil(
     reference_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
     truth: Union[str, List[str]] = None,
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = wer_default,
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = None,
 ) -> float:
     """
     Calculate the word information lost (WIL) between one or more reference and
@@ -256,12 +255,12 @@ def wil(
         reference_transform,
         hypothesis_transform,
     ) = _deprecate_truth(
-        reference,
-        hypothesis,
-        truth,
-        reference_transform,
-        truth_transform,
-        hypothesis_transform,
+        reference=reference,
+        hypothesis=hypothesis,
+        truth=truth,
+        reference_transform=reference_transform,
+        truth_transform=truth_transform,
+        hypothesis_transform=hypothesis_transform,
     )
 
     output = process_words(
@@ -337,7 +336,7 @@ def cer(
     hypothesis_transform: Union[tr.Compose, tr.AbstractTransform] = cer_default,
     return_dict: bool = False,
     truth: Union[str, List[str]] = None,
-    truth_transform: Union[tr.Compose, tr.AbstractTransform] = cer_default,
+    truth_transform: Union[tr.Compose, tr.AbstractTransform] = None,
 ) -> Union[float, Dict[str, Any]]:
     """
     Calculate the character error rate (CER) between one or more reference and
@@ -373,12 +372,12 @@ def cer(
         reference_transform,
         hypothesis_transform,
     ) = _deprecate_truth(
-        reference,
-        hypothesis,
-        truth,
-        reference_transform,
-        truth_transform,
-        hypothesis_transform,
+        reference=reference,
+        hypothesis=hypothesis,
+        truth=truth,
+        reference_transform=reference_transform,
+        truth_transform=truth_transform,
+        hypothesis_transform=hypothesis_transform,
     )
 
     output = process_characters(
