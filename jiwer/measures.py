@@ -46,7 +46,6 @@ import warnings
 
 from typing import List, Union, Dict, Any
 
-import jiwer
 from jiwer import transforms as tr
 from jiwer.transformations import wer_default, cer_default
 from jiwer.process import process_words, process_characters
