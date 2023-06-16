@@ -30,7 +30,9 @@ __all__ = ["visualize_alignment"]
 
 
 def visualize_alignment(
-    output: Union[WordOutput, CharacterOutput], show_measures: bool = True
+    output: Union[WordOutput, CharacterOutput],
+    show_measures: bool = True,
+    skip_correct: bool = True,
 ) -> str:
     """
     Visualize the output of [jiwer.process_words][process.process_words] and
@@ -43,6 +45,7 @@ def visualize_alignment(
         output: The processed output of reference and hypothesis pair(s).
         show_measures: If enabled, the visualization will include measures like the WER
                        or CER
+        skip_correct: If enabled, the visualization will exclude correct reference and hypothesis pairs
 
     Returns:
         (str): The visualization as a string
@@ -101,6 +104,9 @@ def visualize_alignment(
 
     final_str = ""
     for idx, (gt, hp, chunks) in enumerate(zip(references, hypothesis, alignment)):
+        if skip_correct and len(chunks) == 1 and chunks[0].type == "equal":
+            continue
+
         final_str += f"sentence {idx+1}\n"
         final_str += _construct_comparison_string(
             gt, hp, chunks, include_space_seperator=not is_cer
