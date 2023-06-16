@@ -103,6 +103,26 @@ class TestAlignmentVisualizationWords(unittest.TestCase):
         )
         self.assertEqual(alignment, correct_alignment)
 
+    def test_skip_correct(self):
+        correct_alignment = (
+            "sentence 2\n"
+            "REF: one\n"
+            "HYP:   1\n"
+            "       S\n"
+            "\n"
+            "sentence 3\n"
+            "REF: two\n"
+            "HYP:   2\n"
+            "       S\n"
+        )
+        alignment = jiwer.visualize_alignment(
+            jiwer.process_words(
+                ["perfect", "one", "two", "three"], ["perfect", "1", "2", "three"]
+            ),
+            show_measures=False,
+        )
+        self.assertEqual(alignment, correct_alignment)
+
 
 class TestAlignmentVisualizationCharacters(unittest.TestCase):
     def test_insertion(self):
