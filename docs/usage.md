@@ -60,8 +60,8 @@ error = output.cer
 
 With `jiwer.process_words`, you also get the alignment between the reference and hypothesis.
 
-We provide the alignment as a list of `(op, ref_start_idx, ref_idx_end, hyp_idx_start, hyp_idx_end)`, where `op` is one of
-    `equal`, `replace`, `delete`, or `insert`.
+We provide the alignment as a list of `AlignmentChunk` objects with attributes `type, ref_start_idx, ref_end_idx, hyp_start_idx, hyp_end_idx`, where `type` is one of
+    `equal`, `substitute`, `delete`, or `insert`.
 
 This looks like the following:
 
