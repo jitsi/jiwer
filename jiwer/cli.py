@@ -96,19 +96,28 @@ def cli(
 
     if not global_alignment and len(reference_sentences) != len(hypothesis_sentences):
         raise ValueError(
-            f"Number of sentences does not match. "
-            f"{reference_file} contains {len(reference_sentences)} lines."
-            f"{hypothesis_file} contains {len(hypothesis_sentences)} lines."
+            f"Number of reference sentences "
+            f"({len(reference_sentences)} in '{reference_file}') "
+            f"and hypothesis sentences "
+            f"({len(hypothesis_sentences)} in '{hypothesis_file}') "
+            f"do not match! "
+            f"Use the `--global` flag to compute the measures over a global alignment "
+            f"of the reference and hypothesis sentences."
         )
-
-    if global_alignment and compute_cer:
-        raise ValueError("--global and --cer are mutually exclusive.")
 
     if compute_cer:
-        out = jiwer.process_characters(
-            reference_sentences,
-            hypothesis_sentences,
-        )
+        if global_alignment:
+            out = jiwer.process_characters(
+                reference_sentences,
+                hypothesis_sentences,
+                reference_transform=jiwer.cer_contiguous,
+                hypothesis_transform=jiwer.cer_contiguous,
+            )
+        else:
+            out = jiwer.process_characters(
+                reference_sentences,
+                hypothesis_sentences,
+            )
     else:
         if global_alignment:
             out = jiwer.process_words(
@@ -121,7 +130,7 @@ def cli(
             out = jiwer.process_words(reference_sentences, hypothesis_sentences)
 
     if show_alignment:
-        print(jiwer.visualize_alignment(out, show_measures=True))
+        print(jiwer.visualize_alignment(out, show_measures=True), end="")
     else:
         if compute_cer:
             print(out.cer)
