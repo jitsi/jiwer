@@ -33,6 +33,7 @@ def visualize_alignment(
     output: Union[WordOutput, CharacterOutput],
     show_measures: bool = True,
     skip_correct: bool = True,
+    max_chars: int = None,
 ) -> str:
     """
     Visualize the output of [jiwer.process_words][process.process_words] and
@@ -46,6 +47,7 @@ def visualize_alignment(
         show_measures: If enabled, the visualization will include measures like the WER
                        or CER
         skip_correct: If enabled, the visualization will exclude correct reference and hypothesis pairs
+        max_chars: If set split the aligned strings into multiple lines if they exceed this length
 
     Returns:
         (str): The visualization as a string
@@ -109,7 +111,7 @@ def visualize_alignment(
 
         final_str += f"sentence {idx+1}\n"
         final_str += _construct_comparison_string(
-            gt, hp, chunks, include_space_seperator=not is_cer
+            gt, hp, chunks, include_space_seperator=not is_cer, max_chars=max_chars,
         )
         final_str += "\n"
 
@@ -139,10 +141,12 @@ def _construct_comparison_string(
     hypothesis: List[str],
     ops: List[AlignmentChunk],
     include_space_seperator: bool = False,
+    max_chars: int = None,
 ) -> str:
     ref_str = "REF: "
     hyp_str = "HYP: "
     op_str = "     "
+    agg_str = ""  # aggregate string for max_chars split
 
     for op in ops:
         if op.type == "equal" or op.type == "substitute":
@@ -163,6 +167,18 @@ def _construct_comparison_string(
         op_chars = [op_char for _ in range(len(ref))]
         for rf, hp, c in zip(ref, hyp, op_chars):
             str_len = max(len(rf), len(hp), len(c))
+            if max_chars is not None:
+                if len(ref_str) + str_len > max_chars:
+                    # aggregate the strings
+                    if include_space_seperator:
+                        agg_str = f"{ref_str[:-1]}\n{hyp_str[:-1]}\n{op_str[:-1]}\n\n"
+                    else:
+                        agg_str = f"{ref_str}\n{hyp_str}\n{op_str}\n\n"
+
+                    # reset the strings
+                    ref_str = "REF: "
+                    hyp_str = "HYP: "
+                    op_str = "     "
 
             if rf == "*":
                 rf = "".join(["*"] * str_len)
@@ -180,6 +196,6 @@ def _construct_comparison_string(
 
     if include_space_seperator:
         # remove last space
-        return f"{ref_str[:-1]}\n{hyp_str[:-1]}\n{op_str[:-1]}\n"
+        return agg_str + f"{ref_str[:-1]}\n{hyp_str[:-1]}\n{op_str[:-1]}\n"
     else:
-        return f"{ref_str}\n{hyp_str}\n{op_str}\n"
+        return agg_str + f"{ref_str}\n{hyp_str}\n{op_str}\n"
