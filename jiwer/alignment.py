@@ -171,9 +171,9 @@ def _construct_comparison_string(
                 if len(ref_str) + str_len > max_chars:
                     # aggregate the strings
                     if include_space_seperator:
-                        agg_str = f"{ref_str[:-1]}\n{hyp_str[:-1]}\n{op_str[:-1]}\n\n"
+                        agg_str += f"{ref_str[:-1]}\n{hyp_str[:-1]}\n{op_str[:-1]}\n\n"
                     else:
-                        agg_str = f"{ref_str}\n{hyp_str}\n{op_str}\n\n"
+                        agg_str += f"{ref_str}\n{hyp_str}\n{op_str}\n\n"
 
                     # reset the strings
                     ref_str = "REF: "
