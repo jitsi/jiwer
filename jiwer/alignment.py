@@ -98,6 +98,19 @@ def visualize_alignment(
         HYP: quite * bit of an even longest sentence here
                    D         I    I       S             I
         ```
+
+        When setting `max_chars=80`, the output will be split into multiple lines:
+
+        ```txt
+        sentence 1
+        REF: This is a very  long sentence that is *** much longer than the previous one
+        HYP: This is a very loong sentence that is not much longer than the previous one
+                                S                    I
+
+        REF: or the one before that
+        HYP: or *** one before that
+                  D
+        ```
     """
     references = output.references
     hypothesis = output.hypotheses
