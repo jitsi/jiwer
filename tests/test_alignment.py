@@ -4,7 +4,12 @@ import jiwer
 
 class TestAlignmentVisualizationWords(unittest.TestCase):
     def test_insertion(self):
-        correct_alignment = "sentence 1\n" "REF: this is a ****\n" "HYP: this is a test\n" "                  I\n"
+        correct_alignment = (
+            "sentence 1\n"
+            "REF: this is a ****\n"
+            "HYP: this is a test\n"
+            "                  I\n"
+        )
         alignment = jiwer.visualize_alignment(
             jiwer.process_words("this is a", "this is a test"), show_measures=False
         )
@@ -13,7 +18,12 @@ class TestAlignmentVisualizationWords(unittest.TestCase):
         pass
 
     def test_deletion(self):
-        correct_alignment = "sentence 1\n" "REF: this is a test\n" "HYP: this is a ****\n" "                  D\n"
+        correct_alignment = (
+            "sentence 1\n"
+            "REF: this is a test\n"
+            "HYP: this is a ****\n"
+            "                  D\n"
+        )
         alignment = jiwer.visualize_alignment(
             jiwer.process_words("this is a test", "this is a"), show_measures=False
         )
@@ -21,7 +31,10 @@ class TestAlignmentVisualizationWords(unittest.TestCase):
 
     def test_substitution(self):
         correct_alignment = (
-            "sentence 1\n" "REF: this  is a test\n" "HYP: this was a test\n" "            S       \n"
+            "sentence 1\n"
+            "REF: this  is a test\n"
+            "HYP: this was a test\n"
+            "            S       \n"
         )
         alignment = jiwer.visualize_alignment(
             jiwer.process_words("this is a test", "this was a test"),
@@ -58,14 +71,18 @@ class TestAlignmentVisualizationWords(unittest.TestCase):
             "wer=88.89%\n"
         )
         alignment = jiwer.visualize_alignment(
-            jiwer.process_words("this test will  have a high word error rate", "no it will not"),
+            jiwer.process_words(
+                "this test will  have a high word error rate", "no it will not"
+            ),
             show_measures=True,
         )
         self.assertEqual(alignment, correct_alignment)
 
     def test_empty_hypothesis(self):
         correct_alignment = "sentence 1\n" "REF: empty\n" "HYP: *****\n" "         D\n"
-        alignment = jiwer.visualize_alignment(jiwer.process_words("empty", ""), show_measures=False)
+        alignment = jiwer.visualize_alignment(
+            jiwer.process_words("empty", ""), show_measures=False
+        )
         self.assertEqual(alignment, correct_alignment)
 
     def test_multiple_sentences(self):
@@ -99,7 +116,9 @@ class TestAlignmentVisualizationWords(unittest.TestCase):
             "       S\n"
         )
         alignment = jiwer.visualize_alignment(
-            jiwer.process_words(["perfect", "one", "two", "three"], ["perfect", "1", "2", "three"]),
+            jiwer.process_words(
+                ["perfect", "one", "two", "three"], ["perfect", "1", "2", "three"]
+            ),
             show_measures=False,
         )
         self.assertEqual(alignment, correct_alignment)
@@ -126,7 +145,12 @@ class TestAlignmentVisualizationWords(unittest.TestCase):
 
 class TestAlignmentVisualizationCharacters(unittest.TestCase):
     def test_insertion(self):
-        correct_alignment = "sentence 1\n" "REF: this is a*****\n" "HYP: this is a test\n" "              IIIII\n"
+        correct_alignment = (
+            "sentence 1\n"
+            "REF: this is a*****\n"
+            "HYP: this is a test\n"
+            "              IIIII\n"
+        )
         alignment = jiwer.visualize_alignment(
             jiwer.process_characters("this is a", "this is a test"), show_measures=False
         )
@@ -135,14 +159,24 @@ class TestAlignmentVisualizationCharacters(unittest.TestCase):
         pass
 
     def test_deletion(self):
-        correct_alignment = "sentence 1\n" "REF: this is a test\n" "HYP: this is a*****\n" "              DDDDD\n"
+        correct_alignment = (
+            "sentence 1\n"
+            "REF: this is a test\n"
+            "HYP: this is a*****\n"
+            "              DDDDD\n"
+        )
         alignment = jiwer.visualize_alignment(
             jiwer.process_characters("this is a test", "this is a"), show_measures=False
         )
         self.assertEqual(alignment, correct_alignment)
 
     def test_substitution(self):
-        correct_alignment = "sentence 1\n" "REF: this is a test\n" "HYP: this iz a test\n" "           S       \n"
+        correct_alignment = (
+            "sentence 1\n"
+            "REF: this is a test\n"
+            "HYP: this iz a test\n"
+            "           S       \n"
+        )
         alignment = jiwer.visualize_alignment(
             jiwer.process_characters("this is a test", "this iz a test"),
             show_measures=False,
@@ -157,7 +191,9 @@ class TestAlignmentVisualizationCharacters(unittest.TestCase):
             "          IS    S  IS SSD SDDD\n"
         )
         alignment = jiwer.visualize_alignment(
-            jiwer.process_characters("this is a test of skill", "this was a messy test"),
+            jiwer.process_characters(
+                "this is a test of skill", "this was a messy test"
+            ),
             show_measures=False,
         )
         self.assertEqual(alignment, correct_alignment)
@@ -175,14 +211,18 @@ class TestAlignmentVisualizationCharacters(unittest.TestCase):
             "cer=76.74%\n"
         )
         alignment = jiwer.visualize_alignment(
-            jiwer.process_characters("this test will  have a high word error rate", "no it will not"),
+            jiwer.process_characters(
+                "this test will  have a high word error rate", "no it will not"
+            ),
             show_measures=True,
         )
         self.assertEqual(alignment, correct_alignment)
 
     def test_empty_hypothesis(self):
         correct_alignment = "sentence 1\n" "REF: empty\n" "HYP: *****\n" "     DDDDD\n"
-        alignment = jiwer.visualize_alignment(jiwer.process_characters("empty", ""), show_measures=False)
+        alignment = jiwer.visualize_alignment(
+            jiwer.process_characters("empty", ""), show_measures=False
+        )
         self.assertEqual(alignment, correct_alignment)
 
     def test_multiple_sentences(self):
