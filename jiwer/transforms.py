@@ -39,7 +39,7 @@ import re
 import string
 import unicodedata
 
-from typing import Union, List, Mapping
+from typing import Iterable, Union, List, Mapping
 
 
 __all__ = [
@@ -133,7 +133,7 @@ class Compose(object):
 
 
 class BaseRemoveTransform(AbstractTransform):
-    def __init__(self, tokens_to_remove: List[str], replace_token=""):
+    def __init__(self, tokens_to_remove: Iterable[str], replace_token=""):
         self.tokens_to_remove = tokens_to_remove
         self.replace_token = replace_token
 
@@ -267,7 +267,7 @@ class ReduceToSingleSentence(AbstractTransform):
 
 
 class SubstituteRegexes(AbstractTransform):
-    """
+    r"""
     Transform strings by substituting substrings matching regex expressions into
     another substring.
 
