@@ -123,6 +123,25 @@ class TestAlignmentVisualizationWords(unittest.TestCase):
         )
         self.assertEqual(alignment, correct_alignment)
 
+    def test_get_alignment_words(self):
+        reference = ["this is a test of alignment words", "this is a test of the alignment words"]
+        hypothesis = ["this is a test of alignment words", "this is also a test of alignment wordz!"]
+        output = jiwer.process_words(reference, hypothesis)
+
+        reference_words, hypothesis_words, operation_chars = jiwer.get_alignment_words(
+            output.references[0], output.hypotheses[0], output.alignments[0]
+        )
+        self.assertEqual(reference_words, ["this", "is", "a", "test", "of", "alignment", "words"])
+        self.assertEqual(hypothesis_words, ["this", "is", "a", "test", "of", "alignment", "words"])
+        self.assertEqual(operation_chars, [" "] * len(reference_words))
+
+        reference_words, hypothesis_words, operation_chars = jiwer.get_alignment_words(
+            output.references[1], output.hypotheses[1], output.alignments[1]
+        )
+        self.assertEqual(reference_words, ["this", "is", "****", "a", "test", "of", "the", "alignment", "words"])
+        self.assertEqual(hypothesis_words, ["this", "is", "also", "a", "test", "of", "***", "alignment", "wordz!"])
+        self.assertEqual(operation_chars, [" ", " ", "I", " ", " ", " ", "D", " ", "S"])
+
 
 class TestAlignmentVisualizationCharacters(unittest.TestCase):
     def test_insertion(self):

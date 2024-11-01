@@ -26,7 +26,7 @@ from typing import Dict, List, Tuple, Union
 
 from jiwer.process import CharacterOutput, WordOutput, AlignmentChunk
 
-__all__ = ["visualize_alignment"]
+__all__ = ["visualize_alignment", "get_alignment_words"]
 
 
 def visualize_alignment(
@@ -108,9 +108,7 @@ def visualize_alignment(
             continue
 
         final_str += f"sentence {idx+1}\n"
-        final_str += _construct_comparison_string(
-            gt, hp, chunks, include_space_seperator=not is_cer
-        )
+        final_str += _construct_comparison_string(gt, hp, chunks, include_space_separator=not is_cer)
         final_str += "\n"
 
     if show_measures:
@@ -138,48 +136,73 @@ def _construct_comparison_string(
     reference: List[str],
     hypothesis: List[str],
     ops: List[AlignmentChunk],
-    include_space_seperator: bool = False,
+    include_space_separator: bool = False,
 ) -> str:
-    ref_str = "REF: "
-    hyp_str = "HYP: "
-    op_str = "     "
+    reference_str = "REF: "
+    hypothesis_str = "HYP: "
+    operation_str = "     "
 
-    for op in ops:
-        if op.type == "equal" or op.type == "substitute":
-            ref = reference[op.ref_start_idx : op.ref_end_idx]
-            hyp = hypothesis[op.hyp_start_idx : op.hyp_end_idx]
-            op_char = " " if op.type == "equal" else "s"
-        elif op.type == "delete":
-            ref = reference[op.ref_start_idx : op.ref_end_idx]
-            hyp = ["*" for _ in range(len(ref))]
-            op_char = "d"
-        elif op.type == "insert":
-            hyp = hypothesis[op.hyp_start_idx : op.hyp_end_idx]
-            ref = ["*" for _ in range(len(hyp))]
-            op_char = "i"
-        else:
-            raise ValueError(f"unparseable op name={op.type}")
+    reference_words, hypothesis_words, operation_chars = get_alignment_words(reference, hypothesis, ops)
 
-        op_chars = [op_char for _ in range(len(ref))]
-        for rf, hp, c in zip(ref, hyp, op_chars):
-            str_len = max(len(rf), len(hp), len(c))
+    for reference_word, hypothesis_word, operation_char in zip(reference_words, hypothesis_words, operation_chars):
+        word_len = max(len(reference_word), len(hypothesis_word), len(operation_char))
 
-            if rf == "*":
-                rf = "".join(["*"] * str_len)
-            elif hp == "*":
-                hp = "".join(["*"] * str_len)
+        reference_str += f"{reference_word:>{word_len}}"
+        hypothesis_str += f"{hypothesis_word:>{word_len}}"
+        operation_str += f"{operation_char:>{word_len}}"
 
-            ref_str += f"{rf:>{str_len}}"
-            hyp_str += f"{hp:>{str_len}}"
-            op_str += f"{c.upper():>{str_len}}"
+        if include_space_separator:
+            reference_str += " "
+            hypothesis_str += " "
+            operation_str += " "
 
-            if include_space_seperator:
-                ref_str += " "
-                hyp_str += " "
-                op_str += " "
-
-    if include_space_seperator:
+    if include_space_separator:
         # remove last space
-        return f"{ref_str[:-1]}\n{hyp_str[:-1]}\n{op_str[:-1]}\n"
+        return f"{reference_str[:-1]}\n{hypothesis_str[:-1]}\n{operation_str[:-1]}\n"
     else:
-        return f"{ref_str}\n{hyp_str}\n{op_str}\n"
+        return f"{reference_str}\n{hypothesis_str}\n{operation_str}\n"
+
+
+def get_alignment_words(
+    reference: List[str], hypothesis: List[str], operations: List[AlignmentChunk]
+) -> Tuple[List[str], List[str], List[str]]:
+    """Generate aligned words and operation characters based on reference, hypothesis, and alignment operations.
+
+    Args:
+        reference (List[str]): The list of reference words.
+        hypothesis (List[str]): The list of hypothesis words.
+        operations (List[AlignmentChunk]): The list of alignment operations.
+
+    Returns:
+        Tuple[List[str], List[str], List[str]]: A tuple containing three lists:
+            - reference_words: The aligned reference words.
+            - hypothesis_words: The aligned hypothesis words.
+            - operation_chars: The operation characters for each alignment (' ' for equal, 'S' for substitute,
+                               'D' for delete, 'I' for insert).
+
+    Raises:
+        ValueError: If an unparsable operation type is encountered.
+    """
+    reference_words, hypothesis_words, operation_chars = [], [], []
+
+    for operation in operations:
+        if operation.type == "equal" or operation.type == "substitute":
+            ref_chunk_words = reference[operation.ref_start_idx : operation.ref_end_idx]
+            hyp_chunk_words = hypothesis[operation.hyp_start_idx : operation.hyp_end_idx]
+            operation_char = " " if operation.type == "equal" else "S"
+        elif operation.type == "delete":
+            ref_chunk_words = reference[operation.ref_start_idx : operation.ref_end_idx]
+            hyp_chunk_words = ["*" * len(word) for word in ref_chunk_words]
+            operation_char = "D"
+        elif operation.type == "insert":
+            hyp_chunk_words = hypothesis[operation.hyp_start_idx : operation.hyp_end_idx]
+            ref_chunk_words = ["*" * len(word) for word in hyp_chunk_words]
+            operation_char = "I"
+        else:
+            raise ValueError(f"Unparsable operation: {operation.type}")
+
+        operation_chars.extend([operation_char] * len(ref_chunk_words))
+        reference_words.extend(ref_chunk_words)
+        hypothesis_words.extend(hyp_chunk_words)
+
+    return reference_words, hypothesis_words, operation_chars
