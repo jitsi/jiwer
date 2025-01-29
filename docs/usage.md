@@ -108,3 +108,20 @@ wer=88.89%
 ```
 
 Note that it also possible to visualize the character-level alignment, simply use the output of `jiwer.process_characters()` instead. 
+
+# Known Limitations
+
+## Vocabulary Size Limit
+
+JiWER internally maps each unique word to a Unicode character for efficient computation. Due to this implementation detail, there is a limit on the total number of unique words that can be processed:
+
+- Maximum unique words: 1,114,111 (0x10FFFF in hex)
+- This limit applies to the combined unique words from both reference and hypothesis texts
+
+If your texts exceed this limit, you'll receive a ValueError. To work around this limitation:
+
+1. Consider splitting your evaluation into smaller batches
+2. Remove unnecessary vocabulary if possible (e.g., by pre-processing)
+3. Use case-folding or other normalization techniques if appropriate for your use case
+
+Note that this limit is typically only encountered with very large texts or when processing entire corpora at once.

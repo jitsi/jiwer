@@ -149,6 +149,12 @@ def process_words(
 
     Returns:
         (WordOutput): The processed reference and hypothesis sentences
+
+    Raises:
+        ValueError: If one or more references are empty strings
+        ValueError: If after applying transforms, reference and hypothesis lengths don't match
+        ValueError: If the combined vocabulary size exceeds 0x10FFFF (1,114,111) unique words,
+                  which is the maximum Unicode code point that can be used for internal word mapping
     """
     # validate input type
     if isinstance(reference, str):
@@ -386,6 +392,23 @@ def _is_list_of_list_of_strings(x: Any, require_non_empty_lists: bool):
 
 
 def _word2char(reference: List[List[str]], hypothesis: List[List[str]]):
+    """
+    Maps each unique word in the reference and hypothesis sentences to a unique Unicode
+    character for efficient Levenshtein distance calculation.
+
+    Args:
+        reference: List of reference sentences, where each sentence is a list of words
+        hypothesis: List of hypothesis sentences, where each sentence is a list of words
+
+    Returns:
+        Tuple[List[str], List[str]]: The reference and hypothesis sentences with words
+        mapped to unique characters
+
+    Raises:
+        ValueError: If empty strings are found in the vocabulary
+        ValueError: If the combined vocabulary size exceeds 0x10FFFF (1,114,111) unique words,
+                  which is the maximum Unicode code point that can be used for word mapping
+    """
     # tokenize each word into an integer
     vocabulary = set(chain(*reference, *hypothesis))
 
@@ -393,6 +416,13 @@ def _word2char(reference: List[List[str]], hypothesis: List[List[str]]):
         raise ValueError(
             "Empty strings cannot be a word. "
             "Please ensure that the given transform removes empty strings."
+        )
+
+    # Check vocabulary size before mapping
+    if len(vocabulary) > 0x10FFFF:
+        raise ValueError(
+            f"Vocabulary size {len(vocabulary)} exceeds maximum allowed size of {0x10FFFF}. "
+            "This is a limitation of the Unicode code point range used for word mapping."
         )
 
     word2char = dict(zip(vocabulary, range(len(vocabulary))))
