@@ -178,9 +178,9 @@ def process_words(
             f"{len(hyp_transformed)} hypothesis sentences."
         )
 
-    # Change each word into a unique character in order to compute
+    # Map each word into a unique integer in order to compute
     # word-level levenshtein distance
-    ref_as_chars, hyp_as_chars = _word2char(ref_transformed, hyp_transformed)
+    ref_as_ints, hyp_as_ints = _word2int(ref_transformed, hyp_transformed)
 
     # keep track of total hits, substitutions, deletions and insertions
     # across all input sentences
@@ -192,7 +192,7 @@ def process_words(
     # anf finally, keep track of the alignment between each reference and hypothesis
     alignments = []
 
-    for reference_sentence, hypothesis_sentence in zip(ref_as_chars, hyp_as_chars):
+    for reference_sentence, hypothesis_sentence in zip(ref_as_ints, hyp_as_ints):
         # Get the opcodes directly
         opcodes = rapidfuzz.distance.Levenshtein.opcodes(
             reference_sentence,
@@ -398,7 +398,7 @@ def _is_list_of_list_of_strings(x: Any, require_non_empty_lists: bool):
     return True
 
 
-def _word2char(reference: List[List[str]], hypothesis: List[List[str]]):
+def _word2int(reference: List[List[str]], hypothesis: List[List[str]]):
     """
     Maps each unique word in the reference and hypothesis sentences to a unique integer
     for Levenshtein distance calculation.
