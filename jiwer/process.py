@@ -195,8 +195,7 @@ def process_words(
     for reference_sentence, hypothesis_sentence in zip(ref_as_ints, hyp_as_ints):
         # Get the opcodes directly
         opcodes = rapidfuzz.distance.Levenshtein.opcodes(
-            reference_sentence,
-            hypothesis_sentence
+            reference_sentence, hypothesis_sentence
         )
 
         subs = dels = ins = hits = 0
@@ -216,13 +215,13 @@ def process_words(
 
             # Update counts
             if tag == "equal":
-                hits += (i2 - i1)
+                hits += i2 - i1
             elif tag == "replace":
-                subs += (i2 - i1)
+                subs += i2 - i1
             elif tag == "delete":
-                dels += (i2 - i1)
+                dels += i2 - i1
             elif tag == "insert":
-                ins += (j2 - j1)
+                ins += j2 - j1
 
         # Update global counts
         num_hits += hits
@@ -425,11 +424,7 @@ def _word2int(reference: List[List[str]], hypothesis: List[List[str]]):
 
     word2int = dict(zip(vocabulary, range(len(vocabulary))))
 
-    reference_ints = [
-        [word2int[w] for w in sentence] for sentence in reference
-    ]
-    hypothesis_ints = [
-        [word2int[w] for w in sentence] for sentence in hypothesis
-    ]
+    reference_ints = [[word2int[w] for w in sentence] for sentence in reference]
+    hypothesis_ints = [[word2int[w] for w in sentence] for sentence in hypothesis]
 
     return reference_ints, hypothesis_ints
