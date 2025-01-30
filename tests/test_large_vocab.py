@@ -9,46 +9,48 @@ def test_basic_word_mapping():
 
     result = process_words(reference=reference, hypothesis=hypothesis)
     assert isinstance(result.wer, float)
-    assert result.wer == 0.5  # Should detect exactly 50% difference
-    assert result.hits == 50  # Should have 50 matching words
+    assert result.wer == 0.5  # 50% of words are different
+    assert result.hits == 50  # 50 "same" matches
 
 def test_vocabulary_size_limit():
-    """Test that vocabularies exceeding Unicode limit are caught."""
-    # Create a vocabulary that would exceed chr() limit (0x10FFFF)
-    # We need the total unique words to be > 0x10FFFF
-    # Using one more than the limit to trigger the error
-    limit = 0x10FFFF
+    """Test processing with very large vocabulary (no size limit now)."""
+    # Create a large vocabulary that would have exceeded the old chr() limit
+    vocab_size = 0x110000  # 1,114,112 unique words
 
-    # Create two lists with no overlap, each half the limit + 1
-    # This ensures total unique words will be limit + 2
-    half = (limit // 2) + 1
-    reference = [f"ref{i}" for i in range(half)]
-    hypothesis = [f"hyp{i}" for i in range(half)]  # All different from reference
+    # Split into reference and hypothesis
+    reference = [f"word{i}" for i in range(vocab_size//2)]
+    hypothesis = [f"word{i}" for i in range(vocab_size//2, vocab_size)]
 
-    with pytest.raises(ValueError) as exc_info:
-        process_words(reference=reference, hypothesis=hypothesis)
+    try:
+        result = process_words(reference=reference, hypothesis=hypothesis)
+        assert isinstance(result.wer, float)
+        assert result.wer == 1.0  # All words are different
+    except Exception as e:
+        pytest.fail(f"Large vocabulary processing failed: {e}")
 
-    assert "exceeds maximum allowed size" in str(exc_info.value)
-    assert str(0x10FFFF) in str(exc_info.value)
+def test_wer_large_vocabulary():
+    """Test WER calculation with very large vocabulary."""
+    vocab_size = 0x110000  # 1,114,112 unique words, above the chr() limit
 
-def test_at_unicode_limit():
-    """Test behavior exactly at the Unicode limit."""
-    # Create exactly 0x10FFFF unique words total between ref and hyp
-    limit = 0x10FFFF
-    half = limit // 2
+    reference = " ".join(f"word{i}" for i in range(vocab_size//2))
+    hypothesis = " ".join(f"word{i}" for i in range(vocab_size//2, vocab_size))
 
-    # Split words between ref and hyp with no overlap
-    # Total unique words will be exactly at the limit
-    reference = [f"ref{i}" for i in range(half)]
-    hypothesis = [f"hyp{i}" for i in range(limit - half)]  # Fills up to the limit
+    try:
+        error_rate = wer(reference=reference, hypothesis=hypothesis)
+        assert isinstance(error_rate, float)
+        assert error_rate == 1.0  # All words are different
+    except Exception as e:
+        pytest.fail(f"WER calculation failed with large vocabulary: {e}")
 
-    # Make lists same length by repeating
-    max_len = max(len(reference), len(hypothesis))
-    reference = reference * (max_len // len(reference) + 1)
-    hypothesis = hypothesis * (max_len // len(hypothesis) + 1)
-    reference = reference[:max_len]
-    hypothesis = hypothesis[:max_len]
+def test_hash_collision_handling():
+    """Test that hash collisions don't affect results."""
+    # Create words that might have hash collisions
+    reference = ["a" * i for i in range(1, 1001)]  # Start from 1 to avoid empty strings
+    hypothesis = ["b" * i for i in range(1, 1001)]  # Start from 1 to avoid empty strings
 
-    result = process_words(reference=reference, hypothesis=hypothesis)
-    assert isinstance(result.wer, float)
-    assert result.wer == 1.0  # All words should be different
+    try:
+        result = process_words(reference=reference, hypothesis=hypothesis)
+        assert isinstance(result.wer, float)
+        assert result.wer > 0  # Should detect differences
+    except Exception as e:
+        pytest.fail(f"Hash collision test failed: {e}")
