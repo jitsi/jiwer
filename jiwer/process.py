@@ -193,36 +193,45 @@ def process_words(
     alignments = []
 
     for reference_sentence, hypothesis_sentence in zip(ref_as_chars, hyp_as_chars):
-        # Get the required edit operations to transform reference into hypothesis
-        edit_ops = rapidfuzz.distance.Levenshtein.editops(
-            reference_sentence, hypothesis_sentence
+        # Get the opcodes directly
+        opcodes = rapidfuzz.distance.Levenshtein.opcodes(
+            reference_sentence,
+            hypothesis_sentence
         )
 
-        # count the number of edits of each type
-        substitutions = sum(1 if op.tag == "replace" else 0 for op in edit_ops)
-        deletions = sum(1 if op.tag == "delete" else 0 for op in edit_ops)
-        insertions = sum(1 if op.tag == "insert" else 0 for op in edit_ops)
-        hits = len(reference_sentence) - (substitutions + deletions)
+        subs = dels = ins = hits = 0
+        sentence_op_chunks = []
 
-        # update state
+        for tag, i1, i2, j1, j2 in opcodes:
+            # Create alignment chunk
+            sentence_op_chunks.append(
+                AlignmentChunk(
+                    type=tag,
+                    ref_start_idx=i1,
+                    ref_end_idx=i2,
+                    hyp_start_idx=j1,
+                    hyp_end_idx=j2,
+                )
+            )
+
+            # Update counts
+            if tag == "equal":
+                hits += (i2 - i1)
+            elif tag == "replace":
+                subs += (i2 - i1)
+            elif tag == "delete":
+                dels += (i2 - i1)
+            elif tag == "insert":
+                ins += (j2 - j1)
+
+        # Update global counts
         num_hits += hits
-        num_substitutions += substitutions
-        num_deletions += deletions
-        num_insertions += insertions
+        num_substitutions += subs
+        num_deletions += dels
+        num_insertions += ins
         num_rf_words += len(reference_sentence)
         num_hp_words += len(hypothesis_sentence)
-        alignments.append(
-            [
-                AlignmentChunk(
-                    type=op.tag,
-                    ref_start_idx=op.src_start,
-                    ref_end_idx=op.src_end,
-                    hyp_start_idx=op.dest_start,
-                    hyp_end_idx=op.dest_end,
-                )
-                for op in Opcodes.from_editops(edit_ops)
-            ]
-        )
+        alignments.append(sentence_op_chunks)
 
     # Compute all measures
     S, D, I, H = num_substitutions, num_deletions, num_insertions, num_hits
