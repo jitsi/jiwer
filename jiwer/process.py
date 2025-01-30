@@ -30,6 +30,8 @@ import rapidfuzz
 
 from rapidfuzz.distance import Opcodes
 
+from collections import defaultdict
+
 from jiwer import transforms as tr
 from jiwer.transformations import wer_default, cer_default
 
@@ -409,22 +411,12 @@ def _word2int(reference: List[List[str]], hypothesis: List[List[str]]):
     Returns:
         Tuple[List[List[int]], List[List[int]]]: The reference and hypothesis sentences
         with words mapped to unique integers
-
-    Raises:
-        ValueError: If empty strings are found in the vocabulary
     """
-    # tokenize each word into an integer
-    vocabulary = set(chain(*reference, *hypothesis))
+    word2int = defaultdict()
+    word2int.default_factory = word2int.__len__  # Auto-incrementing IDs
 
-    if "" in vocabulary:
-        raise ValueError(
-            "Empty strings cannot be a word. "
-            "Please ensure that the given transform removes empty strings."
-        )
+    # Single pass through all words using generator expressions
+    ref_ints = [[word2int[word] for word in sentence] for sentence in reference]
+    hyp_ints = [[word2int[word] for word in sentence] for sentence in hypothesis]
 
-    word2int = dict(zip(vocabulary, range(len(vocabulary))))
-
-    reference_ints = [[word2int[w] for w in sentence] for sentence in reference]
-    hypothesis_ints = [[word2int[w] for w in sentence] for sentence in hypothesis]
-
-    return reference_ints, hypothesis_ints
+    return ref_ints, hyp_ints
