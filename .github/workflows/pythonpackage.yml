@@ -68,7 +68,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        uv venv run python -m pip install --upgrade pip
+        uv venv
         uv sync --extra dev
     - name: Test with pytest
       run: |
