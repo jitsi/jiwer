@@ -24,7 +24,7 @@ You should be able to install this package using [uv](https://docs.astral.sh/uv/
 $ uv add jiwer
 ```
 
-Or, if you prefer old-fashioned pip and you're using Python >= `3.7`:
+Or, if you prefer old-fashioned pip and you're using Python >= `3.8`:
 
 ```bash
 $ pip install jiwer
