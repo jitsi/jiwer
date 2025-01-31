@@ -70,6 +70,7 @@ jobs:
       run: |
         uv venv
         uv sync --extra dev
+
     - name: Test with pytest
       run: |
         uv run python --version
