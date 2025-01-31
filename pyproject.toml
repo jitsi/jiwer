@@ -1,27 +1,36 @@
-[tool.poetry]
+[project]
 name = "jiwer"
 version = "3.0.5"
 description = "Evaluate your speech-to-text system with similarity measures such as word error rate (WER)"
-authors = ["Nik Vaessen <nikvaes@gmail.com>"]
 readme = "README.md"
+authors = [
+    { name = "Nik Vaessen", email = "nikvaes@gmail.com" }
+]
+requires-python = ">=3.8"
+dependencies = [
+    "click>=8.1.8",
+    "rapidfuzz>=3.9.7",
+]
 license = "Apache-2.0"
-repository = "https://github.com/jitsi/jiwer"
-include = ["LICENCE"]
 
-[tool.poetry.dependencies]
-python = "^3.7"
-rapidfuzz = "^3"
-click = "^8.1.3"
-
-[tool.poetry.group.dev.dependencies]
-black = "^22.8.0"
-pytest = "7.1.3"
-pytest-benchmark = "^3.4.1"
-flake8 = "5.0.4"
-
-[tool.poetry.scripts]
+[project.scripts]
 jiwer = "jiwer.cli:cli"
 
+[project.optional-dependencies]
+dev = [
+    "black>=24.8.0",
+    "flake8>=5.0.4",
+    "pytest>=8.3.4",
+    "pytest-benchmark>=4.0.0",
+]
+docs = [
+    "mkdocs>=1.6.1",
+    "mkdocs-gen-files>=0.5.0",
+    "mkdocs-literate-nav>=0.6.1",
+    "mkdocs-material>=9.5.50",
+    "mkdocstrings[python]>=0.26.1",
+]
+
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

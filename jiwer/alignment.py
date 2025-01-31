@@ -21,8 +21,7 @@ Utility method to visualize the alignment between one or more reference and hypo
 pairs.
 """
 
-from typing import Dict, List, Tuple, Union
-
+from typing import List, Union
 
 from jiwer.process import CharacterOutput, WordOutput, AlignmentChunk
 
