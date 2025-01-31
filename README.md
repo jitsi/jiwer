@@ -18,13 +18,13 @@ For further info, see the documentation at [jitsi.github.io/jiwer](https://jitsi
 
 ## Installation
 
-You should be able to install this package using [poetry](https://python-poetry.org/docs/): 
+You should be able to install this package using [uv](https://docs.astral.sh/uv/): 
 
 ```
-$ poetry add jiwer
+$ uv add jiwer
 ```
 
-Or, if you prefer old-fashioned pip and you're using Python >= `3.7`:
+Or, if you prefer old-fashioned pip and you're using Python >= `3.8`:
 
 ```bash
 $ pip install jiwer
