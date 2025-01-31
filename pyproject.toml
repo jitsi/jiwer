@@ -1,6 +1,6 @@
 [project]
 name = "jiwer"
-version = "3.0.5"
+version = "3.1.0"
 description = "Evaluate your speech-to-text system with similarity measures such as word error rate (WER)"
 readme = "README.md"
 authors = [

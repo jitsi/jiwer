@@ -1,4 +1,3 @@
-
 JiWER provides a simple CLI, which should be available after installation. 
 
 For details, see `jiwer --help`.
@@ -25,5 +24,5 @@ Options:
   --help                 Show this message and exit.
 ```
 
-Note that the CLI does not support a custom pre-processing (as described below). Any pre-processing
+Note that the CLI does not support custom pre-processing. Any pre-processing
 should be done on the text files manually before calling JiWER when using the CLI. 
