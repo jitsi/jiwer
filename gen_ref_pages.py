@@ -5,11 +5,11 @@ import mkdocs_gen_files
 
 nav = mkdocs_gen_files.Nav()
 
-for path in sorted(Path("jiwer").rglob("*.py")):
-    doc_path = path.relative_to("jiwer").with_suffix(".md")
+for path in sorted(Path("src/jiwer").rglob("*.py")):
+    doc_path = path.relative_to("src/jiwer").with_suffix(".md")
     full_doc_path = Path("reference", doc_path)
 
-    module_path = path.relative_to("jiwer").with_suffix("")
+    module_path = path.relative_to("src/jiwer").with_suffix("")
     parts = list(module_path.parts)
 
     if parts[-1] == "__init__" or parts[-1] == "cli":
