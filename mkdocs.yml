@@ -18,7 +18,7 @@ plugins:
 - mkdocstrings:
     handlers:
       python:
-        paths: [jiwer]
+        paths: [src/jiwer]
         options:
           separate_signature: true
           show_root_heading: true
@@ -44,4 +44,4 @@ markdown_extensions:
 
 watch:
 - docs
-- jiwer
+- src/jiwer

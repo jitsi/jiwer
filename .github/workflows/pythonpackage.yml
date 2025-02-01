@@ -32,8 +32,7 @@ jobs:
 
     - name: Setup dependencies
       run: |
-        uv venv 
-        uv sync --extra dev
+        uv sync --all-extras --all-groups
 
     - name: Lint with flake8
       run: |
@@ -68,8 +67,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        uv venv
-        uv sync --extra dev
+        uv sync --all-extras --all-groups
 
     - name: Test with pytest
       run: |

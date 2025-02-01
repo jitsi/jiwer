@@ -9,7 +9,6 @@ on:
 
 jobs:
   deploy:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -28,8 +27,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        uv venv
-        uv sync --all-extras
+        uv sync --all-extras --all-groups
 
     - name: Build and publish
       env:
