@@ -22,15 +22,10 @@ so that measures can be computed and an alignment can be visualized.
 """
 
 from dataclasses import dataclass
-
+from collections import defaultdict
 from typing import Any, List, Union
-from itertools import chain
 
 import rapidfuzz
-
-from rapidfuzz.distance import Opcodes
-
-from collections import defaultdict
 
 from jiwer import transforms as tr
 from jiwer.transformations import wer_default, cer_default
@@ -329,8 +324,6 @@ def process_characters(
         (CharacterOutput): The processed reference and hypothesis sentences.
 
     """
-    # make sure the transforms end with tr.ReduceToListOfListOfChars(),
-
     # it's the same as word processing, just every word is of length 1
     result = process_words(
         reference, hypothesis, reference_transform, hypothesis_transform

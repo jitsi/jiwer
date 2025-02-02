@@ -95,7 +95,7 @@ wer_standardize_contiguous = tr.Compose(
     ]
 )
 """
-This is the same as `wer_standize`, but this version can be usd when the number of
+This is the same as `wer_standardize`, but this version can be usd when the number of
 reference and hypothesis sentences differ. 
 """
 

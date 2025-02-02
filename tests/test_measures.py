@@ -82,7 +82,7 @@ class TestMeasuresContiguousSentencesTransform(unittest.TestCase):
 
         self._apply_test_on(cases)
 
-    def test_different_sentence_length_unequaL_type(self):
+    def test_different_sentence_length_unequal_type(self):
         reference = [
             "i like monthy python",
             "what do you mean african or european swallow",
@@ -112,11 +112,11 @@ class TestMeasuresContiguousSentencesTransform(unittest.TestCase):
 
     def test_fail_on_empty_reference(self):
         for method in [
+            jiwer.process_words,
             jiwer.wer,
             jiwer.wil,
             jiwer.wip,
             jiwer.mer,
-            jiwer.compute_measures,
         ]:
 
             def callback():
@@ -232,7 +232,6 @@ class TestMeasuresDefaultTransform(unittest.TestCase):
             jiwer.wil,
             jiwer.wip,
             jiwer.mer,
-            jiwer.compute_measures,
         ]:
 
             def callback():
@@ -247,7 +246,6 @@ class TestMeasuresDefaultTransform(unittest.TestCase):
             jiwer.wil,
             jiwer.wip,
             jiwer.mer,
-            jiwer.compute_measures,
         ]:
 
             def callback():
@@ -312,99 +310,3 @@ class TestMeasuresDefaultTransform(unittest.TestCase):
             output_dict = to_measure_dict(output)
 
             assert_dict_almost_equal(self, output_dict, correct_measures, delta=1e-16)
-
-            with pytest.deprecated_call():
-                output = jiwer.compute_measures(truth=ref, hypothesis=hyp)
-                output_dict = {
-                    "wer": output["wer"],
-                    "mer": output["mer"],
-                    "wil": output["wil"],
-                    "wip": output["wip"],
-                }
-                assert_dict_almost_equal(
-                    self, output_dict, correct_measures, delta=1e-16
-                )
-
-        self._apply_test_deprecated_truth(cases)
-
-    def _apply_test_deprecated_truth(self, cases):
-        with pytest.deprecated_call():
-            for ref, hyp, correct_measures in cases:
-                output_dict = {}
-                for key, method in [
-                    ("wer", jiwer.wer),
-                    ("mer", jiwer.mer),
-                    ("wil", jiwer.wil),
-                    ("wip", jiwer.wip),
-                ]:
-                    output = method(truth=ref, hypothesis=hyp)
-                    output_dict[key] = output
-
-                assert_dict_almost_equal(
-                    self, output_dict, correct_measures, delta=1e-16
-                )
-
-    def test_deprecated_truth_and_ref(self):
-        for key, method in [
-            ("wer", jiwer.wer),
-            ("mer", jiwer.mer),
-            ("wil", jiwer.wil),
-            ("wip", jiwer.wip),
-            ("cer", jiwer.cer),
-        ]:
-            with pytest.raises(ValueError):
-                method(truth="ref", reference="truth", hypothesis="huh")
-                method()
-                method(truth="only truth")
-                method(reference="only ref")
-                method(hypothesis="only hypothesis")
-
-    def test_deprecated_truth_and_ref_with_transform(self):
-        wer_transform = jiwer.Compose(
-            [
-                jiwer.ToLowerCase(),
-                jiwer.RemoveMultipleSpaces(),
-                jiwer.Strip(),
-                jiwer.ReduceToListOfListOfWords(),
-            ]
-        )
-        cer_transform = jiwer.Compose(
-            [
-                jiwer.ToLowerCase(),
-                jiwer.RemoveMultipleSpaces(),
-                jiwer.Strip(),
-                jiwer.ReduceToListOfListOfChars(),
-            ]
-        )
-
-        for key, method in [
-            ("wer", jiwer.wer),
-            ("mer", jiwer.mer),
-            ("wil", jiwer.wil),
-            ("wip", jiwer.wip),
-            ("cer", jiwer.cer),
-        ]:
-            if key == "cer":
-                tr = cer_transform
-            else:
-                tr = wer_transform
-
-            result = method(
-                truth="This is a short Sentence with a few Words with upper and Lower cases",
-                hypothesis="His is a short Sentence with a few Words with upper and Lower cases",
-                truth_transform=tr,
-                hypothesis_transform=tr,
-            )
-            result_same = method(
-                reference="This is a short Sentence with a few Words with upper and Lower cases",
-                hypothesis="His is a short Sentence with a few Words with upper and Lower cases",
-                reference_transform=tr,
-                hypothesis_transform=tr,
-            )
-            self.assertAlmostEqual(result, result_same)
-
-
-def test_deprecate_compute_measures():
-    # TODO: remove once deprecated
-    with pytest.deprecated_call():
-        jiwer.compute_measures("no more", "compute_measures")
