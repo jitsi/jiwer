@@ -1,5 +1,6 @@
 import unittest
 import jiwer
+from jiwer import visualize_alignment
 
 
 class TestAlignmentVisualizationWords(unittest.TestCase):
@@ -143,6 +144,24 @@ HYP: inserted
         )
         self.assertEqual(alignment, correct_alignment)
 
+    def test_line_width(self):
+        correct = """sentence 1
+REF: this sentence could be
+HYP: this sentence  will be
+                       S   
+
+REF: split ** **
+HYP: split by ai
+            I  I
+"""
+        alignment = visualize_alignment(
+            jiwer.process_words(
+                "this sentence could be split", "this sentence will be split by ai"
+            )
+            , line_width=30, show_measures=False
+        )
+        self.assertEqual(correct, alignment)
+
 
 class TestAlignmentVisualizationCharacters(unittest.TestCase):
     def test_insertion(self):
@@ -263,3 +282,21 @@ HYP: inserted
             show_measures=False,
         )
         self.assertEqual(alignment, correct_alignment)
+
+    def test_line_width(self):
+        correct = """sentence 1
+REF: this sentence could be sp
+HYP: this sentence will* be sp
+                   SSS D      
+
+REF: lit******
+HYP: lit by ai
+        IIIIII
+"""
+        alignment = visualize_alignment(
+            jiwer.process_characters(
+                "this sentence could be split", "this sentence will be split by ai"
+            )
+            , line_width=30, show_measures=False
+        )
+        self.assertEqual(correct, alignment)
