@@ -22,15 +22,10 @@ so that measures can be computed and an alignment can be visualized.
 """
 
 from dataclasses import dataclass
-
+from collections import defaultdict
 from typing import Any, List, Union
-from itertools import chain
 
 import rapidfuzz
-
-from rapidfuzz.distance import Opcodes
-
-from collections import defaultdict
 
 from jiwer import transforms as tr
 from jiwer.transformations import wer_default, cer_default

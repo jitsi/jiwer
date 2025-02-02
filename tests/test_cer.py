@@ -100,26 +100,6 @@ class TestCERInputMethods(unittest.TestCase):
 
         self._apply_test_on(cases)
 
-    def test_return_dict(self):
-        # TODO: remove unit test once deprecated
-        with pytest.deprecated_call():
-            return_dict = jiwer.cer(
-                ["i", "am i good"], ["i am", "y good"], return_dict=True
-            )
-
-        assert_dict_almost_equal(
-            self,
-            return_dict,
-            {
-                "cer": 0.7,
-                "hits": 6,
-                "substitutions": 1,
-                "deletions": 3,
-                "insertions": 3,
-            },
-            delta=1e-16,
-        )
-
     def _apply_test_on(self, cases):
         for ref, hyp, correct_cer in cases:
             cer = jiwer.cer(reference=ref, hypothesis=hyp)

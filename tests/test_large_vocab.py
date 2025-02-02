@@ -35,8 +35,26 @@ def test_wer_large_vocabulary():
     """Test WER calculation with very large vocabulary."""
     vocab_size = 0x110000  # 1,114,112 unique words, above the chr() limit
 
-    reference = " ".join(f"word{i}" for i in range(vocab_size // 2))
-    hypothesis = " ".join(f"word{i}" for i in range(vocab_size // 2, vocab_size))
+    # Split into reference and hypothesis
+    reference = [f"word{i}" for i in range(vocab_size // 2)]
+    hypothesis = [f"word{i}" for i in range(vocab_size // 2, vocab_size)]
+
+    # split in 4 for more manageable run-time
+    num_chunks = 4
+    chunk = len(reference) // num_chunks
+
+    r_split = [
+        " ".join(reference[i * chunk : i * chunk + chunk]) for i in range(num_chunks)
+    ]
+    h_split = [
+        " ".join(hypothesis[i * chunk : i * chunk + chunk]) for i in range(num_chunks)
+    ]
+
+    assert (
+        sum(len(s.split(" ")) for s in r_split)
+        + sum(len(s.split(" ")) for s in h_split)
+        == vocab_size
+    )
 
     try:
         error_rate = wer(reference=reference, hypothesis=hypothesis)
