@@ -103,7 +103,9 @@ def visualize_alignment(
 
     final_str = ""
     for idx, (gt, hp, chunks) in enumerate(zip(references, hypothesis, alignment)):
-        if skip_correct and len(chunks) == 1 and chunks[0].type == "equal":
+        if skip_correct and (
+            len(chunks) == 0 or (len(chunks) == 1 and chunks[0].type == "equal")
+        ):
             continue
 
         final_str += f"sentence {idx+1}\n"

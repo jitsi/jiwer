@@ -183,7 +183,6 @@ class ReduceToListOfListOfWords(AbstractTransform):
 
         for sentence in inp:
             list_of_words = self.process_string(sentence)[0]
-
             sentence_collection.append(list_of_words)
 
         if len(sentence_collection) == 0:

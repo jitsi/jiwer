@@ -49,12 +49,6 @@ class TestCERInputMethods(unittest.TestCase):
 
         self.assertRaises(ValueError, callback)
 
-    def test_fail_on_empty_reference(self):
-        def callback():
-            jiwer.cer("", "test")
-
-        self.assertRaises(ValueError, callback)
-
     def test_known_values(self):
         # Taken from the "From WER and RIL to MER and WIL" paper, for link see README.md
         cases = [
