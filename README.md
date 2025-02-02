@@ -49,7 +49,12 @@ error = wer(reference, hypothesis)
 There is undefined behaviour when you apply an empty reference and hypothesis pair
 to the WER formula, as you get a division by zero.
 
-As of version 4.0, `jiwer` defines the behaviour as follows:
+As of version 4.0, `jiwer` defines the behaviour as follows, and thereby also
+lifts the requirement for reference strings to be non-empty.
+This allows for testing whether models hallucinate on silent audio.
+Note that usually, there are multiple reference and hypothesis pairs.
+It now supported that one or more of these references are empty, but to test well,
+most references should still be non-empty.
 
 ```python3
 import jiwer
