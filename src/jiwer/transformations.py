@@ -52,16 +52,6 @@ Then each string is transformed into a list with lists of strings, where each st
 is a single word.
 """
 
-wer_allow_empty_ref = tr.Compose(
-    [
-        tr.RemoveMultipleSpaces(),
-        tr.Strip(),
-        tr.SubstituteWords({"": "|silence|"}),
-        tr.ReduceToListOfListOfWords(),
-    ]
-)
-
-
 wer_contiguous = tr.Compose(
     [
         tr.RemoveMultipleSpaces(),
