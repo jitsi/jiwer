@@ -1,7 +1,5 @@
 import unittest
-
 import pytest
-
 import jiwer
 
 
@@ -109,20 +107,6 @@ class TestMeasuresContiguousSentencesTransform(unittest.TestCase):
         y_dict = to_measure_dict(y)
 
         assert_dict_almost_equal(self, x_dict, y_dict, delta=1e-9)
-
-    def test_fail_on_empty_reference(self):
-        for method in [
-            jiwer.process_words,
-            jiwer.wer,
-            jiwer.wil,
-            jiwer.wip,
-            jiwer.mer,
-        ]:
-
-            def callback():
-                method("", "test")
-
-            self.assertRaises(ValueError, callback)
 
     def test_known_values(self):
         # Taken from the "From WER and RIL to MER and WIL" paper, for link see README.md
@@ -236,20 +220,6 @@ class TestMeasuresDefaultTransform(unittest.TestCase):
 
             def callback():
                 method(["hello", "this", "sentence", "is fractured"], ["this sentence"])
-
-            self.assertRaises(ValueError, callback)
-
-    def test_fail_on_empty_reference(self):
-        for method in [
-            jiwer.process_words,
-            jiwer.wer,
-            jiwer.wil,
-            jiwer.wip,
-            jiwer.mer,
-        ]:
-
-            def callback():
-                method("", "test")
 
             self.assertRaises(ValueError, callback)
 

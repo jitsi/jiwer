@@ -43,6 +43,44 @@ hypothesis = "hello duck"
 error = wer(reference, hypothesis)
 ```
 
+
+## A note on empty references
+
+There is undefined behaviour when you apply an empty reference and hypothesis pair
+to the WER formula, as you get a division by zero.
+
+As of version 4.0, `jiwer` defines the behaviour as follows, and thereby also
+lifts the requirement for reference strings to be non-empty.
+This allows for testing whether models hallucinate on silent audio.
+Note that usually, there are multiple reference and hypothesis pairs.
+It now supported that one or more of these references are empty, but to test well,
+most references should still be non-empty.
+
+```python3
+import jiwer
+
+# when ref and hyp are both empty, there is no error as
+# an ASR system correctly predicted silence/non-speech.
+assert jiwer.wer('', '') == 0 
+assert jiwer.mer('', '') == 0
+assert jiwer.wip('', '') == 1
+assert jiwer.wil('', '') == 0
+
+assert jiwer.cer('', '') == 0
+```
+
+When the hypothesis is non-empty, every word or character counts as an insertion:
+```python3
+import jiwer
+
+assert jiwer.wer('', 'silence') == 1
+assert jiwer.wer('', 'peaceful silence') == 2
+assert jiwer.process_words('', 'now defined behaviour').insertions == 3
+
+assert jiwer.cer('', 'a') == 1
+assert jiwer.cer('', 'abcde') == 5
+```
+
 ## Licence
 
 The jiwer package is released under the `Apache License, Version 2.0` licence by [8x8](https://www.8x8.com/).

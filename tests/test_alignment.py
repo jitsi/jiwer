@@ -123,6 +123,26 @@ class TestAlignmentVisualizationWords(unittest.TestCase):
         )
         self.assertEqual(alignment, correct_alignment)
 
+    def test_empty_ref(self):
+        correct_alignment = ""
+        alignment = jiwer.visualize_alignment(
+            jiwer.process_words("", ""),
+            show_measures=False,
+        )
+        self.assertEqual(alignment, correct_alignment)
+
+    def test_empty_ref_with_hyp_deletion(self):
+        correct_alignment = """sentence 1
+REF: ********
+HYP: inserted
+            I
+"""
+        alignment = jiwer.visualize_alignment(
+            jiwer.process_words("", "inserted"),
+            show_measures=False,
+        )
+        self.assertEqual(alignment, correct_alignment)
+
 
 class TestAlignmentVisualizationCharacters(unittest.TestCase):
     def test_insertion(self):
@@ -220,6 +240,26 @@ class TestAlignmentVisualizationCharacters(unittest.TestCase):
         )
         alignment = jiwer.visualize_alignment(
             jiwer.process_characters(["one", "two"], ["1", "2"]),
+            show_measures=False,
+        )
+        self.assertEqual(alignment, correct_alignment)
+
+    def test_empty_ref(self):
+        correct_alignment = ""
+        alignment = jiwer.visualize_alignment(
+            jiwer.process_characters("", ""),
+            show_measures=False,
+        )
+        self.assertEqual(alignment, correct_alignment)
+
+    def test_empty_ref_with_hyp_deletion(self):
+        correct_alignment = """sentence 1
+REF: ********
+HYP: inserted
+     IIIIIIII
+"""
+        alignment = jiwer.visualize_alignment(
+            jiwer.process_characters("", "inserted"),
             show_measures=False,
         )
         self.assertEqual(alignment, correct_alignment)

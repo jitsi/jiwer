@@ -156,8 +156,6 @@ def process_words(
         reference = [reference]
     if isinstance(hypothesis, str):
         hypothesis = [hypothesis]
-    if any(len(t) == 0 for t in reference):
-        raise ValueError("one or more references are empty strings")
 
     # pre-process reference and hypothesis by applying transforms
     ref_transformed = _apply_transform(
@@ -232,13 +230,29 @@ def process_words(
     # Compute all measures
     S, D, I, H = num_substitutions, num_deletions, num_insertions, num_hits
 
-    wer = float(S + D + I) / float(H + S + D)
-    mer = float(S + D + I) / float(H + S + D + I)
-    wip = (
-        (float(H) / num_rf_words) * (float(H) / num_hp_words)
-        if num_hp_words >= 1
-        else 0
-    )
+    # special edge-case for empty references
+    if num_rf_words == 0:
+        wer = num_insertions
+
+        # if the reference was silence and this is correctly predicted,
+        # there is no error and all information is preserved
+        if num_hp_words == 0:
+            mer = 0
+            wip = 1
+        else:
+            mer = 1
+            wip = 0
+
+    else:
+        wer = float(S + D + I) / float(H + S + D)
+        mer = float(S + D + I) / float(H + S + D + I)
+
+        # there is an edge-case when hypothesis is empty
+        if num_hp_words >= 1:
+            wip = (float(H) / num_rf_words) * (float(H) / num_hp_words)
+        else:
+            wip = 0
+
     wil = 1 - wip
 
     # return all output
@@ -355,35 +369,24 @@ def _apply_transform(
     transformed_sentence = transform(sentence)
 
     # Validate the output is a list containing lists of strings
-    if is_reference:
-        if not _is_list_of_list_of_strings(
-            transformed_sentence, require_non_empty_lists=True
-        ):
-            raise ValueError(
-                "After applying the transformation, each reference should be a "
-                "non-empty list of strings, with each string being a single word."
-            )
-    else:
-        if not _is_list_of_list_of_strings(
-            transformed_sentence, require_non_empty_lists=False
-        ):
-            raise ValueError(
-                "After applying the transformation, each hypothesis should be a "
-                "list of strings, with each string being a single word."
-            )
+    if not _is_list_of_list_of_strings(transformed_sentence):
+        raise ValueError(
+            "After applying the transformation, each "
+            f"{'reference' if is_reference else 'hypothesis'} should be a "
+            "list of strings, with each string being a single word or character."
+            "Please ensure the given transformation reduces the input "
+            "to a list of list strings."
+        )
 
     return transformed_sentence
 
 
-def _is_list_of_list_of_strings(x: Any, require_non_empty_lists: bool):
+def _is_list_of_list_of_strings(x: Any):
     if not isinstance(x, list):
         return False
 
     for e in x:
         if not isinstance(e, list):
-            return False
-
-        if require_non_empty_lists and len(e) == 0:
             return False
 
         if not all([isinstance(s, str) for s in e]):
