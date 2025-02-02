@@ -157,8 +157,9 @@ HYP: split by ai
         alignment = visualize_alignment(
             jiwer.process_words(
                 "this sentence could be split", "this sentence will be split by ai"
-            )
-            , line_width=30, show_measures=False
+            ),
+            line_width=30,
+            show_measures=False,
         )
         self.assertEqual(correct, alignment)
 
@@ -296,7 +297,8 @@ HYP: lit by ai
         alignment = visualize_alignment(
             jiwer.process_characters(
                 "this sentence could be split", "this sentence will be split by ai"
-            )
-            , line_width=30, show_measures=False
+            ),
+            line_width=30,
+            show_measures=False,
         )
         self.assertEqual(correct, alignment)
