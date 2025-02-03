@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.1">
     
     
       
@@ -308,6 +308,7 @@
   
   <span class="md-ellipsis">
     jiwer
+    
   </span>
   
 
@@ -332,15 +333,92 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
     Usage
+    
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#word-error-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Word error rate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#character-error-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Character error rate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alignment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-frequencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error frequencies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transformations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -358,6 +436,7 @@
   
   <span class="md-ellipsis">
     Command-line interface
+    
   </span>
   
 
@@ -391,6 +470,7 @@
   
   <span class="md-ellipsis">
     API reference
+    
   </span>
   
 
@@ -416,6 +496,7 @@
   
   <span class="md-ellipsis">
     alignment
+    
   </span>
   
 
@@ -437,6 +518,7 @@
   
   <span class="md-ellipsis">
     measures
+    
   </span>
   
 
@@ -458,6 +540,7 @@
   
   <span class="md-ellipsis">
     process
+    
   </span>
   
 
@@ -479,6 +562,7 @@
   
   <span class="md-ellipsis">
     transformations
+    
   </span>
   
 
@@ -500,6 +584,7 @@
   
   <span class="md-ellipsis">
     transforms
+    
   </span>
   
 
@@ -536,6 +621,59 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#word-error-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Word error rate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#character-error-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Character error rate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alignment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-frequencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error frequencies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transformations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -548,11 +686,13 @@
                 
                   
 
+
   
   
 
 
 <h1 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h1>
+<h2 id="word-error-rate">Word error rate<a class="headerlink" href="#word-error-rate" title="Permanent link">#</a></h2>
 <p>The most simple use-case is computing the word error rate between two strings:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">jiwer</span><span class="w"> </span><span class="kn">import</span> <span class="n">wer</span>
 
@@ -585,6 +725,7 @@
 
 <span class="n">error</span> <span class="o">=</span> <span class="n">wer</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
 </code></pre></div>
+<h2 id="character-error-rate">Character error rate<a class="headerlink" href="#character-error-rate" title="Permanent link">#</a></h2>
 <p>We also provide the character error rate:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">jiwer</span>
 
@@ -597,7 +738,7 @@
 <span class="n">output</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">process_characters</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
 <span class="n">error</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">cer</span>
 </code></pre></div>
-<h1 id="alignment">Alignment<a class="headerlink" href="#alignment" title="Permanent link">#</a></h1>
+<h2 id="alignment">Alignment<a class="headerlink" href="#alignment" title="Permanent link">#</a></h2>
 <p>With <code>jiwer.process_words</code> and <code>jiwer.process_characters</code>, you get the alignment between the reference and hypothesis.</p>
 <p>We provide the alignment as a list of <code>AlignmentChunk</code> objects with attributes <code>type, ref_start_idx, ref_end_idx, hyp_start_idx, hyp_end_idx</code>, where <code>type</code> is one of <code>equal</code>, <code>substitute</code>, <code>delete</code>, or <code>insert</code>.</p>
 <p>This looks like the following:</p>
@@ -619,16 +760,19 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">jiwer</span><span class="o">.</span><span class="n">visualize_alignment</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
 </code></pre></div>
 Gives the following output
-<div class="highlight"><pre><span></span><code>sentence 1
+<div class="highlight"><pre><span></span><code>=== SENTENCE 1 === 
+
 REF: **** short one here
 HYP: shoe order one ****
         I     S        D
 
-sentence 2
+=== SENTENCE 2 ===
+
 REF: quite a bit of ** ****  longer sentence ****
 HYP: quite * bit of an even longest sentence here
            D         I    I       S             I
 
+=== SUMMARY ===
 number of sentences: 2
 substitutions=2 deletions=2 insertions=4 hits=5
 
@@ -638,6 +782,52 @@ wip=25.25%
 wer=88.89%
 </code></pre></div></p>
 <p>Note that it also possible to visualize the character-level alignment, simply use the output of <code>jiwer.process_characters()</code> instead. </p>
+<h2 id="error-frequencies">Error frequencies<a class="headerlink" href="#error-frequencies" title="Permanent link">#</a></h2>
+<p>You can list all the substitutions, insertions, and deletion, along with their frequencies:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">jiwer</span>
+
+<span class="n">out</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">process_words</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;short one here&quot;</span><span class="p">,</span> <span class="s2">&quot;quite a bit of longer sentence&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;shoe order one&quot;</span><span class="p">,</span> <span class="s2">&quot;quite bit of an even longest sentence here&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">jiwer</span><span class="o">.</span><span class="n">visualize_error_counts</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
+</code></pre></div>
+<p>Will return
+<div class="highlight"><pre><span></span><code>=== SUBSTITUTIONS ===
+short   --&gt; order   = 1x
+longer  --&gt; longest = 1x
+
+=== INSERTIONS ===
+shoe    = 1x
+an even = 1x
+here    = 1x
+
+=== DELETIONS ===
+here = 1x
+a    = 1x
+</code></pre></div></p>
+<h2 id="transformations">Transformations<a class="headerlink" href="#transformations" title="Permanent link">#</a></h2>
+<p>You can apply transformations to reference or hypothesis strings before the calculation of various metrics
+with the transform API. For all available, transformations, see <a href="/jiwer/reference/transforms/">here</a>.
+For the default transformations, see <a href="/jiwer/reference/transformations/">here</a>.</p>
+<p>An example of the transformation API:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">jiwer</span>
+
+<span class="n">tr</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+    <span class="n">jiwer</span><span class="o">.</span><span class="n">RemoveMultipleSpaces</span><span class="p">(),</span>
+    <span class="n">jiwer</span><span class="o">.</span><span class="n">Strip</span><span class="p">(),</span>
+    <span class="n">jiwer</span><span class="o">.</span><span class="n">SubstituteWords</span><span class="p">({</span><span class="s2">&quot;I&#39;m&quot;</span><span class="p">:</span> <span class="s1">&#39;i am&#39;</span><span class="p">}),</span>
+    <span class="n">jiwer</span><span class="o">.</span><span class="n">ReduceToListOfListOfWords</span><span class="p">()</span>
+<span class="p">])</span>
+
+<span class="n">out</span> <span class="o">=</span> <span class="n">jiwer</span><span class="o">.</span><span class="n">process_words</span><span class="p">(</span>
+    <span class="s2">&quot;I&#39;m good&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;i am bad&quot;</span><span class="p">,</span> 
+    <span class="n">reference_transform</span><span class="o">=</span><span class="n">tr</span><span class="p">,</span> 
+    <span class="n">hypothesis_transform</span><span class="o">=</span><span class="n">tr</span>
+<span class="p">)</span>
+</code></pre></div>
 
 
 
@@ -693,7 +883,7 @@ wer=88.89%
     <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
+      <script src="../assets/javascripts/bundle.5090c770.min.js"></script>
       
     
   </body>

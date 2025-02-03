@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.1">
     
     
       
@@ -308,6 +308,7 @@
   
   <span class="md-ellipsis">
     jiwer
+    
   </span>
   
 
@@ -328,6 +329,7 @@
   
   <span class="md-ellipsis">
     Usage
+    
   </span>
   
 
@@ -348,6 +350,7 @@
   
   <span class="md-ellipsis">
     Command-line interface
+    
   </span>
   
 
@@ -386,6 +389,7 @@
   
   <span class="md-ellipsis">
     API reference
+    
   </span>
   
 
@@ -411,6 +415,7 @@
   
   <span class="md-ellipsis">
     alignment
+    
   </span>
   
 
@@ -432,6 +437,7 @@
   
   <span class="md-ellipsis">
     measures
+    
   </span>
   
 
@@ -460,6 +466,7 @@
   
   <span class="md-ellipsis">
     process
+    
   </span>
   
 
@@ -471,6 +478,7 @@
   
   <span class="md-ellipsis">
     process
+    
   </span>
   
 
@@ -570,6 +578,7 @@
   
   <span class="md-ellipsis">
     transformations
+    
   </span>
   
 
@@ -591,6 +600,7 @@
   
   <span class="md-ellipsis">
     transforms
+    
   </span>
   
 
@@ -704,6 +714,7 @@
               <article class="md-content__inner md-typeset">
                 
                   
+
 
   
   
@@ -838,7 +849,12 @@ so that measures can be computed and an alignment can be visualized.</p>
 
               <details class="quote">
                 <summary>Source code in <code>src/jiwer/process.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
 <span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
@@ -873,12 +889,7 @@ so that measures can be computed and an alignment can be visualized.</p>
 <span class="normal">80</span>
 <span class="normal">81</span>
 <span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AlignmentChunk</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Define an alignment between two subsequence of the reference and hypothesis.</span>
@@ -1076,16 +1087,7 @@ more reference and hypothesis sentence(s).</p>
 
               <details class="quote">
                 <summary>Source code in <code>src/jiwer/process.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">278</span>
 <span class="normal">279</span>
 <span class="normal">280</span>
 <span class="normal">281</span>
@@ -1111,7 +1113,16 @@ more reference and hypothesis sentence(s).</p>
 <span class="normal">301</span>
 <span class="normal">302</span>
 <span class="normal">303</span>
-<span class="normal">304</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">CharacterOutput</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The output of calculating the character-level levenshtein distance between one or</span>
@@ -1336,7 +1347,12 @@ reference and hypothesis sentence(s).</p>
 
               <details class="quote">
                 <summary>Source code in <code>src/jiwer/process.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 91</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
 <span class="normal"> 92</span>
 <span class="normal"> 93</span>
 <span class="normal"> 94</span>
@@ -1372,12 +1388,7 @@ reference and hypothesis sentence(s).</p>
 <span class="normal">124</span>
 <span class="normal">125</span>
 <span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">127</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">WordOutput</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The output of calculating the word-level levenshtein distance between one or more</span>
@@ -1572,16 +1583,7 @@ reference and hypothesis transform need to be modified.</p>
 
             <details class="quote">
               <summary>Source code in <code>src/jiwer/process.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span>
-<span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span>
-<span class="normal">315</span>
-<span class="normal">316</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">316</span>
 <span class="normal">317</span>
 <span class="normal">318</span>
 <span class="normal">319</span>
@@ -1613,7 +1615,14 @@ reference and hypothesis transform need to be modified.</p>
 <span class="normal">345</span>
 <span class="normal">346</span>
 <span class="normal">347</span>
-<span class="normal">348</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">process_characters</span><span class="p">(</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">process_characters</span><span class="p">(</span>
     <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">cer_default</span><span class="p">,</span>
@@ -1638,8 +1647,6 @@ reference and hypothesis transform need to be modified.</p>
 <span class="sd">        (CharacterOutput): The processed reference and hypothesis sentences.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># make sure the transforms end with tr.ReduceToListOfListOfChars(),</span>
-
     <span class="c1"># it&#39;s the same as word processing, just every word is of length 1</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">process_words</span><span class="p">(</span>
         <span class="n">reference</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">,</span> <span class="n">reference_transform</span><span class="p">,</span> <span class="n">hypothesis_transform</span>
@@ -1820,7 +1827,12 @@ can be computed, such as the word error rate.</p>
 
             <details class="quote">
               <summary>Source code in <code>src/jiwer/process.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">135</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
 <span class="normal">136</span>
 <span class="normal">137</span>
 <span class="normal">138</span>
@@ -1947,7 +1959,16 @@ can be computed, such as the word error rate.</p>
 <span class="normal">259</span>
 <span class="normal">260</span>
 <span class="normal">261</span>
-<span class="normal">262</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">process_words</span><span class="p">(</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">process_words</span><span class="p">(</span>
     <span class="n">reference</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">hypothesis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">reference_transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">AbstractTransform</span><span class="p">]</span> <span class="o">=</span> <span class="n">wer_default</span><span class="p">,</span>
@@ -1976,8 +1997,6 @@ can be computed, such as the word error rate.</p>
         <span class="n">reference</span> <span class="o">=</span> <span class="p">[</span><span class="n">reference</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hypothesis</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">hypothesis</span> <span class="o">=</span> <span class="p">[</span><span class="n">hypothesis</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">reference</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;one or more references are empty strings&quot;</span><span class="p">)</span>
 
     <span class="c1"># pre-process reference and hypothesis by applying transforms</span>
     <span class="n">ref_transformed</span> <span class="o">=</span> <span class="n">_apply_transform</span><span class="p">(</span>
@@ -2052,13 +2071,29 @@ can be computed, such as the word error rate.</p>
     <span class="c1"># Compute all measures</span>
     <span class="n">S</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="n">num_substitutions</span><span class="p">,</span> <span class="n">num_deletions</span><span class="p">,</span> <span class="n">num_insertions</span><span class="p">,</span> <span class="n">num_hits</span>
 
-    <span class="n">wer</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">S</span> <span class="o">+</span> <span class="n">D</span> <span class="o">+</span> <span class="n">I</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">H</span> <span class="o">+</span> <span class="n">S</span> <span class="o">+</span> <span class="n">D</span><span class="p">)</span>
-    <span class="n">mer</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">S</span> <span class="o">+</span> <span class="n">D</span> <span class="o">+</span> <span class="n">I</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">H</span> <span class="o">+</span> <span class="n">S</span> <span class="o">+</span> <span class="n">D</span> <span class="o">+</span> <span class="n">I</span><span class="p">)</span>
-    <span class="n">wip</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_rf_words</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_hp_words</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">num_hp_words</span> <span class="o">&gt;=</span> <span class="mi">1</span>
-        <span class="k">else</span> <span class="mi">0</span>
-    <span class="p">)</span>
+    <span class="c1"># special edge-case for empty references</span>
+    <span class="k">if</span> <span class="n">num_rf_words</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">wer</span> <span class="o">=</span> <span class="n">num_insertions</span>
+
+        <span class="c1"># if the reference was silence and this is correctly predicted,</span>
+        <span class="c1"># there is no error and all information is preserved</span>
+        <span class="k">if</span> <span class="n">num_hp_words</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">mer</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">wip</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mer</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">wip</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">wer</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">S</span> <span class="o">+</span> <span class="n">D</span> <span class="o">+</span> <span class="n">I</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">H</span> <span class="o">+</span> <span class="n">S</span> <span class="o">+</span> <span class="n">D</span><span class="p">)</span>
+        <span class="n">mer</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">S</span> <span class="o">+</span> <span class="n">D</span> <span class="o">+</span> <span class="n">I</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">H</span> <span class="o">+</span> <span class="n">S</span> <span class="o">+</span> <span class="n">D</span> <span class="o">+</span> <span class="n">I</span><span class="p">)</span>
+
+        <span class="c1"># there is an edge-case when hypothesis is empty</span>
+        <span class="k">if</span> <span class="n">num_hp_words</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">wip</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_rf_words</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_hp_words</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">wip</span> <span class="o">=</span> <span class="mi">0</span>
+
     <span class="n">wil</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">wip</span>
 
     <span class="c1"># return all output</span>
@@ -2143,7 +2178,7 @@ can be computed, such as the word error rate.</p>
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      <script src="../../assets/javascripts/bundle.5090c770.min.js"></script>
       
     
   </body>
