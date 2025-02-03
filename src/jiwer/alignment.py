@@ -53,6 +53,7 @@ def visualize_alignment(
 
     Example:
         This code snippet
+
         ```python
         import jiwer
 
@@ -63,7 +64,9 @@ def visualize_alignment(
 
         print(jiwer.visualize_alignment(out))
         ```
+
         will produce this visualization:
+
         ```txt
         === SENTENCE 1 ===
 
@@ -71,7 +74,7 @@ def visualize_alignment(
         HYP: shoe order one    *
                 I     S        D
 
-        === sentence 2 ===
+        === SENTENCE 2 ===
 
         REF: quite a bit of  #    #  longer sentence    #
         HYP: quite * bit of an even longest sentence here
@@ -97,6 +100,7 @@ def visualize_alignment(
                 I     S        D
 
         === SENTENCE 2 ===
+
         REF: quite a bit of  #    #  longer sentence    #
         HYP: quite * bit of an even longest sentence here
                    D         I    I       S             I
@@ -106,6 +110,7 @@ def visualize_alignment(
 
         ```txt
         === SENTENCE 1 ===
+
         REF: This is a very  long sentence that is *** much longer than the previous one
         HYP: This is a very loong sentence that is not much longer than the previous one
                                 S                    I
@@ -268,14 +273,43 @@ def visualize_error_counts(
     Visualize which words (or characters), and how often, were substituted, inserted, or deleted.
 
     Args:
-        output:
+        output: The processed output of reference and hypothesis pair(s).
         show_substitutions: If true, visualize substitution errors.
         show_insertions: If true, visualize insertion errors.
         show_deletions: If true, visualize deletion errors.
         top_k: If set, only visualize the k most frequent errors.
 
-    Returns: A string which visualizes the words/characters and their frequencies.
+    Returns:
+         (str): A string which visualizes the words/characters and their frequencies.
 
+    Example:
+        The code snippet
+        ```python3
+        import jiwer
+
+        out = jiwer.process_words(
+            ["short one here", "quite a bit of longer sentence"],
+            ["shoe order one", "quite bit of an even longest sentence here"],
+        )
+        print(jiwer.visualize_error_counts(out))
+        ```
+
+        will print the following:
+
+        ```txt
+        === SUBSTITUTIONS ===
+        short   --> order   = 1x
+        longer  --> longest = 1x
+
+        === INSERTIONS ===
+        shoe    = 1x
+        an even = 1x
+        here    = 1x
+
+        === DELETIONS ===
+        here = 1x
+        a    = 1x
+        ```
     """
     s, i, d = collect_error_counts(output)
 

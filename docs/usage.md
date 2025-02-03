@@ -1,5 +1,7 @@
 # Usage
 
+## Word error rate  
+
 The most simple use-case is computing the word error rate between two strings:
 
 ```python
@@ -41,6 +43,8 @@ hypothesis = ["hello duck", "i like python"]
 error = wer(reference, hypothesis)
 ```
 
+## Character error rate
+
 We also provide the character error rate:
 
 ```python
@@ -56,7 +60,7 @@ output = jiwer.process_characters(reference, hypothesis)
 error = output.cer
 ```
 
-# Alignment
+## Alignment
 
 With `jiwer.process_words` and `jiwer.process_characters`, you get the alignment between the reference and hypothesis.
 
@@ -88,16 +92,19 @@ print(jiwer.visualize_alignment(out))
 ```
 Gives the following output
 ```text
-sentence 1
+=== SENTENCE 1 === 
+
 REF: **** short one here
 HYP: shoe order one ****
         I     S        D
 
-sentence 2
+=== SENTENCE 2 ===
+
 REF: quite a bit of ** ****  longer sentence ****
 HYP: quite * bit of an even longest sentence here
            D         I    I       S             I
 
+=== SUMMARY ===
 number of sentences: 2
 substitutions=2 deletions=2 insertions=4 hits=5
 
@@ -108,3 +115,60 @@ wer=88.89%
 ```
 
 Note that it also possible to visualize the character-level alignment, simply use the output of `jiwer.process_characters()` instead. 
+
+## Error frequencies
+
+You can list all the substitutions, insertions, and deletion, along with their frequencies:
+
+```python3
+import jiwer
+
+out = jiwer.process_words(
+    ["short one here", "quite a bit of longer sentence"],
+    ["shoe order one", "quite bit of an even longest sentence here"],
+)
+
+print(jiwer.visualize_error_counts(out))
+```
+
+Will return
+```text
+=== SUBSTITUTIONS ===
+short   --> order   = 1x
+longer  --> longest = 1x
+
+=== INSERTIONS ===
+shoe    = 1x
+an even = 1x
+here    = 1x
+
+=== DELETIONS ===
+here = 1x
+a    = 1x
+```
+
+## Transformations
+
+You can apply transformations to reference or hypothesis strings before the calculation of various metrics
+with the transform API. For all available, transformations, see [here](/jiwer/reference/transforms/).
+For the default transformations, see [here](/jiwer/reference/transformations/).
+
+An example of the transformation API:
+
+```python3
+import jiwer
+
+tr = jiwer.Compose([
+    jiwer.RemoveMultipleSpaces(),
+    jiwer.Strip(),
+    jiwer.SubstituteWords({"I'm": 'i am'}),
+    jiwer.ReduceToListOfListOfWords()
+])
+
+out = jiwer.process_words(
+    "I'm good", 
+    "i am bad", 
+    reference_transform=tr, 
+    hypothesis_transform=tr
+)
+```
