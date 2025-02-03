@@ -779,6 +779,7 @@ The other two dictionaries have the inserted/deleted words or characters as keys
       <tbody>
           <tr class="doc-section-item">
             <td>
+                  <code>Tuple[dict, dict, dict]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -836,7 +837,7 @@ The other two dictionaries have the inserted/deleted words or characters as keys
 <span class="sd">        output: The processed output of reference and hypothesis pair(s).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A three-tuple of dictionaries, in the order substitutions, insertions, deletions.</span>
+<span class="sd">        (Tuple[dict, dict, dict]): A three-tuple of dictionaries, in the order substitutions, insertions, deletions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">substitutions</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">insertions</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
