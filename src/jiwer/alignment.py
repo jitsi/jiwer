@@ -236,7 +236,7 @@ def collect_error_counts(output: Union[WordOutput, CharacterOutput]):
         output: The processed output of reference and hypothesis pair(s).
 
     Returns:
-        A three-tuple of dictionaries, in the order substitutions, insertions, deletions.
+        (Tuple[dict, dict, dict]): A three-tuple of dictionaries, in the order substitutions, insertions, deletions.
     """
     substitutions = defaultdict(lambda: 0)
     insertions = defaultdict(lambda: 0)

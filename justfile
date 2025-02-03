@@ -16,4 +16,4 @@ publish-docs:
     git remote set-url deploy-docs git@github.com:jitsi/jiwer.git
 
     # push to deploy-docs remote and gh-pages branch
-    uv run --group docs mkdocs gh-publish -r deploy-docs -b gh-pages
+    uv run --group docs mkdocs gh-deploy -r deploy-docs -b gh-pages
