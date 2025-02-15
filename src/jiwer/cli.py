@@ -20,8 +20,9 @@
 Provide a simple CLI wrapper for JiWER. The CLI does not support custom transforms.
 """
 
-import click
 import pathlib
+
+import click
 
 import jiwer
 

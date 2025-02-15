@@ -33,23 +33,22 @@ composition of multiple transformations must therefore also always end with
 [transforms.ReduceToListOfListOfChars][].
 """
 
-import sys
 import functools
 import re
 import string
+import sys
 import unicodedata
 
-from typing import Iterable, Union, List, Mapping
-
+from typing import Iterable, List, Mapping, Union
 
 __all__ = [
     "AbstractTransform",
     "Compose",
     "ExpandCommonEnglishContractions",
-    "RemoveEmptyStrings",
-    "ReduceToListOfListOfWords",
     "ReduceToListOfListOfChars",
+    "ReduceToListOfListOfWords",
     "ReduceToSingleSentence",
+    "RemoveEmptyStrings",
     "RemoveKaldiNonWords",
     "RemoveMultipleSpaces",
     "RemovePunctuation",

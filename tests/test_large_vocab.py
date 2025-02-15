@@ -1,4 +1,5 @@
 import pytest
+
 from jiwer import process_words, wer
 
 

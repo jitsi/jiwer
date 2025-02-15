@@ -41,18 +41,19 @@ results from the
 [jiwer.CharacterOutput][process.CharacterOutput]
 classes.
 """
+
 from typing import List, Union
 
 from jiwer import transforms as tr
-from jiwer.transformations import wer_default, cer_default
-from jiwer.process import process_words, process_characters
+from jiwer.process import process_characters, process_words
+from jiwer.transformations import cer_default, wer_default
 
 __all__ = [
-    "wer",
+    "cer",
     "mer",
+    "wer",
     "wil",
     "wip",
-    "cer",
 ]
 
 ########################################################################################

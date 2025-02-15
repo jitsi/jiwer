@@ -26,12 +26,12 @@ useful in specific use cases.
 import jiwer.transforms as tr
 
 __all__ = [
-    "wer_default",
+    "cer_contiguous",
+    "cer_default",
     "wer_contiguous",
+    "wer_default",
     "wer_standardize",
     "wer_standardize_contiguous",
-    "cer_default",
-    "cer_contiguous",
 ]
 
 ########################################################################################

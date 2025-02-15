@@ -1,7 +1,22 @@
 import unittest
 
-from jiwer.transforms import *
-from jiwer.transforms import ReduceToListOfListOfChars
+from jiwer.transforms import (
+    ExpandCommonEnglishContractions,
+    ReduceToListOfListOfChars,
+    ReduceToListOfListOfWords,
+    ReduceToSingleSentence,
+    RemoveEmptyStrings,
+    RemoveKaldiNonWords,
+    RemoveMultipleSpaces,
+    RemovePunctuation,
+    RemoveSpecificWords,
+    RemoveWhiteSpace,
+    Strip,
+    SubstituteRegexes,
+    SubstituteWords,
+    ToLowerCase,
+    ToUpperCase,
+)
 
 
 def _apply_test_on(self: unittest.TestCase, tr, cases):

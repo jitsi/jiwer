@@ -1,9 +1,6 @@
 import unittest
-import pytest
 
 import jiwer
-
-from .test_measures import assert_dict_almost_equal
 
 
 class TestCERInputMethods(unittest.TestCase):
