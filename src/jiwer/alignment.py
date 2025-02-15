@@ -20,12 +20,13 @@
 Utility method to visualize the alignment and errors between one or more reference
 and hypothesis pairs.
 """
+
 from collections import defaultdict
-from typing import List, Union, Optional
+from typing import List, Optional, Union
 
-from jiwer.process import CharacterOutput, WordOutput, AlignmentChunk
+from jiwer.process import AlignmentChunk, CharacterOutput, WordOutput
 
-__all__ = ["visualize_alignment", "collect_error_counts", "visualize_error_counts"]
+__all__ = ["collect_error_counts", "visualize_alignment", "visualize_error_counts"]
 
 
 def visualize_alignment(
@@ -131,7 +132,7 @@ def visualize_alignment(
         ):
             continue
 
-        final_str += f"=== SENTENCE {idx+1} ===\n\n"
+        final_str += f"=== SENTENCE {idx + 1} ===\n\n"
         final_str += _construct_comparison_string(
             gt, hp, chunks, include_space_seperator=not is_cer, line_width=line_width
         )
@@ -146,12 +147,12 @@ def visualize_alignment(
         final_str += f"hits={output.hits}\n"
 
         if is_cer:
-            final_str += f"\ncer={output.cer*100:.2f}%\n"
+            final_str += f"\ncer={output.cer * 100:.2f}%\n"
         else:
-            final_str += f"\nmer={output.mer*100:.2f}%"
-            final_str += f"\nwil={output.wil*100:.2f}%"
-            final_str += f"\nwip={output.wip*100:.2f}%"
-            final_str += f"\nwer={output.wer*100:.2f}%\n"
+            final_str += f"\nmer={output.mer * 100:.2f}%"
+            final_str += f"\nwil={output.wil * 100:.2f}%"
+            final_str += f"\nwip={output.wip * 100:.2f}%"
+            final_str += f"\nwer={output.wer * 100:.2f}%\n"
     else:
         # remove last newline
         final_str = final_str[:-1]

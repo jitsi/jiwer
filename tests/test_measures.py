@@ -1,5 +1,6 @@
+import functools
 import unittest
-import pytest
+
 import jiwer
 
 
@@ -217,11 +218,14 @@ class TestMeasuresDefaultTransform(unittest.TestCase):
             jiwer.wip,
             jiwer.mer,
         ]:
-
-            def callback():
-                method(["hello", "this", "sentence", "is fractured"], ["this sentence"])
-
-            self.assertRaises(ValueError, callback)
+            self.assertRaises(
+                ValueError,
+                functools.partial(
+                    method,
+                    ["hello", "this", "sentence", "is fractured"],
+                    ["this sentence"],
+                ),
+            )
 
     def test_known_values(self):
         # Taken from the "From WER and RIL to MER and WIL" paper, for link see README.md

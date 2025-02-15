@@ -21,22 +21,21 @@ The core algorithm(s) for processing a one or more reference and hypothesis sent
 so that measures can be computed and an alignment can be visualized.
 """
 
-from dataclasses import dataclass
 from collections import defaultdict
+from dataclasses import dataclass
 from typing import Any, List, Union
 
 import rapidfuzz
 
 from jiwer import transforms as tr
-from jiwer.transformations import wer_default, cer_default
-
+from jiwer.transformations import cer_default, wer_default
 
 __all__ = [
     "AlignmentChunk",
-    "WordOutput",
     "CharacterOutput",
-    "process_words",
+    "WordOutput",
     "process_characters",
+    "process_words",
 ]
 
 
@@ -228,7 +227,7 @@ def process_words(
         alignments.append(sentence_op_chunks)
 
     # Compute all measures
-    S, D, I, H = num_substitutions, num_deletions, num_insertions, num_hits
+    subs, dels, ins, hits = num_substitutions, num_deletions, num_insertions, num_hits
 
     # special edge-case for empty references
     if num_rf_words == 0:
@@ -244,12 +243,12 @@ def process_words(
             wip = 0
 
     else:
-        wer = float(S + D + I) / float(H + S + D)
-        mer = float(S + D + I) / float(H + S + D + I)
+        wer = float(subs + dels + ins) / float(hits + subs + dels)
+        mer = float(subs + dels + ins) / float(hits + subs + dels + ins)
 
         # there is an edge-case when hypothesis is empty
         if num_hp_words >= 1:
-            wip = (float(H) / num_rf_words) * (float(H) / num_hp_words)
+            wip = (float(hits) / num_rf_words) * (float(hits) / num_hp_words)
         else:
             wip = 0
 

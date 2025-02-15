@@ -6,6 +6,14 @@ test-quick:
 test:
     uv run --group dev pytest
 
+lint:
+    uv run --group dev ruff check .
+    uv run --group dev ruff format . --diff
+
+format:
+    uv run --group dev ruff check --select I,RUF022 --fix .
+    uv run --group dev ruff format .
+
 serve-docs:
     uv run --group docs mkdocs serve
 
