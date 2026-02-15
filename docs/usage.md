@@ -150,8 +150,8 @@ a    = 1x
 ## Transformations
 
 You can apply transformations to reference or hypothesis strings before the calculation of various metrics
-with the transform API. For all available, transformations, see [here](/jiwer/reference/transforms/).
-For the default transformations, see [here](/jiwer/reference/transformations/).
+with the transform API. For all available transformations, see [here](https://jitsi.github.io/jiwer/reference/transforms/).
+For the default transformations, see [here](https://jitsi.github.io/jiwer/reference/transformations/).
 
 An example of the transformation API:
 
