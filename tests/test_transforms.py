@@ -65,6 +65,30 @@ class TestReduceToListOfListOfWords(unittest.TestCase):
 
         _apply_test_on(self, ReduceToListOfListOfWords(), cases)
 
+    def test_default_delimiter_splits_on_any_whitespace(self):
+        # With the default delimiter a single tab / newline / non-breaking
+        # space is a word boundary, exactly like a run of them — word
+        # segmentation must not depend on how often a stray whitespace
+        # character is repeated.
+        cases = [
+            ("a\tb", [["a", "b"]]),
+            ("a\t\tb", [["a", "b"]]),
+            ("a\u00a0b", [["a", "b"]]),
+            ("a\u00a0\u00a0b", [["a", "b"]]),
+            ("a\r\nb", [["a", "b"]]),
+        ]
+
+        _apply_test_on(self, ReduceToListOfListOfWords(), cases)
+
+    def test_custom_delimiter_is_untouched_by_whitespace_splitting(self):
+        # A custom delimiter must keep exact-split semantics: whitespace
+        # characters other than the delimiter stay inside tokens.
+        cases = [
+            ("a b\tc", [["a b", "c"]]),
+        ]
+
+        _apply_test_on(self, ReduceToListOfListOfWords(word_delimiter="\t"), cases)
+
     def test_delimiter(self):
         cases = [
             ("this_is_a_test", [["this", "is", "a", "test"]]),

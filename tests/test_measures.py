@@ -284,3 +284,15 @@ class TestMeasuresDefaultTransform(unittest.TestCase):
             output_dict = to_measure_dict(output)
 
             assert_dict_almost_equal(self, output_dict, correct_measures, delta=1e-16)
+
+
+class TestWhitespaceConsistency(unittest.TestCase):
+    def test_single_whitespace_artifact_is_word_boundary(self):
+        # A lone tab or U+00A0 non-breaking space in a reference must be the
+        # same word boundary as a run of them: previously wer("a\t\tb", "a b")
+        # was 0.0 while wer("a\tb", "a b") was 2.0.
+        for ws in ["\t", "\u00a0"]:
+            single = jiwer.wer(f"a{ws}b", "a b")
+            double = jiwer.wer(f"a{ws}{ws}b", "a b")
+            self.assertEqual(single, 0.0)
+            self.assertEqual(single, double)

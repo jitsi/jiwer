@@ -153,8 +153,11 @@ class ReduceToListOfListOfWords(AbstractTransform):
     edit operations between two input sentences on a word-level.
 
     A sentence is assumed to be a string, where words are delimited by a token
-    (such as ` `, space). Each string is expected to contain only a single sentence.
-    Empty strings (no output) are removed for the list.
+    (such as ` `, space). With the default delimiter ` ` the string is split
+    like `str.split()`: every run of whitespace characters (space, tab,
+    newline, non-breaking space, ...) is a single word boundary. A custom
+    delimiter splits on exactly that token. Each string is expected to contain
+    only a single sentence. Empty strings (no output) are removed for the list.
 
     Example:
         ```python
@@ -175,6 +178,17 @@ class ReduceToListOfListOfWords(AbstractTransform):
         self.word_delimiter = word_delimiter
 
     def process_string(self, s: str):
+        if self.word_delimiter == " ":
+            # The default delimiter means "split into words": treat every
+            # whitespace character (tab, newline, non-breaking space, ...) as
+            # a word boundary, exactly like `str.split()`. Splitting on the
+            # literal space only made word segmentation depend on how often a
+            # stray whitespace character was repeated: a run of two or more
+            # was collapsed to a single space by `RemoveMultipleSpaces`
+            # earlier in the default pipelines and therefore split, while a
+            # single tab or non-breaking space glued its neighbours into one
+            # token ("a\t\tb" became two words but "a\tb" stayed one).
+            return [s.split()]
         return [[w for w in s.split(self.word_delimiter) if len(w) >= 1]]
 
     def process_list(self, inp: List[str]):
