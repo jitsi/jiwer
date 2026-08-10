@@ -87,12 +87,12 @@ def cli(
     """
     with reference_file.open("r") as f:
         reference_sentences = [
-            ln.strip() for ln in f.readlines() if len(ln.strip()) > 1
+            ln.strip() for ln in f.readlines() if len(ln.strip()) > 0
         ]
 
     with hypothesis_file.open("r") as f:
         hypothesis_sentences = [
-            ln.strip() for ln in f.readlines() if len(ln.strip()) > 1
+            ln.strip() for ln in f.readlines() if len(ln.strip()) > 0
         ]
 
     if not global_alignment and len(reference_sentences) != len(hypothesis_sentences):
