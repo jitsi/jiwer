@@ -305,6 +305,8 @@ class SubstituteWords(AbstractTransform):
     is a substring of another word it will not be affected.
     For example, if you're substituting `foo` into `bar`, the word `foobar` will NOT
     be substituted into `barbar`.
+    Replacement words are used literally. Use `SubstituteRegexes` for regex
+    replacement expressions such as backreferences.
 
     Example:
         ```python
@@ -328,7 +330,11 @@ class SubstituteWords(AbstractTransform):
 
     def process_string(self, s: str):
         for key, value in self.substitutions.items():
-            s = re.sub(r"\b{}\b".format(re.escape(key)), value, s)
+            s = re.sub(
+                r"\b{}\b".format(re.escape(key)),
+                lambda _, replacement=value: replacement,
+                s,
+            )
 
         return s
 
