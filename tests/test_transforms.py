@@ -324,6 +324,32 @@ class TestExpandCommonEnglishContractions(unittest.TestCase):
 
         _apply_test_on(self, ExpandCommonEnglishContractions(), cases)
 
+    def test_word_boundaries(self):
+        cases = [
+            (["the tablet's screen"], ["the tablet is screen"]),
+            (["my wallet's empty"], ["my wallet is empty"]),
+            (
+                ["he said 'start' and 'red' and 'dog'"],
+                ["he said 'start' and 'red' and 'dog'"],
+            ),
+            (
+                ["they said 'test', 'very', 'my', and 'lloyd'"],
+                ["they said 'test', 'very', 'my', and 'lloyd'"],
+            ),
+            (
+                ["o'reilly and o'malley met o'sullivan"],
+                ["o'reilly and o'malley met o'sullivan"],
+            ),
+            (
+                ["don't won't can't let's i'm you're it's he'd she'll we've"],
+                [
+                    "do not will not can not let us i am you are it is he would she will we have"
+                ],
+            ),
+        ]
+
+        _apply_test_on(self, ExpandCommonEnglishContractions(), cases)
+
 
 class TestToLowerCase(unittest.TestCase):
     def test_normal(self):

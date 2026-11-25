@@ -539,19 +539,19 @@ class ExpandCommonEnglishContractions(AbstractTransform):
         # definitely a non exhaustive list
 
         # specific words
-        s = re.sub(r"won't", "will not", s)
-        s = re.sub(r"can\'t", "can not", s)
-        s = re.sub(r"let\'s", "let us", s)
+        s = re.sub(r"\bwon't\b", "will not", s)
+        s = re.sub(r"\bcan't\b", "can not", s)
+        s = re.sub(r"\blet's\b", "let us", s)
 
         # general attachments
-        s = re.sub(r"n\'t", " not", s)
-        s = re.sub(r"\'re", " are", s)
-        s = re.sub(r"\'s", " is", s)
-        s = re.sub(r"\'d", " would", s)
-        s = re.sub(r"\'ll", " will", s)
-        s = re.sub(r"\'t", " not", s)
-        s = re.sub(r"\'ve", " have", s)
-        s = re.sub(r"\'m", " am", s)
+        s = re.sub(r"(?<=\w)n't\b", " not", s)
+        s = re.sub(r"(?<=\w)'re\b", " are", s)
+        s = re.sub(r"(?<=\w)'s\b", " is", s)
+        s = re.sub(r"(?<=\w)'d\b", " would", s)
+        s = re.sub(r"(?<=\w)'ll\b", " will", s)
+        s = re.sub(r"(?<=\w)'t\b", " not", s)
+        s = re.sub(r"(?<=\w)'ve\b", " have", s)
+        s = re.sub(r"(?<=\w)'m\b", " am", s)
 
         return s
 
